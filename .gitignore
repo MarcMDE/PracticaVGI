@@ -12,12 +12,21 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+
+!**/src/EntornVGI/res/models/*.obj
+
 # Build results
-src/[Dd]ebug/EntornVGI.*
-src/EntornVGI/[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
+#[Dd]ebug/
+#[Dd]ebugPublic/
+#[Rr]elease/
+#[Rr]eleases/
+**\src\EntornVGI\Debug\EntornVGI.tlog
+**\src\EntornVGI\Debug\EntornVGI.res
+**\src\EntornVGI\Debug\EntornVGI.tlog\
+**\src\EntornVGI\Debug\
+**\src\EntornVGI\Release\
+*.exe
+*.tlog
 x64/
 x86/
 bld/
@@ -64,7 +73,7 @@ StyleCopReport.xml
 *_i.h
 *.ilk
 *.meta
-#*.obj
+*.obj
 *.iobj
 *.pch
 *.pdb

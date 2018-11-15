@@ -95,3 +95,44 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	// Enviar les comandes gràfiques a pantalla
 	glFlush();
 }
+
+void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
+
+	switch (nChar) {
+
+		case DAV:
+
+			car.GetDynamicBody()->Translate(Vector3(5, 0, 0));
+
+			break;
+
+		case DAR:
+
+			car.GetDynamicBody()->Translate(Vector3(-5, 0, 0));
+
+			break;
+
+
+		case ESQ:
+
+			car.GetDynamicBody()->Translate(Vector3(0, 0, -5));
+
+			break;
+
+
+		case DRT:
+
+			car.GetDynamicBody()->Translate(Vector3(0, 0, 5));
+
+			break;
+
+
+		case ESP:
+
+			//
+
+			break;
+	
+	}
+
+}

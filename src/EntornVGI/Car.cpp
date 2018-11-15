@@ -37,6 +37,11 @@ OGLObject * Car::GetBody()
 	return &m_body;
 }
 
+DynamicOGLObject * Car::GetDynamicBody()
+{
+	return &m_body;
+}
+
 
 Car::~Car()
 {

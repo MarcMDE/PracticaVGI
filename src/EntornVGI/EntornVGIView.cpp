@@ -1283,24 +1283,34 @@ void CEntornVGIView::releaseAllShaders()
 //    - nFlags: Flags d'interrupció activats.
 void CEntornVGIView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-// TODO: Agregue aquí su código de controlador de mensajes o llame al valor predeterminado
+	// TODO: Agregue aquí su código de controlador de mensajes o llame al valor predeterminado
 	const float incr = 0.025f;
 	float modul = 0;
 	GLfloat vdir[3] = { 0, 0, 0 };
 
-	if ((!pan) && (!transf) && (!navega))
-	{
-		if (!sw_color) Teclat_ColorFons(nChar, nRepCnt);
-		else Teclat_ColorObjecte(nChar, nRepCnt);
-	}
-	else {	if (transf)
-			{	if (rota) Teclat_TransRota(nChar, nRepCnt);
-				  else if (trasl) Teclat_TransTraslada(nChar, nRepCnt);
-					else if (escal) Teclat_TransEscala(nChar, nRepCnt);
+	if (escena == ESCENA_PRACTICA_COTXE_1) {
+		
+		practicaCotxe.Procesa_Teclat(nChar, nRepCnt);
+
+	} else {
+
+		if ((!pan) && (!transf) && (!navega))
+		{
+			if (!sw_color) Teclat_ColorFons(nChar, nRepCnt);
+			else Teclat_ColorObjecte(nChar, nRepCnt);
+		}
+		else {
+			if (transf)
+			{
+				if (rota) Teclat_TransRota(nChar, nRepCnt);
+				else if (trasl) Teclat_TransTraslada(nChar, nRepCnt);
+				else if (escal) Teclat_TransEscala(nChar, nRepCnt);
 			}
 			if (pan) Teclat_Pan(nChar, nRepCnt);
-			 else if (navega) Teclat_Navega(nChar, nRepCnt);
+			else if (navega) Teclat_Navega(nChar, nRepCnt);
 		}
+
+	}
 
 // Crida a OnPaint() per redibuixar l'escena
 	InvalidateRect(NULL, false);

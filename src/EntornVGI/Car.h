@@ -16,6 +16,7 @@ public:
 	Car(GLuint bodyGlIndex, int wheelsLength, Vector3 bodyPosition, Vector3 bodyRotation, Vector3 bodyScale);
 	void SetWheel(int index, GLuint glIndex, Vector3 position, Vector3 rotation, Vector3 scale);
 	OGLObject * GetBody();
+	DynamicOGLObject * GetDynamicBody();
 	~Car();
 };
 

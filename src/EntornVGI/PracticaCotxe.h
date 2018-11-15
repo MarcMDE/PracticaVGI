@@ -1,6 +1,16 @@
 #pragma once
 #include "Car.h"
 #include "OGLObject.h"
+#include "DynamicOGLObject.h"
+
+// Definició de les tecles del teclat W, A, S, D, Espai
+#define DAV 87 // W
+#define DAR 83 // S
+#define ESQ 65 // A
+#define DRT 68 // D
+#define ESP 32 // Espai
+
+
 class PracticaCotxe
 {
 private:
@@ -15,6 +25,7 @@ public:
 	PracticaCotxe();
 	~PracticaCotxe();
 	void Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/);
+	void Procesa_Teclat(UINT nChar, UINT nRepCnt);
 
 };
 
