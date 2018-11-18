@@ -2265,23 +2265,29 @@ BOOL CEntornVGIView::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 void CEntornVGIView::OnTimer(UINT_PTR nIDEvent)
 {
 // TODO: Agregue aquí su código de controlador de mensajes o llame al valor predeterminado
-	if (anima)	{
-		// Codi de tractament de l'animació quan transcorren els ms. del crono.
+	if (escena == ESCENA_PRACTICA_COTXE_1) {
 
-		// Crida a OnPaint() per redibuixar l'escena
-		InvalidateRect(NULL, false);
+		//practicaCotxe.Procesa_Teclat(87, 1);
+		//InvalidateRect(NULL, false);
+	}
+	else {
+		if (anima) {
+			// Codi de tractament de l'animació quan transcorren els ms. del crono.
+
+			// Crida a OnPaint() per redibuixar l'escena
+			InvalidateRect(NULL, false);
 		}
-	else if (satelit)	{	// OPCIÓ SATÈLIT: Increment OPV segons moviments mouse.
-		//OPV.R = OPV.R + m_EsfeIncEAvall.R;
-		OPV.alfa = OPV.alfa + m_EsfeIncEAvall.alfa;
-		while (OPV.alfa > 360) OPV.alfa = OPV.alfa - 360;	while (OPV.alfa < 0) OPV.alfa = OPV.alfa + 360;
-		OPV.beta = OPV.beta + m_EsfeIncEAvall.beta;
-		while (OPV.beta > 360) OPV.beta = OPV.beta - 360;	while (OPV.beta < 0) OPV.beta = OPV.beta + 360;
+		else if (satelit) {	// OPCIÓ SATÈLIT: Increment OPV segons moviments mouse.
+			//OPV.R = OPV.R + m_EsfeIncEAvall.R;
+			OPV.alfa = OPV.alfa + m_EsfeIncEAvall.alfa;
+			while (OPV.alfa > 360) OPV.alfa = OPV.alfa - 360;	while (OPV.alfa < 0) OPV.alfa = OPV.alfa + 360;
+			OPV.beta = OPV.beta + m_EsfeIncEAvall.beta;
+			while (OPV.beta > 360) OPV.beta = OPV.beta - 360;	while (OPV.beta < 0) OPV.beta = OPV.beta + 360;
 
-		// Crida a OnPaint() per redibuixar l'escena
-		InvalidateRect(NULL, false);
+			// Crida a OnPaint() per redibuixar l'escena
+			InvalidateRect(NULL, false);
 		}
-
+	}
 	CView::OnTimer(nIDEvent);
 }
 
@@ -3631,7 +3637,7 @@ void CEntornVGIView::OnPracticaCotxe()
 		escena = ESCENA_PRACTICA_COTXE_1;
 		
 		wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);	// Activem contexte OpenGL
-
+		// Repassar, vertex buffer objects
 		if (ObOBJ == NULL) ObOBJ = new COBJModel;
 		ObOBJ->LoadModel("res/models/basic_car.obj", OBJ_CAR, false);	// Carregar model obj cotxe sense textura
 		//ObOBJ->LoadModel("assets/models/basic_car.obj", OBJ_CAR, true);	// Carregar model obj cotxe amb textura
@@ -3639,6 +3645,8 @@ void CEntornVGIView::OnPracticaCotxe()
 		ObOBJ = new COBJModel;
 		ObOBJ->LoadModel("res/models/basic_wheel.obj", OBJ_WHEEL, false);	// Carregar model obj roda sense textura
 		//ObOBJ->LoadModel("assets/models/basic_wheel.obj", OBJ_WHEEL, true);	// Carregar model obj roda amb textura
+
+		SetTimer(WM_TIMER, 10, NULL);
 
 		wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);	// Desactivem contexte OpenGL
 	}

@@ -102,34 +102,34 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 
 		case DAV:
 
-			car.GetDynamicBody()->Translate(Vector3(5, 0, 0));
+			car.GetDynamicBody()->Translate(Vector3(1, 0, 0));
 
 			break;
 
 		case DAR:
 
-			car.GetDynamicBody()->Translate(Vector3(-5, 0, 0));
+			car.GetDynamicBody()->Translate(Vector3(-1, 0, 0));
 
 			break;
 
 
 		case ESQ:
 
-			car.GetDynamicBody()->Translate(Vector3(0, 0, -5));
+			car.GetDynamicBody()->Translate(Vector3(0, 0, -1));
 
 			break;
 
 
 		case DRT:
 
-			car.GetDynamicBody()->Translate(Vector3(0, 0, 5));
+			car.GetDynamicBody()->Translate(Vector3(0, 0, 1));
 
 			break;
 
 
 		case ESP:
 
-			//
+			car.GetDynamicBody()->SetPosition(Vector3().Zero());
 
 			break;
 	
