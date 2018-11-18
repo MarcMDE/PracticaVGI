@@ -59,6 +59,13 @@ void Vector3::Dec(float x, float y, float z)
 	m_z -= z;
 }
 
+float Vector3::Distance(Vector3 t)
+{
+	Vector3 f = (*this) - t;
+
+	return sqrtf(f.m_x*f.m_x + f.m_y*f.m_y + f.m_z*f.m_z);
+}
+
 Vector3 & Vector3::operator=(const Vector3 &v)
 {
 	m_x = v.m_x;
