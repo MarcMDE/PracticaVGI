@@ -20,7 +20,7 @@ private:
 public:
 	CubicSpline();
 	CubicSpline(string fileName);
-	void Draw(bool cp);
+	void Draw(bool cp, int res);
 	~CubicSpline();
 	
 	Vector3 GetPosition(float p);

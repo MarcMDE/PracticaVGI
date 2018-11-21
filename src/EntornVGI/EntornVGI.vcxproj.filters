@@ -286,7 +286,7 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="CubicSpline.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\ClasesCarProj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -363,7 +363,7 @@
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
     <ClCompile Include="CubicSpline.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

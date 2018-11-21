@@ -3635,13 +3635,6 @@ void CEntornVGIView::OnPracticaCotxe()
 	{
 		objecte = NO_OBJECT;	textura = true;
 		escena = ESCENA_PRACTICA_COTXE_1;
-
-		GLfloat light_position[] = { -1.0,-1.0,-1.0,1.0 };
-		GLfloat light_diff[] = { 1.0,0.0,0.0,1.0 };
-		glLightfv(GL_LIGHT1, GL_POSITION, light_position);
-		glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diff);
-		glEnable(GL_LIGHTING);
-		glEnable(GL_LIGHT1);
 		
 		wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);	// Activem contexte OpenGL
 		// Repassar, vertex buffer objects

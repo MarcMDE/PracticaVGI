@@ -2,6 +2,7 @@
 #include "Car.h"
 #include "OGLObject.h"
 #include "DynamicOGLObject.h"
+#include "CubicSpline.h"
 
 // Definició de les tecles del teclat W, A, S, D, Espai
 #define DAV 87 // W
@@ -14,9 +15,10 @@
 class PracticaCotxe
 {
 private:
-	Car car = Car(OBJ_CAR, 4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
-	OGLObject mainObj;
-	LLUM sun; // Light 1
+	Car m_car = Car(OBJ_CAR, 4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
+	OGLObject m_mainObj;
+	LLUM m_sun; // Light 1
+	CubicSpline m_circuit = CubicSpline("circuits/c1.txt");
 
 	void glTranslateV(const Vector3& v);
 	void glRotateV(const Vector3& v);
