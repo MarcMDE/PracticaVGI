@@ -16,6 +16,7 @@ class PracticaCotxe
 private:
 	Car car = Car(OBJ_CAR, 4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
 	OGLObject mainObj;
+	LLUM sun; // Light 1
 
 	void glTranslateV(const Vector3& v);
 	void glRotateV(const Vector3& v);

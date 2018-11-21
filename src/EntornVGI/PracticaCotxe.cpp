@@ -55,6 +55,16 @@ PracticaCotxe::PracticaCotxe()
 
 	mainObj.SetChildsLength(1);
 	mainObj.SetChild(0, car.GetBody());
+
+	sun.encesa = true;
+	sun.difusa[0] = 1.0f;		sun.difusa[1] = 0.0f;		sun.difusa[2] = 1.0f;		sun.difusa[3] = 1.0f;
+	sun.especular[0] = 1.0f;		sun.especular[1] = 1.0f;		sun.especular[2] = 1.0f;		sun.especular[3] = 1.0f;
+
+	sun.posicio.R = 75.0;		sun.posicio.alfa = 90.0;		sun.posicio.beta = 0.0;		// Posició llum (x,y,z)=(0,0,75)
+	sun.atenuacio.a = 0.0;		sun.atenuacio.b = 0.0;		sun.atenuacio.c = 1.0;		// Llum sense atenuació per distància (a,b,c)=(0,0,1)
+	sun.restringida = false;
+	sun.spotdirection[0] = 0.0;	sun.spotdirection[1] = 0.0;	sun.spotdirection[2] = 0.0;
+	sun.cutoff = 0.0;			sun.exponent = 0.0;
 }
 
 
