@@ -1,4 +1,6 @@
 #pragma once
+#include <math.h>
+
 class Vector3
 {
 private:
@@ -20,6 +22,9 @@ public:
 
 	void Inc(float x, float y, float z);
 	void Dec(float x, float y, float z);
+
+	float Distance(Vector3 t);
+	//Vector3 Direction(Vector3 t);
 
 	//TODO: Operators overload & methods (+, -, *, /, scalate, dot prod, unari, etc.)
 
