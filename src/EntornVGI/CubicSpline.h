@@ -9,15 +9,18 @@ using namespace std;
 class CubicSpline
 {
 private:
-	Vector3 *spline;
-	int size;
-	float distance;
-	float *pointsDistance;
-	Vector3 CubicInterpolate(Vector3 y0, Vector3 y1, Vector3 y2, Vector3 y3, double mu);
+	Vector3 *m_spline;
+	int m_size;
+	float m_distance;
+	float *m_pointsDistance;
+	bool m_circular;
+	Vector3 m_CubicInterpolate(Vector3 y0, Vector3 y1, Vector3 y2, Vector3 y3, double mu);
+	int m_GetNextIndex(int i);
 
 public:
 	CubicSpline();
 	CubicSpline(string fileName);
+	void Draw(bool cp);
 	~CubicSpline();
 	
 	Vector3 GetPosition(float p);
