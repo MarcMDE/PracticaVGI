@@ -112,6 +112,11 @@ void OGLObject::SetChild(int index, OGLObject * child)
 	m_childs[index] = child;
 }
 
+void OGLObject::Draw()
+{
+
+}
+
 OGLObject::~OGLObject()
 {
 	if (m_childs != NULL)

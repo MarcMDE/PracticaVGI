@@ -33,5 +33,8 @@ public:
 	void SetChildsLength(int lenght);
 	void SetChild(int index, OGLObject *child);
 
+	// Draw---------------------------------
+	virtual void Draw();
+
 };
 
