@@ -339,3 +339,6 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 src/Debug/EntornVGI.exp
+src/EntornVGI/EntornVGI.vcxproj
+src/Debug/EntornVGI.exp
+src/Debug/EntornVGI.lib
