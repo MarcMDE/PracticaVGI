@@ -27,6 +27,8 @@ public:
 
 	float Distance(Vector3 t);
 	float DotP(Vector3 v);
+	Vector3 DirCrossP(Vector3 v);
+	Vector3 CrossP(Vector3 v);
 	float Magnitude();
 	void Normalize();
 	float AngleBtw(Vector3 v);

@@ -137,7 +137,7 @@ void Spline::Draw(bool cp, int res, SPLINE_TYPES s)
 {
 	if (cp)
 	{
-		glColor3f(1, 0.7, 1);
+		glColor3f(5, 0.7, 1);
 		// For each control point
 		for (int i=0; i < m_size; i++)
 		{
@@ -174,9 +174,9 @@ void Spline::Draw(bool cp, int res, SPLINE_TYPES s)
 
 void Spline::DrawCircuit()
 {
-	int res = 10;
-	float inc = 1.0f / 25;
-	int width = 5;
+	int res = 50;
+	float inc = 1.0f / res;
+	int width = 10;
 	Vector3 l = Vector3(0, 0, -width);
 	Vector3 r = Vector3(0, 0, width);
 
@@ -184,15 +184,17 @@ void Spline::DrawCircuit()
 	for (float f=0.0f; f < 1; f+=inc)
 	{
 		Vector3 p = GetPosition(f, SPLINE);
-
-		Vector3 pl = p + l;
-		Vector3 pr = p + r;
-
 		Vector3 d = GetDirection(f, SPLINE);
-		float angleX = d.AngleX();
+		d.Normalize();
 
-		pl.RotateY(angleX, p);
-		pr.RotateY(angleX, p);
+		Vector3 perp = d.DirCrossP(Vector3(0,1,0));
+		Vector3 pl = p + (perp * (-width));
+		Vector3 pr = p + (perp * width);
+
+		//float angleX = d.AngleX();
+
+		//pl.RotateY(angleX, p);
+		//pr.RotateY(angleX, p);
 
 		glVertex3f(pl.X(), pl.Y(), pl.Z());
 		glVertex3f(pr.X(), pr.Y(), pr.Z());

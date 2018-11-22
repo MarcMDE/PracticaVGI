@@ -71,9 +71,21 @@ float Vector3::DotP(Vector3 v)
 	return v.m_x*m_x + v.m_y*m_y + v.m_z*m_z;
 }
 
+Vector3 Vector3::DirCrossP(Vector3 v)
+{
+	return Vector3(	m_y*v.m_z - m_z*v.m_y,
+					m_z*v.m_x - m_x*v.m_z,
+					m_x*v.m_y - m_y*v.m_x);
+}
+
 float Vector3::Magnitude()
 {
 	return sqrtf(m_x*m_x + m_y*m_y + m_z*m_z);
+}
+
+void Vector3::Normalize()
+{
+	*this /= Magnitude();
 }
 
 float Vector3::AngleX()
