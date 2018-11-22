@@ -188,7 +188,7 @@
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="constants.h" />
-    <ClInclude Include="CubicSpline.h" />
+    <ClInclude Include="Spline.h" />
     <ClInclude Include="DynamicOGLObject.h" />
     <ClInclude Include="EntornVGI.h" />
     <ClInclude Include="EntornVGIDoc.h" />
@@ -217,7 +217,7 @@
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="ClassView.cpp" />
-    <ClCompile Include="CubicSpline.cpp" />
+    <ClCompile Include="Spline.cpp" />
     <ClCompile Include="DynamicOGLObject.cpp" />
     <ClCompile Include="EntornVGI.cpp" />
     <ClCompile Include="EntornVGIDoc.cpp" />

@@ -66,6 +66,42 @@ float Vector3::Distance(Vector3 t)
 	return sqrtf(f.m_x*f.m_x + f.m_y*f.m_y + f.m_z*f.m_z);
 }
 
+float Vector3::DotP(Vector3 v)
+{
+	return v.m_x*m_x + v.m_y*m_y + v.m_z*m_z;
+}
+
+float Vector3::Magnitude()
+{
+	return sqrtf(m_x*m_x + m_y*m_y + m_z*m_z);
+}
+
+float Vector3::AngleX()
+{
+	return acos(m_x / Magnitude());
+}
+float Vector3::AngleY()
+{
+	return acos(m_y / Magnitude());
+}
+float Vector3::AngleZ()
+{
+	return acos(m_z / Magnitude());
+}
+
+void Vector3::RotateY(float d, Vector3 r)
+{
+	float sind = sin(d);
+	float cosd = cos(d);
+
+	*this -= r;
+
+	m_x = m_x * cosd + m_z * sind;
+	m_z = -m_x * sind + m_z * cosd;
+
+	*this += r;
+}
+
 Vector3 & Vector3::operator=(const Vector3 &v)
 {
 	m_x = v.m_x;

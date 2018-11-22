@@ -79,7 +79,8 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	//reflexio_material = ref_mat;
 	//for (int i = 0; i < 4; i++) sw_materials[i] = sw_mat[i];
 
-	m_circuit.Draw(true, 5);
+	m_circuit.Draw(true, 50, SPLINE);
+	m_circuit.DrawCircuit();
 	DrawRec(&m_mainObj);
 
 	/*glCallList(OBJ_CAR);

@@ -1,6 +1,8 @@
 #pragma once
 #include <math.h>
 
+#define RAD_TO_DEG (180.0 / pi)
+
 class Vector3
 {
 private:
@@ -24,6 +26,15 @@ public:
 	void Dec(float x, float y, float z);
 
 	float Distance(Vector3 t);
+	float DotP(Vector3 v);
+	float Magnitude();
+	void Normalize();
+	float AngleBtw(Vector3 v);
+	float AngleX();
+	float AngleY();
+	float AngleZ();
+	void RotateY(float d, Vector3 r);
+
 	//Vector3 Direction(Vector3 t);
 
 	//TODO: Operators overload & methods (+, -, *, /, scalate, dot prod, unari, etc.)

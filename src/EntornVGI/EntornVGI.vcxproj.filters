@@ -285,7 +285,7 @@
     <ClInclude Include="alglib\xblas.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="CubicSpline.h">
+    <ClInclude Include="Spline.h">
       <Filter>Archivos de encabezado\ClasesCarProj</Filter>
     </ClInclude>
   </ItemGroup>
@@ -362,7 +362,7 @@
     <ClCompile Include="PracticaCotxe.cpp">
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
-    <ClCompile Include="CubicSpline.cpp">
+    <ClCompile Include="Spline.cpp">
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
   </ItemGroup>
