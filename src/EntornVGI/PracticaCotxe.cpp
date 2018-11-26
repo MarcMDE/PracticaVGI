@@ -25,10 +25,7 @@ void PracticaCotxe::DrawRec(OGLObject * obj)
 	glRotateV(obj->GetRotation());
 	glTranslateV(obj->GetPosition());
 
-	if (obj->GetGLIndex() != 0)
-	{
-		glCallList(obj->GetGLIndex());
-	}
+	obj->Draw();
 
 	int cLength = obj->GetChildsLength();
 
@@ -45,6 +42,7 @@ void PracticaCotxe::DrawRec(OGLObject * obj)
 PracticaCotxe::PracticaCotxe()
 {
 	m_mainObj = OGLObject(0);
+
 	m_carProgress = 0;
 	m_carInc = 0.005f;
 
@@ -62,9 +60,6 @@ PracticaCotxe::PracticaCotxe()
 	m_car.GetDynamicBody()->SetPosition(m_circuit.GetPosition(m_carProgress));
 
 	glEnable(GL_LIGHT1);
-
-	
-
 
 	m_sun.encesa = true;
 	m_sun.difusa[0] = 1.0f;			m_sun.difusa[1] = 0.0f;			m_sun.difusa[2] = 1.0f;			m_sun.difusa[3] = 1.0f;

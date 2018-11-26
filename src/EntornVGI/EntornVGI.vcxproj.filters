@@ -350,9 +350,6 @@
     <ClCompile Include="OGLObject.cpp">
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
-    <ClCompile Include="DynamicOGLObject.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="MobileOGLObject.cpp">
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
@@ -363,6 +360,9 @@
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
     <ClCompile Include="Spline.cpp">
+      <Filter>Archivos de código fuente\ClasesCarProj</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicOGLObject.cpp">
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
   </ItemGroup>

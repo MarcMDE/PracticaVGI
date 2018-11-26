@@ -114,7 +114,10 @@ void OGLObject::SetChild(int index, OGLObject * child)
 
 void OGLObject::Draw()
 {
-
+	if (m_glIndex != 0)
+	{
+		glCallList(m_glIndex);
+	}
 }
 
 OGLObject::~OGLObject()
