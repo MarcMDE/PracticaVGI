@@ -20,6 +20,9 @@ private:
 	LLUM m_sun; // Light 1
 	Spline m_circuit = Spline("circuits/c2.txt");
 
+	float m_carProgress;
+	float m_carInc;
+
 	void glTranslateV(const Vector3& v);
 	void glRotateV(const Vector3& v);
 	void glScaleV(const Vector3& v);

@@ -45,6 +45,9 @@ void PracticaCotxe::DrawRec(OGLObject * obj)
 PracticaCotxe::PracticaCotxe()
 {
 	m_mainObj = OGLObject(0);
+	m_carProgress = 0;
+	m_carInc = 0.005f;
+
 
 	m_car.SetWheel(0, OBJ_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
 	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
@@ -55,6 +58,8 @@ PracticaCotxe::PracticaCotxe()
 
 	m_mainObj.SetChildsLength(1);
 	m_mainObj.SetChild(0, m_car.GetBody());
+
+	m_car.GetDynamicBody()->SetPosition(m_circuit.GetPosition(m_carProgress));
 
 	glEnable(GL_LIGHT1);
 
@@ -270,30 +275,9 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	//reflexio_material = ref_mat;
 	//for (int i = 0; i < 4; i++) sw_materials[i] = sw_mat[i];
 
-	m_circuit.Draw(true, 50, SPLINE);
+	m_circuit.Draw(true, 50);
 	m_circuit.DrawCircuit();
 	DrawRec(&m_mainObj);
-
-	/*glCallList(OBJ_CAR);
-
-	glPushMatrix();
-		glTranslatef(14.0f, 0.0f, 7.0f);
-		glCallList(OBJ_WHEEL);
-	glPopMatrix();
-	glPushMatrix();
-		glTranslatef(14.0f, 0.0f, -7.0f);
-		glScalef(1, 1, -1.0f);
-		glCallList(OBJ_WHEEL);
-	glPopMatrix();
-	glPushMatrix();
-		glTranslatef(-14.0f, 0.0f, 7.0f);
-		glCallList(OBJ_WHEEL);
-	glPopMatrix();
-	glPushMatrix();
-		glTranslatef(-14.0f, 0.0f, -7.0f);
-		glScalef(1, 1, -1.0f);
-		glCallList(OBJ_WHEEL);
-	glPopMatrix();*/
 
 	// Enviar les comandes gràfiques a pantalla
 	glFlush();
@@ -306,6 +290,10 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 		case DAV:
 
 			m_car.GetDynamicBody()->Translate(Vector3(1, 0, 0));
+			m_carProgress += m_carInc;
+			if (m_carProgress >= 1) m_carProgress -= 1;
+
+			m_car.GetDynamicBody()->SetPosition(m_circuit.GetPosition(m_carProgress));
 
 			break;
 
@@ -333,7 +321,6 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 		case ESP:
 
 			m_car.GetDynamicBody()->SetPosition(Vector3().Zero());
-
 			break;
 	
 	}
