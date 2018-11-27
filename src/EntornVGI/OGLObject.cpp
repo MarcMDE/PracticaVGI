@@ -76,11 +76,6 @@ int OGLObject::GetChildsLength() const
 	return m_childsLength;
 }
 
-OGLObject * OGLObject::GetOGLObject()
-{
-	return this;
-}
-
 void OGLObject::SetChilds(OGLObject ** childs, int lenght)
 {
 	if (m_childs != NULL)
@@ -99,7 +94,7 @@ void OGLObject::SetChilds(OGLObject ** childs, int lenght)
 
 void OGLObject::SetChildsLength(int lenght)
 {
-	if (m_childs != NULL)
+	if (m_childsLength != 0 && m_childs != NULL)
 	{
 		for (int i = 0; i < m_childsLength; i++)
 		{

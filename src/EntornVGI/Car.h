@@ -13,15 +13,17 @@ private:
 	Vector3 m_speed;
 public:
 	Car() : MobileOGLObject() {};
-	Car(GLuint bodyGlIndex, int wheelsLength, Vector3 bodyPosition, Vector3 bodyRotation, Vector3 bodyScale) : MobileOGLObject()
+	Car(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 scale) : MobileOGLObject()
 	{
-		m_body = MobileOGLObject(bodyGlIndex, bodyPosition, bodyRotation, bodyScale);
+		m_position = position;
+		m_rotation = rotation;
+		m_scale = scale;
 
 		if (wheelsLength > 0)
 		{
 			m_wheelsLength = wheelsLength;
-			m_body.SetChildsLength(wheelsLength);
 			m_wheels = new MobileOGLObject*[m_wheelsLength+1];
+			SetChildsLength(wheelsLength + 1);
 		}
 		else
 		{

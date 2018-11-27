@@ -289,7 +289,7 @@
       <Filter>Archivos de encabezado\ClasesCarProj</Filter>
     </ClInclude>
     <ClInclude Include="Circuit.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\ClasesCarProj</Filter>
     </ClInclude>
     <ClInclude Include="camara.h">
       <Filter>Archivos de encabezado</Filter>
@@ -372,7 +372,7 @@
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
     <ClCompile Include="Circuit.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
     <ClCompile Include="camara.cpp">
       <Filter>Archivos de código fuente</Filter>
