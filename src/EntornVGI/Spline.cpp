@@ -48,7 +48,7 @@ Vector3 Spline::m_CubicInterpolateD(float mu)
 }
 */
 
-Vector3 Spline::m_BSpline(float mu)
+Vector3 Spline::m_BSpline(float mu, Vector3 cps[4]) const
 {
 	Vector3 p = Vector3().Zero();
 	float coef[4];
@@ -65,13 +65,13 @@ Vector3 Spline::m_BSpline(float mu)
 	//Càlcul de la Posició
 	for (i = 0; i < 4; i++)
 	{
-		p += (*m_cps[i]) * coef[i];
+		p += (cps[i]) * coef[i];
 	}
 
 	return p;
 }
 
-Vector3 Spline::m_BSplineD(float mu)
+Vector3 Spline::m_BSplineD(float mu, Vector3 cps[4]) const
 {
 	Vector3 dp = Vector3().Zero();
 	float coef[4];
@@ -88,7 +88,7 @@ Vector3 Spline::m_BSplineD(float mu)
 	//Càlcul de la Derivada
 	for (i = 0; i < 4; i++)
 	{
-		dp += (*m_cps[i]) * coef[i];
+		dp += (cps[i]) * coef[i];
 	}
 
 	return dp;
@@ -136,12 +136,7 @@ void Spline::Load(string fileName)
 	m_distance = m_pointsDistance[m_size - 1];
 }
 
-Spline::Spline()
-{
-
-}
-
-void Spline::Draw(bool cp, int res)
+void Spline::Debug(bool cp, int res) const
 {
 	if (cp)
 	{
@@ -165,15 +160,15 @@ void Spline::Draw(bool cp, int res)
 	//glLineStipple(1, 0x0101);
 	glColor3f(1, 0, 1);
 	glBegin(GL_LINES);
-		Vector3 v = GetPosition(0);
+		Vector3 v = CalcPosition(0);
 		glVertex3f(v.X(), v.Y(), v.Z());
 		for (float f=inc; f < 1; f+=inc)
 		{
-			v = GetPosition(f);
+			v = CalcPosition(f);
 			glVertex3f(v.X(), v.Y(), v.Z());
 			glVertex3f(v.X(), v.Y(), v.Z());
 		}
-		v = GetPosition(1);
+		v = CalcPosition(1);
 		glVertex3f(v.X(), v.Y(), v.Z());
 	glEnd();
 	glColor3f(1, 1, 1);
@@ -187,8 +182,10 @@ Spline::~Spline()
 	delete[] m_pointsDistance;
 }
 
-Vector3 Spline::GetPosition(float p) // (0-1)
+Vector3 Spline::CalcPosition(float p) const // (0-1)
 {
+	Vector3 cps[4];
+
 	float partialDist = m_distance * p; // dist to p
 
 	int leftIndex = m_size - 1;
@@ -199,33 +196,33 @@ Vector3 Spline::GetPosition(float p) // (0-1)
 	
 	int nextIndex;
 
-	m_cps[0] = &m_spline[leftIndex];
+	cps[0] = m_spline[leftIndex];
 
 	nextIndex = leftIndex + 1;
 	if (nextIndex >= m_size)
 	{
-		m_cps[1] = &m_spline[nextIndex - m_size + 1];
+		cps[1] = m_spline[nextIndex - m_size + 1];
 		//else m_cps[1] = &m_spline[leftIndex];
 	}
-	else m_cps[1] = &m_spline[nextIndex];
+	else cps[1] = m_spline[nextIndex];
 
 	nextIndex = leftIndex + 2;
 	if (nextIndex >= m_size)
 	{
-		m_cps[2] = &m_spline[nextIndex - m_size + 1];
+		cps[2] = m_spline[nextIndex - m_size + 1];
 		//else m_cps[2] = &m_spline[leftIndex];
 	}
-	else m_cps[2] = &m_spline[nextIndex];
+	else cps[2] = m_spline[nextIndex];
 
 	nextIndex = leftIndex + 3;
 	if (nextIndex >= m_size)
 	{
-		m_cps[3] = &m_spline[nextIndex - m_size + 1];
+		cps[3] = m_spline[nextIndex - m_size + 1];
 		//else m_cps[3] = &m_spline[leftIndex];
 	}
-	else m_cps[3] = &m_spline[nextIndex];
+	else cps[3] = m_spline[nextIndex];
 
-	return m_BSpline(p);
+	return m_BSpline(p, cps);
 
 	/*
 	switch (s)
@@ -280,8 +277,10 @@ Vector3 Spline::GetPosition(float p) // (0-1)
 	*/
 }
 
-Vector3 Spline::GetDirection(float p)
+Vector3 Spline::CalcDirection(float p) const
 {
+	Vector3 cps[4];
+
 	float partialDist = m_distance * p; // dist to p
 
 	int leftIndex = m_size - 1;
@@ -292,33 +291,33 @@ Vector3 Spline::GetDirection(float p)
 
 	int nextIndex;
 
-	m_cps[0] = &m_spline[leftIndex];
+	cps[0] = m_spline[leftIndex];
 
 	nextIndex = leftIndex + 1;
 	if (nextIndex >= m_size)
 	{
-		m_cps[1] = &m_spline[nextIndex - m_size + 1];
+		cps[1] = m_spline[nextIndex - m_size + 1];
 		//else m_cps[1] = &m_spline[leftIndex];
 	}
-	else m_cps[1] = &m_spline[nextIndex];
+	else cps[1] = m_spline[nextIndex];
 
 	nextIndex = leftIndex + 2;
 	if (nextIndex >= m_size)
 	{
-		m_cps[2] = &m_spline[nextIndex - m_size + 1];
+		cps[2] = m_spline[nextIndex - m_size + 1];
 		//else m_cps[2] = &m_spline[leftIndex];
 	}
-	else m_cps[2] = &m_spline[nextIndex];
+	else cps[2] = m_spline[nextIndex];
 
 	nextIndex = leftIndex + 3;
 	if (nextIndex >= m_size)
 	{
-		m_cps[3] = &m_spline[nextIndex - m_size + 1];
+		cps[3] = m_spline[nextIndex - m_size + 1];
 		//else m_cps[3] = &m_spline[leftIndex];
 	}
-	else m_cps[3] = &m_spline[nextIndex];
+	else cps[3] = m_spline[nextIndex];
 
-	return m_BSplineD(p);
+	return m_BSplineD(p, cps);
 }
 
 /*

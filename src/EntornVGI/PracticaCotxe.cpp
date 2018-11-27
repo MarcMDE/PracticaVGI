@@ -46,18 +46,19 @@ PracticaCotxe::PracticaCotxe()
 	m_carProgress = 0;
 	m_carInc = 0.005f;
 
+	//m_car.SetWheel(0, OBJ_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
+	//// Pos Z debería ser -7 pero para estar siendo afectada por la escala
+	//m_car.SetWheel(1, OBJ_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+	//m_car.SetWheel(2, OBJ_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
+	//// Pos Z debería ser -7 pero para estar siendo afectada por la escala
+	//m_car.SetWheel(3, OBJ_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
 
-	m_car.SetWheel(0, OBJ_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
-	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
-	m_car.SetWheel(1, OBJ_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
-	m_car.SetWheel(2, OBJ_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
-	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
-	m_car.SetWheel(3, OBJ_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+	//m_mainObj.SetChildsLength(1);
+	//m_mainObj.SetChild(1, m_circuit.GetOGLObject());
+	//m_circuit.SetChildsLength(1);
+	//m_circuit.SetChild(0, m_car.GetOGLObject());
 
-	m_mainObj.SetChildsLength(1);
-	m_mainObj.SetChild(0, m_car.GetBody());
-
-	m_car.GetDynamicBody()->SetPosition(m_circuit.GetPosition(m_carProgress));
+	//m_car.SetPosition(m_circuit.CalcPosition(m_carProgress));
 
 	glEnable(GL_LIGHT1);
 
@@ -270,8 +271,12 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	//reflexio_material = ref_mat;
 	//for (int i = 0; i < 4; i++) sw_materials[i] = sw_mat[i];
 
-	m_circuit.Draw(true, 50);
-	m_circuit.DrawCircuit();
+	//m_circuit.Draw();
+	glPushMatrix();
+		// Debug---------
+		glutSolidSphere(25, 10, 10);
+	glPopMatrix();
+
 	DrawRec(&m_mainObj);
 
 	// Enviar les comandes gràfiques a pantalla
@@ -280,44 +285,44 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 
-	switch (nChar) {
+	/*switch (nChar) {
 
 		case DAV:
 
-			m_car.GetDynamicBody()->Translate(Vector3(1, 0, 0));
+			m_car.Translate(Vector3(1, 0, 0));
 			m_carProgress += m_carInc;
 			if (m_carProgress >= 1) m_carProgress -= 1;
 
-			m_car.GetDynamicBody()->SetPosition(m_circuit.GetPosition(m_carProgress));
+			m_car.SetPosition(m_circuit.CalcPosition(m_carProgress));
 
 			break;
 
 		case DAR:
 
-			m_car.GetDynamicBody()->Translate(Vector3(-1, 0, 0));
+			m_car.Translate(Vector3(-1, 0, 0));
 
 			break;
 
 
 		case ESQ:
 
-			m_car.GetDynamicBody()->Translate(Vector3(0, 0, -1));
+			m_car.Translate(Vector3(0, 0, -1));
 
 			break;
 
 
 		case DRT:
 
-			m_car.GetDynamicBody()->Translate(Vector3(0, 0, 1));
+			m_car.Translate(Vector3(0, 0, 1));
 
 			break;
 
 
 		case ESP:
 
-			m_car.GetDynamicBody()->SetPosition(Vector3().Zero());
+			m_car.SetPosition(Vector3().Zero());
 			break;
 	
-	}
+	}*/
 
 }

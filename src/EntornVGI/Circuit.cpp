@@ -1,18 +1,6 @@
 #include "stdafx.h"
 #include "Circuit.h"
 
-
-Circuit::Circuit()
-{
-	m_carrils = 1;
-}
-
-
-Circuit::Circuit(int carrils)
-{
-	m_carrils = carrils;
-}
-
 Circuit::~Circuit()
 {
 
@@ -21,19 +9,21 @@ Circuit::~Circuit()
 void Circuit::Load(Circuits c)
 {
 	m_index = c;
-	m_spline.Load(CircuitsFileNames[(int)m_index]);
+	Spline::Load(CircuitsFileNames[(int)m_index]);
 }
 
-void Circuit::Draw()
+void Circuit::Draw() const
 {
 	float inc = 1.0f / CircuitsResolutions[(int)m_index];
 	int width = CarrilWidth * m_carrils;
 
+	//m_spline.Debug(true, CircuitsResolutions[(int)m_index]);
+
 	glBegin(GL_QUAD_STRIP);
 	for (float f = 0.0f; f < 1; f += inc)
 	{
-		Vector3 p = m_spline.GetPosition(f);
-		Vector3 d = m_spline.GetDirection(f);
+		Vector3 p = CalcPosition(f);
+		Vector3 d = CalcDirection(f);
 		d.Normalize();
 
 		Vector3 perp = d.DirCrossP(Vector3(0, 1, 0));
@@ -45,8 +35,8 @@ void Circuit::Draw()
 	}
 
 	// Ultim vertex = posicio inicial
-	Vector3 p = m_spline.GetPosition(0);
-	Vector3 d = m_spline.GetDirection(0);
+	Vector3 p = CalcPosition(0);
+	Vector3 d = CalcDirection(0);
 	d.Normalize();
 
 	Vector3 perp = d.DirCrossP(Vector3(0, 1, 0));

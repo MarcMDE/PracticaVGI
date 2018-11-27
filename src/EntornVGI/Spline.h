@@ -21,24 +21,22 @@ private:
 	};
 
 	Vector3 *m_spline;
-	Vector3* m_cps[4];
 	int m_size;
 	float m_distance;
 	float *m_pointsDistance;
 	//bool m_circular;
 	//Vector3 m_CubicInterpolate(float mu);
 	//Vector3 m_CubicInterpolateD(float mu);
-	Vector3 m_BSpline(float mu);
-	Vector3 m_BSplineD(float mu);
+	Vector3 m_BSpline(float mu, Vector3 cps[4]) const;
+	Vector3 m_BSplineD(float mu, Vector3 cps[4]) const;
 
 public:
 	Spline();
 	void Load(string fileName);
-	void Draw(bool cp, int res);
-	void DrawCircuit();
+	void Debug(bool cp, int res) const;
 	~Spline();
 	
-	Vector3 GetPosition(float p);
-	Vector3 GetDirection(float p);
+	Vector3 CalcPosition(float p) const;
+	Vector3 CalcDirection(float p) const;
 };
 

@@ -76,9 +76,9 @@ int OGLObject::GetChildsLength() const
 	return m_childsLength;
 }
 
-const OGLObject & OGLObject::GetOGLObject() const
+OGLObject * OGLObject::GetOGLObject()
 {
-	return *this;
+	return this;
 }
 
 void OGLObject::SetChilds(OGLObject ** childs, int lenght)
