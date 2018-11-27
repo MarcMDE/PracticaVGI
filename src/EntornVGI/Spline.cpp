@@ -96,12 +96,13 @@ Vector3 Spline::m_BSplineD(float mu, Vector3 cps[4]) const
 
 Spline::Spline()
 {
+	m_size = 0;
 }
 
 void Spline::Load(string fileName)
 {
-	if (m_spline != NULL) delete[] m_spline;
-	if (m_pointsDistance != NULL) delete[] m_pointsDistance;
+	if (m_size != 0) delete[] m_spline;
+	if (m_size != 0) delete[] m_pointsDistance;
 
 	ifstream file;
 	file.open(fileName);

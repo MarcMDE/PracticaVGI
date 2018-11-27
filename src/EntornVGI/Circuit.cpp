@@ -9,7 +9,7 @@ Circuit::~Circuit()
 void Circuit::Load(Circuits c)
 {
 	m_index = c;
-	Spline::Load(CircuitsFileNames[(int)m_index]);
+	m_spline.Load(CircuitsFileNames[(int)m_index]);
 }
 
 void Circuit::Draw() const
@@ -22,8 +22,8 @@ void Circuit::Draw() const
 	glBegin(GL_QUAD_STRIP);
 	for (float f = 0.0f; f < 1; f += inc)
 	{
-		Vector3 p = CalcPosition(f);
-		Vector3 d = CalcDirection(f);
+		Vector3 p = m_spline.CalcPosition(f);
+		Vector3 d = m_spline.CalcDirection(f);
 		d.Normalize();
 
 		Vector3 perp = d.DirCrossP(Vector3(0, 1, 0));
@@ -35,8 +35,8 @@ void Circuit::Draw() const
 	}
 
 	// Ultim vertex = posicio inicial
-	Vector3 p = CalcPosition(0);
-	Vector3 d = CalcDirection(0);
+	Vector3 p = m_spline.CalcPosition(0);
+	Vector3 d = m_spline.CalcDirection(0);
 	d.Normalize();
 
 	Vector3 perp = d.DirCrossP(Vector3(0, 1, 0));

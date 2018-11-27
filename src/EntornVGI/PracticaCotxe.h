@@ -18,7 +18,7 @@ private:
 	//Car m_car = Car(OBJ_CAR, 4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
 	OGLObject m_mainObj;
 	LLUM m_sun; // Light 1
-	//Circuit m_circuit;
+	Circuit m_circuit;
 
 	float m_carProgress;
 	float m_carInc;

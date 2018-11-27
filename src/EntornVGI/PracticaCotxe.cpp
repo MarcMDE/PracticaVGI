@@ -46,15 +46,17 @@ PracticaCotxe::PracticaCotxe()
 	m_carProgress = 0;
 	m_carInc = 0.005f;
 
+	m_circuit.Load(CIRCUIT_2);
+
 	//m_car.SetWheel(0, OBJ_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
-	//// Pos Z debería ser -7 pero para estar siendo afectada por la escala
+	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
 	//m_car.SetWheel(1, OBJ_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
 	//m_car.SetWheel(2, OBJ_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
-	//// Pos Z debería ser -7 pero para estar siendo afectada por la escala
+	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
 	//m_car.SetWheel(3, OBJ_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
 
-	//m_mainObj.SetChildsLength(1);
-	//m_mainObj.SetChild(1, m_circuit.GetOGLObject());
+	m_mainObj.SetChildsLength(1);
+	m_mainObj.SetChild(1, &m_circuit);
 	//m_circuit.SetChildsLength(1);
 	//m_circuit.SetChild(0, m_car.GetOGLObject());
 
@@ -271,7 +273,6 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	//reflexio_material = ref_mat;
 	//for (int i = 0; i < 4; i++) sw_materials[i] = sw_mat[i];
 
-	//m_circuit.Draw();
 	glPushMatrix();
 		// Debug---------
 		glutSolidSphere(25, 10, 10);
