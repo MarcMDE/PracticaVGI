@@ -14,7 +14,7 @@
     <ProjectGuid>{16DA3653-49D0-4DA9-B3B2-A642AB40D71C}</ProjectGuid>
     <RootNamespace>EntornVGI</RootNamespace>
     <Keyword>MFCProj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -184,6 +184,7 @@
     <ClInclude Include="alglib\trlinsolve.h" />
     <ClInclude Include="alglib\tsort.h" />
     <ClInclude Include="alglib\xblas.h" />
+    <ClInclude Include="camara.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="ChildFrm.h" />
     <ClInclude Include="Circuit.h" />
@@ -215,6 +216,7 @@
     <ClInclude Include="visualitzacio.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="camara.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="Circuit.cpp" />

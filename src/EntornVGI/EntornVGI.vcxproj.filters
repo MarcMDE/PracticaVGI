@@ -291,6 +291,9 @@
     <ClInclude Include="Circuit.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="camara.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntornVGI.cpp">
@@ -369,6 +372,9 @@
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
     <ClCompile Include="Circuit.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="camara.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
