@@ -7,17 +7,17 @@ camara::camara() {
 
 	// Constructor
 
-	m_eyeX = 0.0f;
-	m_eyeY = 0.0f;
-	m_eyeZ = 0.0f;
+	m_eyeX = 0;
+	m_eyeY = 0;
+	m_eyeZ = 0;
 
-	m_centerX = 0.0f;
-	m_centerY = 0.0f;
-	m_centerZ = 0.0f;
+	m_centerX = 0;
+	m_centerY = 0;
+	m_centerZ = 0;
 
-	m_upX = 0.0f;
-	m_upY = 0.0f;
-	m_upZ = 0.0f;
+	m_upX = 0;
+	m_upY = 0;
+	m_upZ = 0;
 
 }
 
@@ -26,8 +26,8 @@ camara::camara(GLdouble eyeX, GLdouble eyeY, GLdouble eyeZ, GLdouble centerX, GL
 	// Constructor
 
 	setCamEye(eyeX, eyeY, eyeZ);
-	setCamEye(centerX, centerY, centerZ);
-	setCamEye(upX, upY, upZ);
+	setCamCenter(centerX, centerY, centerZ);
+	setCamUp(upX, upY, upZ);
 
 }
 
@@ -46,7 +46,7 @@ void camara::getCam() {
 
 void camara::getIlu() {
 
-	//
+	Iluminacio();
 
 }
 
