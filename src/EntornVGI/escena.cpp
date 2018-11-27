@@ -37,62 +37,62 @@ void glScaleV(const Vector3& v)
 	glScalef(v.X(), v.Y(), v.Z());
 }
 
-void drawOGLObjectRec(OGLObject* obj)
-{
-	glPushMatrix();
-		glScaleV(obj->GetScale());
-		glRotateV(obj->GetRotation());
-		glTranslateV(obj->GetPosition());
+//void drawOGLObjectRec(OGLObject* obj)
+//{
+//	glPushMatrix();
+//		glScaleV(obj->GetScale());
+//		glRotateV(obj->GetRotation());
+//		glTranslateV(obj->GetPosition());
+//
+//		if (obj->GetGLIndex() != 0)
+//		{
+//			glCallList(obj->GetGLIndex());
+//		}
+//
+//		int cLength = obj->GetChildsLength();
+//
+//		// For each child
+//		for (int i = 0; i < cLength; i++)
+//		{
+//			drawOGLObjectRec(obj->GetChild(i));
+//		}
+//
+//	glPopMatrix();
+//}
 
-		if (obj->GetGLIndex() != 0)
-		{
-			glCallList(obj->GetGLIndex());
-		}
-
-		int cLength = obj->GetChildsLength();
-
-		// For each child
-		for (int i = 0; i < cLength; i++)
-		{
-			drawOGLObjectRec(obj->GetChild(i));
-		}
-
-	glPopMatrix();
-}
-
-void dibuixa_EscenaCotxe(OGLObject* mainObj, CColor col_object, bool ref_mat, bool sw_mat[4])
-{
-	// Assignació de les variables de color i reflexió als valors de les variables per paràmetre
-	color_objecte = col_object;
-	reflexio_material = ref_mat;
-	for (int i = 0; i < 4; i++) sw_materials[i] = sw_mat[i];
-
-	drawOGLObjectRec(mainObj);
-
-	/*glCallList(OBJ_CAR);
-
-	glPushMatrix();
-		glTranslatef(14.0f, 0.0f, 7.0f);
-		glCallList(OBJ_WHEEL);
-	glPopMatrix();
-	glPushMatrix();
-		glTranslatef(14.0f, 0.0f, -7.0f);
-		glScalef(1, 1, -1.0f);
-		glCallList(OBJ_WHEEL);
-	glPopMatrix();
-	glPushMatrix();
-		glTranslatef(-14.0f, 0.0f, 7.0f);
-		glCallList(OBJ_WHEEL);
-	glPopMatrix();
-	glPushMatrix();
-		glTranslatef(-14.0f, 0.0f, -7.0f);
-		glScalef(1, 1, -1.0f);
-		glCallList(OBJ_WHEEL);
-	glPopMatrix();*/
-
-	// Enviar les comandes gràfiques a pantalla
-	glFlush();
-}
+//void dibuixa_EscenaCotxe(OGLObject* mainObj, CColor col_object, bool ref_mat, bool sw_mat[4])
+//{
+//	// Assignació de les variables de color i reflexió als valors de les variables per paràmetre
+//	color_objecte = col_object;
+//	reflexio_material = ref_mat;
+//	for (int i = 0; i < 4; i++) sw_materials[i] = sw_mat[i];
+//
+//	drawOGLObjectRec(mainObj);
+//
+//	/*glCallList(OBJ_CAR);
+//
+//	glPushMatrix();
+//		glTranslatef(14.0f, 0.0f, 7.0f);
+//		glCallList(OBJ_WHEEL);
+//	glPopMatrix();
+//	glPushMatrix();
+//		glTranslatef(14.0f, 0.0f, -7.0f);
+//		glScalef(1, 1, -1.0f);
+//		glCallList(OBJ_WHEEL);
+//	glPopMatrix();
+//	glPushMatrix();
+//		glTranslatef(-14.0f, 0.0f, 7.0f);
+//		glCallList(OBJ_WHEEL);
+//	glPopMatrix();
+//	glPushMatrix();
+//		glTranslatef(-14.0f, 0.0f, -7.0f);
+//		glScalef(1, 1, -1.0f);
+//		glCallList(OBJ_WHEEL);
+//	glPopMatrix();*/
+//
+//	// Enviar les comandes gràfiques a pantalla
+//	glFlush();
+//}
 
 // dibuixa_EscenaGL: Dibuix de l'escena amb comandes GL
 void dibuixa_EscenaGL(char objecte, CColor col_object, bool ref_mat, bool sw_mat[4], bool textur)

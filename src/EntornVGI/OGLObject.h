@@ -27,7 +27,7 @@ public:
 	GLuint GetGLIndex() const;
 	OGLObject* GetChild(int i);
 	int GetChildsLength() const;
-	const OGLObject& GetOGLObject() const;
+	OGLObject* GetOGLObject();
 
 	// Setters------------------------------
 	void SetChilds(OGLObject **childs, int lenght);

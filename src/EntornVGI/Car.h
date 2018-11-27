@@ -3,21 +3,35 @@
 #include "MobileOGLObject.h"
 #include "OGLObject.h"
 
-class Car : MobileOGLObject
+class Car : public MobileOGLObject
 {
 private:
-	MobileOGLObject m_body;
+	OGLObject m_body;
 	MobileOGLObject** m_wheels;
 	int m_wheelsLength;
 
 	Vector3 m_speed;
-	Vector3 m_direction;
 public:
-	Car();
-	Car(GLuint bodyGlIndex, int wheelsLength, Vector3 bodyPosition, Vector3 bodyRotation, Vector3 bodyScale);
+	Car() : MobileOGLObject() {};
+	Car(GLuint bodyGlIndex, int wheelsLength, Vector3 bodyPosition, Vector3 bodyRotation, Vector3 bodyScale) : MobileOGLObject()
+	{
+		m_body = MobileOGLObject(bodyGlIndex, bodyPosition, bodyRotation, bodyScale);
+
+		if (wheelsLength > 0)
+		{
+			m_wheelsLength = wheelsLength;
+			m_body.SetChildsLength(wheelsLength);
+			m_wheels = new MobileOGLObject*[m_wheelsLength+1];
+		}
+		else
+		{
+			m_wheelsLength = 0;
+			m_wheels = NULL;
+		}
+	};
 	void SetWheel(int index, GLuint glIndex, Vector3 position, Vector3 rotation, Vector3 scale);
-	OGLObject * GetBody();
-	Car & Car::operator=(const Car & c);
+	void SetBody(GLuint glIndex, Vector3 position, Vector3 rotation, Vector3 scale);
+	//Car & Car::operator=(const Car & c);
 	~Car();
 };
 
