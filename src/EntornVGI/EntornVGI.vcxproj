@@ -186,6 +186,7 @@
     <ClInclude Include="alglib\xblas.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="ChildFrm.h" />
+    <ClInclude Include="Circuit.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="Spline.h" />
@@ -216,6 +217,7 @@
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="ChildFrm.cpp" />
+    <ClCompile Include="Circuit.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="Spline.cpp" />
     <ClCompile Include="DynamicOGLObject.cpp" />

@@ -288,6 +288,9 @@
     <ClInclude Include="Spline.h">
       <Filter>Archivos de encabezado\ClasesCarProj</Filter>
     </ClInclude>
+    <ClInclude Include="Circuit.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntornVGI.cpp">
@@ -364,6 +367,9 @@
     </ClCompile>
     <ClCompile Include="DynamicOGLObject.cpp">
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
+    </ClCompile>
+    <ClCompile Include="Circuit.cpp">
+      <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

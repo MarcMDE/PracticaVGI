@@ -33,7 +33,7 @@ private:
 
 public:
 	Spline();
-	Spline(string fileName);
+	void Load(string fileName);
 	void Draw(bool cp, int res);
 	void DrawCircuit();
 	~Spline();

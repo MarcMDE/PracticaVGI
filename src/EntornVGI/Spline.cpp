@@ -98,11 +98,13 @@ Spline::Spline()
 {
 }
 
-Spline::Spline(string fileName)
+void Spline::Load(string fileName)
 {
+	if (m_spline != NULL) delete[] m_spline;
+	if (m_pointsDistance != NULL) delete[] m_pointsDistance;
+
 	ifstream file;
 	file.open(fileName);
-
 	//m_circular = true;
 
 	if (file.is_open())
@@ -129,9 +131,14 @@ Spline::Spline(string fileName)
 	m_pointsDistance[0] = 0;
 	for (int i = 1; i < m_size; i++)
 	{
-		m_pointsDistance[i] = m_pointsDistance[i-1] + m_spline[i-1].Distance(m_spline[i]);
+		m_pointsDistance[i] = m_pointsDistance[i - 1] + m_spline[i - 1].Distance(m_spline[i]);
 	}
 	m_distance = m_pointsDistance[m_size - 1];
+}
+
+Spline::Spline()
+{
+
 }
 
 void Spline::Draw(bool cp, int res)
@@ -174,49 +181,11 @@ void Spline::Draw(bool cp, int res)
 	glLineWidth(1.0);
 }
 
-void Spline::DrawCircuit()
-{
-	int res = 150;
-	float inc = 1.0f / res;
-	int width = 30;
-
-	glBegin(GL_QUAD_STRIP);
-	for (float f=0.0f; f < 1; f+=inc)
-	{
-		Vector3 p = GetPosition(f);
-		Vector3 d = GetDirection(f);
-		d.Normalize();
-
-		Vector3 perp = d.DirCrossP(Vector3(0,1,0));
-		Vector3 pl = p + (perp * (-width));
-		Vector3 pr = p + (perp * width);
-
-		glVertex3f(pl.X(), pl.Y(), pl.Z());
-		glVertex3f(pr.X(), pr.Y(), pr.Z());
-	}
-
-	// Ultim vertex = posicio inicial
-	Vector3 p = GetPosition(0);
-	Vector3 d = GetDirection(0);
-	d.Normalize();
-
-	Vector3 perp = d.DirCrossP(Vector3(0, 1, 0));
-	Vector3 pl = p + (perp * (-width));
-	Vector3 pr = p + (perp * width);
-
-	glVertex3f(pl.X(), pl.Y(), pl.Z());
-	glVertex3f(pr.X(), pr.Y(), pr.Z());
-
-	glEnd();
-}
-
-
 Spline::~Spline()
 {
 	delete[] m_spline;
 	delete[] m_pointsDistance;
 }
-
 
 Vector3 Spline::GetPosition(float p) // (0-1)
 {
