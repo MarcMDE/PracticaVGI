@@ -303,7 +303,10 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 
 		case DAR:
 
-			m_car.Translate(Vector3(-1, 0, 0));
+			//m_car.Translate(Vector3(-1, 0, 0));
+			m_carProgress -= m_carInc;
+			if (m_carProgress <= 0) m_carProgress += 1;
+			m_car.SetPosition(m_circuit.CalcPosition(m_carProgress));
 
 			break;
 
