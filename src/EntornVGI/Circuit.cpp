@@ -6,13 +6,28 @@ Circuit::~Circuit()
 
 }
 
+Vector3 Circuit::CalcPosition(float f)
+{
+	return m_spline.CalcPosition(f);
+}
+
+Vector3 Circuit::CalcDirection(float f)
+{
+	return m_spline.CalcDirection(f);
+}
+
+void Circuit::CalcDirPos(float f, Vector3 & direction, Vector3 & position)
+{
+	m_spline.CalcDirPos(f, direction, position);
+}
+
 void Circuit::Load(Circuits c)
 {
 	m_index = c;
 	m_spline.Load(CircuitsFileNames[(int)m_index]);
 }
 
-void Circuit::Draw() const
+void Circuit::Draw()
 {
 	float inc = 1.0f / CircuitsResolutions[(int)m_index];
 	int width = CarrilWidth * m_carrils;

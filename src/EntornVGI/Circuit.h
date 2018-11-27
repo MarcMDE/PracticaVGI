@@ -21,8 +21,12 @@ public:
 	Circuit(int carrils) : m_carrils(carrils), OGLObject() {};
 	~Circuit();
 	
+	Vector3 CalcPosition(float f);
+	Vector3 CalcDirection(float f);
+	void CalcDirPos(float f, Vector3 & direction, Vector3 & position);
+	
 	void Load(Circuits c);
 
-	void Draw() const;
+	void Draw();
 };
 

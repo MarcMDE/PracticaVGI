@@ -15,7 +15,7 @@
 class PracticaCotxe
 {
 private:
-	//Car m_car = Car(OBJ_CAR, 4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
+	Car m_car = Car(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
 	OGLObject m_mainObj;
 	LLUM m_sun; // Light 1
 	Circuit m_circuit;

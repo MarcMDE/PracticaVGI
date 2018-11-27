@@ -38,5 +38,6 @@ public:
 	
 	Vector3 CalcPosition(float p) const;
 	Vector3 CalcDirection(float p) const;
+	void CalcDirPos(float p, Vector3 & dir, Vector3 & pos);
 };
 
