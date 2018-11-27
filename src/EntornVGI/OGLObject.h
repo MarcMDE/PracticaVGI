@@ -27,6 +27,7 @@ public:
 	GLuint GetGLIndex() const;
 	OGLObject* GetChild(int i);
 	int GetChildsLength() const;
+	const OGLObject& GetOGLObject() const;
 
 	// Setters------------------------------
 	void SetChilds(OGLObject **childs, int lenght);
@@ -35,6 +36,8 @@ public:
 
 	// Draw---------------------------------
 	virtual void Draw();
+
+	// Operators----------------------------
 
 };
 

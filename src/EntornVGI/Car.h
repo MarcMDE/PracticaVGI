@@ -1,12 +1,13 @@
 #pragma once
 
-#include "DynamicOGLObject.h"
+#include "MobileOGLObject.h"
+#include "OGLObject.h"
 
-class Car
+class Car : MobileOGLObject
 {
 private:
-	DynamicOGLObject m_body;
-	DynamicOGLObject** m_wheels;
+	MobileOGLObject m_body;
+	MobileOGLObject** m_wheels;
 	int m_wheelsLength;
 
 	Vector3 m_speed;
@@ -16,7 +17,7 @@ public:
 	Car(GLuint bodyGlIndex, int wheelsLength, Vector3 bodyPosition, Vector3 bodyRotation, Vector3 bodyScale);
 	void SetWheel(int index, GLuint glIndex, Vector3 position, Vector3 rotation, Vector3 scale);
 	OGLObject * GetBody();
-	DynamicOGLObject * GetDynamicBody();
+	Car & Car::operator=(const Car & c);
 	~Car();
 };
 
