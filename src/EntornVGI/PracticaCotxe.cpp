@@ -18,8 +18,9 @@ void PracticaCotxe::glScaleV(const Vector3 & v)
 	glScalef(v.X(), v.Y(), v.Z());
 }
 
-void PracticaCotxe::DrawRec(OGLObject * obj)
+void PracticaCotxe::DrawRec(OGLObject * obj, int aux)
 {
+
 	glPushMatrix();
 	glScaleV(obj->GetScale());
 	glRotateV(obj->GetRotation());
@@ -29,10 +30,18 @@ void PracticaCotxe::DrawRec(OGLObject * obj)
 
 	int cLength = obj->GetChildsLength();
 
+	if (aux == 4) {
+
+		//camara cam(100, 100, 100, 0, 25, 0, 5, 5, 0);
+		//cam.getCam();
+
+	}
+
 	// For each child
 	for (int i = 0; i < cLength; i++)
 	{
-		DrawRec(obj->GetChild(i));
+		aux++;
+		DrawRec(obj->GetChild(i), aux);
 	}
 
 	glPopMatrix();
@@ -56,6 +65,8 @@ PracticaCotxe::PracticaCotxe()
 	m_car.SetWheel(2, OBJ_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
 	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
 	m_car.SetWheel(3, OBJ_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+
+	//m_car.SetChild(5, &m_cam);
 
 	m_circuit.SetChildsLength(1);
 	m_circuit.SetChild(0, &m_car);
@@ -276,12 +287,13 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	//reflexio_material = ref_mat;
 	//for (int i = 0; i < 4; i++) sw_materials[i] = sw_mat[i];
 
+	m_cam.getCam();
 	// Debug---------
-	//glPushMatrix();
-	//	glutSolidSphere(25, 10, 10);
-	//glPopMatrix();
+	glPushMatrix();
+		glutSolidSphere(25, 10, 10);
+	glPopMatrix();
 	// -----------
-	DrawRec(&m_mainObj);
+	//DrawRec(&m_mainObj, 0);
 
 	// Enviar les comandes gràfiques a pantalla
 	glFlush();

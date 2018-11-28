@@ -1,5 +1,6 @@
 #pragma once
 #include "Car.h"
+#include "camara.h"
 #include "OGLObject.h"
 #include "DynamicOGLObject.h"
 #include "Circuit.h"
@@ -19,6 +20,7 @@ private:
 	OGLObject m_mainObj;
 	LLUM m_sun; // Light 1
 	Circuit m_circuit;
+	camara m_cam = camara(-100, 0, 0, 0, 25, 0, 0, 5, 0);
 
 	float m_carProgress;
 	float m_carInc;
@@ -26,7 +28,7 @@ private:
 	void glTranslateV(const Vector3& v);
 	void glRotateV(const Vector3& v);
 	void glScaleV(const Vector3& v);
-	void DrawRec(OGLObject* obj);
+	void DrawRec(OGLObject* obj, int aux);
 public:
 	PracticaCotxe();
 	~PracticaCotxe();

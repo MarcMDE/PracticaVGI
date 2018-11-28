@@ -1,5 +1,10 @@
 #pragma once
-class camara {
+
+#include "visualitzacio.h"
+#include "OGLObject.h"
+#include "Vector3.h"
+
+class camara : public OGLObject{
 
 	// Variables
 	public:
@@ -33,6 +38,8 @@ class camara {
 		void getIlu();
 
 		void setIlu();
+
+		void Draw();
 
 };
 

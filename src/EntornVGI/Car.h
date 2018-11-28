@@ -23,7 +23,7 @@ public:
 		{
 			m_wheelsLength = wheelsLength;
 			m_wheels = new MobileOGLObject*[m_wheelsLength+1];
-			SetChildsLength(wheelsLength + 1);
+			SetChildsLength(wheelsLength + 1); // X rodes, 1 carroceria, 1 camara
 		}
 		else
 		{

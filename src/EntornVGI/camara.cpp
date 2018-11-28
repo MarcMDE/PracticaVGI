@@ -1,7 +1,5 @@
 #include "stdafx.h"
 #include "camara.h"
-#include "visualitzacio.h"
-
 
 camara::camara() {
 
@@ -10,6 +8,7 @@ camara::camara() {
 	m_eyeX = 0;
 	m_eyeY = 0;
 	m_eyeZ = 0;
+	//m_position = Vector3().Zero();
 
 	m_centerX = 0;
 	m_centerY = 0;
@@ -41,12 +40,13 @@ camara::~camara() {
 void camara::getCam() {
 
 	gluLookAt(m_eyeX, m_eyeY, m_eyeZ, m_centerX, m_centerY, m_centerZ, m_upX, m_upY, m_upZ);
+	//gluLookAt(m_position.X(), m_position.Y(), m_position.Z(), m_centerX, m_centerY, m_centerZ, m_upX, m_upY, m_upZ);
 
 }
 
 void camara::getIlu() {
 
-	Iluminacio();
+	//Iluminacio();
 
 }
 
@@ -55,6 +55,7 @@ void camara::setCamEye(GLdouble X, GLdouble Y, GLdouble Z) {
 	m_eyeX = X;
 	m_eyeY = Y;
 	m_eyeZ = Z;
+	//m_position = Vector3(X, Y, Z);
 
 }
 
@@ -78,4 +79,9 @@ void camara::setIlu() {
 
 	//
 
+}
+
+void camara::Draw()
+{
+	getCam();
 }
