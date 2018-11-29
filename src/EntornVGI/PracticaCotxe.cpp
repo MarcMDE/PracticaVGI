@@ -9,8 +9,8 @@ void PracticaCotxe::glTranslateV(const Vector3 & v)
 
 void PracticaCotxe::glRotateV(const Vector3 & v)
 {
-	//glRotatef(v.Z(), 0, 0, 1);
-	glRotatef(v.X() * rad2deg, 0, 1, 0);
+	glRotatef(v.X() * RAD_TO_DEG, 0, 1, 0);
+	//glRotatef(v.Z() * RAD_TO_DEG, 0, 0, 1);
 	//glRotatef(v.X(), 1, 0, 0);
 }
 
@@ -301,17 +301,22 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 	Vector3 rotation;
+	Vector3 newPos;
+
 	switch (nChar) {
 
 		case DAV:
 
 			//m_car.Translate(Vector3(1, 0, 0));
-
 			m_carProgress += m_carInc;
 			if (m_carProgress >= 1) m_carProgress -= 1;
-			m_car.SetPosition(m_circuit.CalcPosition(m_carProgress));
+			newPos = m_circuit.CalcPosition(m_carProgress);
+			m_car.SetPosition(newPos);
 			rotation = m_circuit.CalcDirection(m_carProgress).GetAngles();
+			//rotation = (newPos - m_carPrevPos).GetAngles();
+			//rotation = Vector3(-rotation.X(), rotation.Y(), rotation.Z());
 			m_car.SetRotation(rotation);
+			rotation = rotation * RAD_TO_DEG;
 
 			a += 0.5f;
 

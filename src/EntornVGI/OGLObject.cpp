@@ -126,10 +126,10 @@ void OGLObject::Draw()
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 	glEnable(GL_TEXTURE_2D);
-	if (m_glTextIndex != -1)
-	{
-		glBindTexture(GL_TEXTURE_2D, m_glTextIndex);
-	}
+	//if (m_glTextIndex != -1)
+	//{
+	//	glBindTexture(GL_TEXTURE_2D, m_glTextIndex);
+	//}
 	if (m_glIndex != -1)
 	{
 		glCallList(m_glIndex);
