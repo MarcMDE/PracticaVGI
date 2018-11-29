@@ -3,7 +3,7 @@
 
 OGLObject::OGLObject()
 {
-	m_glIndex = 0;
+	m_glIndex = -1;
 	m_position = Vector3().Zero();
 	m_rotation = Vector3().One();
 	m_scale = Vector3().One();
@@ -11,9 +11,10 @@ OGLObject::OGLObject()
 	m_childsLength = 0;
 }
 
-OGLObject::OGLObject(GLuint glIndex)
+OGLObject::OGLObject(GLuint glIndex, GLuint glTextIndex)
 {
 	m_glIndex = glIndex;
+	m_glTextIndex = glTextIndex;
 	m_position = Vector3().Zero();
 	m_rotation = Vector3().One();
 	m_scale = Vector3().One();
@@ -21,9 +22,10 @@ OGLObject::OGLObject(GLuint glIndex)
 	m_childsLength = 0;
 }
 
-OGLObject::OGLObject(GLuint glIndex, Vector3 position)
+OGLObject::OGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position)
 {
 	m_glIndex = glIndex;
+	m_glTextIndex = glTextIndex;
 	m_position = position;
 	m_rotation = Vector3().One();
 	m_scale = Vector3().One();
@@ -31,9 +33,10 @@ OGLObject::OGLObject(GLuint glIndex, Vector3 position)
 	m_childsLength = 0;
 }
 
-OGLObject::OGLObject(GLuint glIndex, Vector3 position, Vector3 rotation, Vector3 scale)
+OGLObject::OGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale)
 {
 	m_glIndex = glIndex;
+	m_glTextIndex = glTextIndex;
 	m_position = position;
 	m_rotation = rotation;
 	m_scale = scale;
@@ -56,10 +59,10 @@ const Vector3& OGLObject::GetScale() const
 	return m_scale;
 }
 
-GLuint OGLObject::GetGLIndex() const
-{
-	return m_glIndex;
-}
+//GLuint OGLObject::GetGLIndex() const
+//{
+//	return m_glIndex;
+//}
 
 OGLObject * OGLObject::GetChild(int i)
 {
@@ -114,9 +117,14 @@ void OGLObject::SetChild(int index, OGLObject * child)
 
 void OGLObject::Draw()
 {
-	if (m_glIndex != 0)
+	if (m_glIndex != -1)
 	{
 		glCallList(m_glIndex);
+	}
+
+	if (m_glTextIndex != -1)
+	{
+		glBindTexture(GL_TEXTURE_2D, m_glTextIndex);
 	}
 }
 

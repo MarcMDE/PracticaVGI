@@ -9,22 +9,26 @@ protected:
 	Vector3 m_rotation;
 	Vector3 m_scale;
 	GLuint m_glIndex;
+	GLuint m_glTextIndex;
 	OGLObject **m_childs;
 	int m_childsLength;
 
 public:
 	// Constructors-------------------------
 	OGLObject();
-	OGLObject(GLuint glIndex);
-	OGLObject(GLuint glIndex, Vector3 position);
-	OGLObject(GLuint glIndex, Vector3 position, Vector3 rotation, Vector3 scale);
+	// glIndex i/o glTextIndex han de ser -1 si no model o no textura
+	OGLObject(GLuint glIndex, GLuint glTextIndex);
+	// glIndex i/o glTextIndex han de ser -1 si no model o no textura
+	OGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position);
+	// glIndex i/o glTextIndex han de ser -1 si no model o no textura
+	OGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
 	~OGLObject();
 
 	// Getters------------------------------
 	const Vector3& GetPosition() const;
 	const Vector3& GetRotation() const;
 	const Vector3& GetScale() const;
-	GLuint GetGLIndex() const;
+	//GLuint GetGLIndex() const;
 	OGLObject* GetChild(int i);
 	int GetChildsLength() const;
 

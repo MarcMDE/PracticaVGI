@@ -7,10 +7,10 @@ class MobileOGLObject : public OGLObject
 public:
 	// Constructors
 	MobileOGLObject() : OGLObject() {};
-	MobileOGLObject(GLuint glIndex) : OGLObject(glIndex) {};
-	MobileOGLObject(GLuint glIndex, Vector3 position) : OGLObject(glIndex, position) {};
-	MobileOGLObject(GLuint glIndex, Vector3 position, Vector3 rotation, Vector3 scale) : 
-		OGLObject(glIndex, position, rotation, scale) {};
+	MobileOGLObject(GLuint glIndex, GLuint glTextIndex) : OGLObject(glIndex, glTextIndex) {};
+	MobileOGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position) : OGLObject(glIndex, glTextIndex, position) {};
+	MobileOGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale) :
+		OGLObject(glIndex, glTextIndex, position, rotation, scale) {};
 	~MobileOGLObject();
 
 	// Setters

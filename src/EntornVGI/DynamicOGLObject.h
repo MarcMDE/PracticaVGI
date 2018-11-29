@@ -10,11 +10,11 @@ private:
 	float m_mass;
 	
 public:
-	DynamicOGLObject() : MobileOGLObject(), m_direction(Vector3().Zero()), m_velocity(Vector3().Zero()) {};
+	/*DynamicOGLObject() : MobileOGLObject(), m_direction(Vector3().Zero()), m_velocity(Vector3().Zero()) {};
 	DynamicOGLObject(GLuint glIndex) : MobileOGLObject(glIndex), m_direction(Vector3().Zero()), m_velocity(Vector3().Zero()) {};
 	DynamicOGLObject(GLuint glIndex, Vector3 position) : MobileOGLObject(glIndex, position), m_direction(Vector3().Zero()), m_velocity(Vector3().Zero()) {};
 	DynamicOGLObject(GLuint glIndex, Vector3 position, Vector3 rotation, Vector3 scale) : 
-		MobileOGLObject(glIndex, position, rotation, scale), m_direction(Vector3().Zero()), m_velocity(Vector3().Zero()) {};
+		MobileOGLObject(glIndex, position, rotation, scale), m_direction(Vector3().Zero()), m_velocity(Vector3().Zero()) {};*/
 
 
 

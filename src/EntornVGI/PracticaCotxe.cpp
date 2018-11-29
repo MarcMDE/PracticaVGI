@@ -30,13 +30,6 @@ void PracticaCotxe::DrawRec(OGLObject * obj, int aux)
 
 	int cLength = obj->GetChildsLength();
 
-	if (aux == 4) {
-
-		//camara cam(100, 100, 100, 0, 25, 0, 5, 5, 0);
-		//cam.getCam();
-
-	}
-
 	// For each child
 	for (int i = 0; i < cLength; i++)
 	{
@@ -50,21 +43,21 @@ void PracticaCotxe::DrawRec(OGLObject * obj, int aux)
 
 PracticaCotxe::PracticaCotxe()
 {
-	m_mainObj = OGLObject(0);
+	m_mainObj = OGLObject(-1, -1);
 
 	m_carProgress = 0;
 	m_carInc = 0.005f;
 
 	m_circuit.Load(CIRCUIT_2);
 
-	m_car.SetBody(OBJ_CAR, Vector3().Zero(), Vector3().Zero(), Vector3().One());
+	m_car.SetBody(OBJ_CAR, TXT_CAR, Vector3().Zero(), Vector3().Zero(), Vector3().One());
 
-	m_car.SetWheel(0, OBJ_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
+	m_car.SetWheel(0, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
 	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
-	m_car.SetWheel(1, OBJ_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
-	m_car.SetWheel(2, OBJ_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
+	m_car.SetWheel(1, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+	m_car.SetWheel(2, OBJ_WHEEL, TXT_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
 	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
-	m_car.SetWheel(3, OBJ_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+	m_car.SetWheel(3, OBJ_WHEEL, TXT_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
 
 	//m_car.SetChild(5, &m_cam);
 
@@ -289,11 +282,13 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 	m_cam.getCam();
 	// Debug---------
-	glPushMatrix();
-		glutSolidSphere(25, 10, 10);
-	glPopMatrix();
+	//glPushMatrix();
+	//	glutSolidSphere(25, 10, 10);
+	//glPopMatrix();
 	// -----------
-	//DrawRec(&m_mainObj, 0);
+	
+	glEnable(GL_TEXTURE_2D);
+	DrawRec(&m_mainObj, 0);
 
 	// Enviar les comandes gràfiques a pantalla
 	glFlush();

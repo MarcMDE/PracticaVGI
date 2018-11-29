@@ -31,8 +31,8 @@ public:
 			m_wheels = NULL;
 		}
 	};
-	void SetWheel(int index, GLuint glIndex, Vector3 position, Vector3 rotation, Vector3 scale);
-	void SetBody(GLuint glIndex, Vector3 position, Vector3 rotation, Vector3 scale);
+	void SetWheel(int index, GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
+	void SetBody(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
 	//Car & Car::operator=(const Car & c);
 	~Car();
 };

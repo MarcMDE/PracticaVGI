@@ -3637,16 +3637,31 @@ void CEntornVGIView::OnPracticaCotxe()
 		escena = ESCENA_PRACTICA_COTXE_1;
 		
 		wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);	// Activem contexte OpenGL
-		// Repassar, vertex buffer objects
+
+		// Carregar cotxe
 		if (ObOBJ == NULL) ObOBJ = new COBJModel;
-		ObOBJ->LoadModel("res/models/basic_car.obj", OBJ_CAR, false);	// Carregar model obj cotxe sense textura
-		//ObOBJ->LoadModel("assets/models/basic_car.obj", OBJ_CAR, true);	// Carregar model obj cotxe amb textura
+		ObOBJ->LoadModel("res/models/basic_car.obj", OBJ_CAR, true);	// Carregar model obj cotxe amb textura
+		// Carregar textura cotxe
+		loadIMA("textures/ProjecteCotxe/cotxe_vermell.png", TXT_CAR);
 
 		ObOBJ = new COBJModel;
-		ObOBJ->LoadModel("res/models/basic_wheel.obj", OBJ_WHEEL, false);	// Carregar model obj roda sense textura
-		//ObOBJ->LoadModel("assets/models/basic_wheel.obj", OBJ_WHEEL, true);	// Carregar model obj roda amb textura
+		ObOBJ->LoadModel("res/models/basic_wheel.obj", OBJ_WHEEL, false);	// Carregar model obj amb sense textura
+		// Carregar textura roda
+		loadIMA("textures/ProjecteCotxe/roda.png", TXT_WHEEL);
 
+		// Timer ("FPS")
 		SetTimer(WM_TIMER, 10, NULL);
+
+		// Parametres textures ----
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		// ------------------------
+
 
 		wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);	// Desactivem contexte OpenGL
 	}
