@@ -16,6 +16,13 @@
 class PracticaCotxe
 {
 private:
+
+	float a = 0;
+
+	float vX = 0;
+	float vY = 1;
+	float vZ = 0;
+
 	Car m_car = Car(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
 	OGLObject m_mainObj;
 	LLUM m_sun; // Light 1
@@ -28,7 +35,7 @@ private:
 	void glTranslateV(const Vector3& v);
 	void glRotateV(const Vector3& v);
 	void glScaleV(const Vector3& v);
-	void DrawRec(OGLObject* obj, int aux);
+	void DrawRec(OGLObject* obj);
 public:
 	PracticaCotxe();
 	~PracticaCotxe();

@@ -29,12 +29,13 @@ public:
 	float DotP(Vector3 v);
 	Vector3 DirCrossP(Vector3 v);
 	Vector3 CrossP(Vector3 v);
-	float Magnitude();
+	float Magnitude() const;
 	void Normalize();
 	float AngleBtw(Vector3 v);
-	float AngleX();
-	float AngleY();
-	float AngleZ();
+	float AngleX() const;
+	float AngleY() const;
+	float AngleZ() const;
+	Vector3 GetAngles() const;
 	void RotateY(float d, Vector3 r);
 
 	//Vector3 Direction(Vector3 t);

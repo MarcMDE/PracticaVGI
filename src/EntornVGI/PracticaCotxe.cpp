@@ -9,8 +9,9 @@ void PracticaCotxe::glTranslateV(const Vector3 & v)
 
 void PracticaCotxe::glRotateV(const Vector3 & v)
 {
-	// TODO: rotate call
-//glRotatef()
+	//glRotatef(v.Z(), 0, 0, 1);
+	glRotatef(v.X() * rad2deg, 0, 1, 0);
+	//glRotatef(v.X(), 1, 0, 0);
 }
 
 void PracticaCotxe::glScaleV(const Vector3 & v)
@@ -18,23 +19,24 @@ void PracticaCotxe::glScaleV(const Vector3 & v)
 	glScalef(v.X(), v.Y(), v.Z());
 }
 
-void PracticaCotxe::DrawRec(OGLObject * obj, int aux)
+void PracticaCotxe::DrawRec(OGLObject * obj)
 {
 
 	glPushMatrix();
+
+	glTranslateV(obj->GetPosition());	
 	glScaleV(obj->GetScale());
 	glRotateV(obj->GetRotation());
-	glTranslateV(obj->GetPosition());
 
 	obj->Draw();
+
 
 	int cLength = obj->GetChildsLength();
 
 	// For each child
 	for (int i = 0; i < cLength; i++)
 	{
-		aux++;
-		DrawRec(obj->GetChild(i), aux);
+		DrawRec(obj->GetChild(i));
 	}
 
 	glPopMatrix();
@@ -54,10 +56,10 @@ PracticaCotxe::PracticaCotxe()
 
 	m_car.SetWheel(0, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
 	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
-	m_car.SetWheel(1, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+	m_car.SetWheel(1, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
 	m_car.SetWheel(2, OBJ_WHEEL, TXT_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
 	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
-	m_car.SetWheel(3, OBJ_WHEEL, TXT_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+	m_car.SetWheel(3, OBJ_WHEEL, TXT_WHEEL, Vector3(-14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
 
 	//m_car.SetChild(5, &m_cam);
 
@@ -280,22 +282,25 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	//reflexio_material = ref_mat;
 	//for (int i = 0; i < 4; i++) sw_materials[i] = sw_mat[i];
 
-	m_cam.getCam();
+	//m_cam.getCam();
 	// Debug---------
-	//glPushMatrix();
-	//	glutSolidSphere(25, 10, 10);
-	//glPopMatrix();
+	/*glPushMatrix();
+
+	glRotatef(a, vX, vY, vZ);
+	
+	glutSolidSphere(25, 10, 10);
+	glPopMatrix();*/
 	// -----------
 	
 	glEnable(GL_TEXTURE_2D);
-	DrawRec(&m_mainObj, 0);
+	DrawRec(&m_mainObj);
 
 	// Enviar les comandes gràfiques a pantalla
 	glFlush();
 }
 
 void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
-
+	Vector3 rotation;
 	switch (nChar) {
 
 		case DAV:
@@ -305,6 +310,10 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 			m_carProgress += m_carInc;
 			if (m_carProgress >= 1) m_carProgress -= 1;
 			m_car.SetPosition(m_circuit.CalcPosition(m_carProgress));
+			rotation = m_circuit.CalcDirection(m_carProgress).GetAngles();
+			m_car.SetRotation(rotation);
+
+			a += 0.5f;
 
 			break;
 

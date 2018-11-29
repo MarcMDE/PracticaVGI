@@ -106,6 +106,8 @@ const int p_far=50000;
 const double pi=3.14159;
 const double TWOPI = 2 * pi;
 const double PID2 = pi / 2;
+
+const float rad2deg = 180.0f / pi;
 //const double pi=3.14159265358979323846264338327950288419716939937510f;
 
 // --------------- VGI. TRUCK: Resolució de les rodes (Nombre de divisions del cilindre i discos)

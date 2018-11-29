@@ -78,7 +78,7 @@ Vector3 Vector3::DirCrossP(Vector3 v)
 					m_x*v.m_y - m_y*v.m_x);
 }
 
-float Vector3::Magnitude()
+float Vector3::Magnitude() const
 {
 	return sqrtf(m_x*m_x + m_y*m_y + m_z*m_z);
 }
@@ -88,17 +88,28 @@ void Vector3::Normalize()
 	*this /= Magnitude();
 }
 
-float Vector3::AngleX()
+float Vector3::AngleX() const
 {
 	return acos(m_x / Magnitude());
 }
-float Vector3::AngleY()
+float Vector3::AngleY() const
 {
 	return acos(m_y / Magnitude());
 }
-float Vector3::AngleZ()
+float Vector3::AngleZ() const
 {
 	return acos(m_z / Magnitude());
+}
+
+Vector3 Vector3::GetAngles() const
+{
+	float magnitude = Magnitude();
+	Vector3 ret = Vector3(
+		acos(m_x / magnitude),
+		acos(m_y / magnitude),
+		acos(m_z / magnitude));
+
+	return ret;
 }
 
 void Vector3::RotateY(float d, Vector3 r)
