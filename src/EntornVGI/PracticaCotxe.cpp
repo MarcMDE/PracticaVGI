@@ -302,6 +302,8 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 	Vector3 rotation;
 	Vector3 newPos;
+	Vector3 dir;
+	Vector3 pos;
 
 	switch (nChar) {
 
@@ -309,10 +311,16 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 
 			//m_car.Translate(Vector3(1, 0, 0));
 			m_carProgress += m_carInc;
+
 			if (m_carProgress >= 1) m_carProgress -= 1;
+
+			dir = m_circuit.CalcDirection(m_carProgress);
+			dir.Normalize();
+			pos = m_circuit.CalcPosition(m_carProgress);
+
 			newPos = m_circuit.CalcPosition(m_carProgress);
 			m_car.SetPosition(newPos);
-			rotation = m_circuit.CalcDirection(m_carProgress).GetAngles();
+			rotation = dir.GetAngles();
 			//rotation = (newPos - m_carPrevPos).GetAngles();
 			//rotation = Vector3(-rotation.X(), rotation.Y(), rotation.Z());
 			m_car.SetRotation(rotation);
