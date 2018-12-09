@@ -1,7 +1,5 @@
-DOING: Arreglar rotacio Y cotxe
+DOING: Fer interpolacions circuit proporcionals a la dist
 
 TODO:
 - Treure textura de parametre cotxe i rodes
-- Fer rotacio Z cotxe
-- Fer interpolacions circuit proporcionals a la dist
 - Fer camara 

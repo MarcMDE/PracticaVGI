@@ -33,6 +33,8 @@ public:
 	};
 	void SetWheel(int index, GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
 	void SetBody(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
+	void Move(Vector3 pos, Vector3 dir);
+
 	//Car & Car::operator=(const Car & c);
 	~Car();
 };

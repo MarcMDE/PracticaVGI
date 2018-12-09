@@ -25,8 +25,8 @@ private:
 	float m_distance;
 	float *m_pointsDistance;
 	//bool m_circular;
-	//Vector3 m_CubicInterpolate(float mu);
-	//Vector3 m_CubicInterpolateD(float mu);
+	Vector3 m_CubicInterpolate(float mu, Vector3 cps[4]) const;
+	Vector3 m_CubicInterpolateD(float mu, Vector3 cps[4]) const;
 	Vector3 m_BSpline(float mu, Vector3 cps[4]) const;
 	Vector3 m_BSplineD(float mu, Vector3 cps[4]) const;
 

@@ -1,52 +1,52 @@
 #include "stdafx.h"
 #include "Spline.h"
 
-/*
-Vector3 Spline::m_CubicInterpolate(float mu)
+
+Vector3 Spline::m_CubicInterpolate(float mu, Vector3 cps[4]) const
 {
 	Vector3 a0, a1, a2, a3;
 	float mu2 = mu * mu;
 
 
 	// Cublic spline
-	//a0 = (*m_cps[3]) - (*m_cps[2]) - m_cps[0] + (*m_cps[1]);
-	//a1 = m_cps[0] - (*m_cps[1]) - a0;
-	//a2 = (*m_cps[2]) - m_cps[0];
-	//a3 = (*m_cps[1]);
+	//a0 = (*cps[3]) - (*cps[2]) - cps[0] + (*cps[1]);
+	//a1 = cps[0] - (*cps[1]) - a0;
+	//a2 = (*cps[2]) - cps[0];
+	//a3 = (*cps[1]);
 	
 
 	// Catmull-Roin cubic Splines
-	a0 = (*m_cps[0])*(-0.5) + (*m_cps[1])*1.5 - (*m_cps[2])* 1.5 + (*m_cps[3])*0.5;
-	a1 = (*m_cps[0]) - (*m_cps[1])*2.5 + (*m_cps[2])*2 - (*m_cps[3])*0.5;
-	a2 = (*m_cps[0])*(-0.5) + (*m_cps[2])*0.5;
-	a3 = (*m_cps[1]);
+	a0 = (cps[0])*(-0.5) + (cps[1])*1.5 - (cps[2])* 1.5 + (cps[3])*0.5;
+	a1 = (cps[0]) - (cps[1])*2.5 + (cps[2])*2 - (cps[3])*0.5;
+	a2 = (cps[0])*(-0.5) + (cps[2])*0.5;
+	a3 = (cps[1]);
 
 	return (a0*mu*mu2 + a1 * mu2 + a2 * mu + a3);
 }
-*/
-/*
-Vector3 Spline::m_CubicInterpolateD(float mu)
+
+
+Vector3 Spline::m_CubicInterpolateD(float mu, Vector3 cps[4]) const
 {
 	Vector3 a0, a1, a2, a3;
 	float mu2 = mu * mu;
 
 	// Cublic spline
-	//a0 = (*m_cps[3]) - (*m_cps[2]) - m_cps[0] + (*m_cps[1]);
-	//a1 = m_cps[0] - (*m_cps[1]) - a0;
-	//a2 = (*m_cps[2]) - m_cps[0];
-	//a3 = (*m_cps[1]);
+	//a0 = (cps[3]) - (cps[2]) - cps[0] + (cps[1]);
+	//a1 = cps[0] - (cps[1]) - a0;
+	//a2 = (cps[2]) - cps[0];
+	//a3 = (cps[1]);
 	
 
 	// Catmull-Roin cubic Splines
-	a0 = (*m_cps[0]) * (-0.5) + (*m_cps[1]) * 1.5 - (*m_cps[2]) * 1.5 + (*m_cps[3]) * 0.5;
-	a1 = (*m_cps[0]) - (*m_cps[1]) * 2.5 + (*m_cps[2]) * 2 - (*m_cps[3]) * 0.5;
-	a2 = (*m_cps[0]) * (-0.5) + (*m_cps[2]) * 0.5;
-	a3 = (*m_cps[1]);
+	a0 = (cps[0]) * (-0.5) + (cps[1]) * 1.5 - (cps[2]) * 1.5 + (cps[3]) * 0.5;
+	a1 = (cps[0]) - (cps[1]) * 2.5 + (cps[2]) * 2 - (cps[3]) * 0.5;
+	a2 = (cps[0]) * (-0.5) + (cps[2]) * 0.5;
+	a3 = (cps[1]);
 
 	// TODO: Retornar derivada
 	return (a0*mu*mu2 + a1 * mu2 + a2 * mu + a3);
 }
-*/
+
 
 Vector3 Spline::m_BSpline(float mu, Vector3 cps[4]) const
 {
@@ -224,6 +224,7 @@ Vector3 Spline::CalcPosition(float p) const // (0-1)
 	else cps[3] = m_spline[nextIndex];
 
 	return m_BSpline(p, cps);
+	//return m_CubicInterpolate(p, cps);
 
 	/*
 	switch (s)
@@ -319,6 +320,7 @@ Vector3 Spline::CalcDirection(float p) const
 	else cps[3] = m_spline[nextIndex];
 
 	return m_BSplineD(p, cps);
+	//return m_CubicInterpolateD(p, cps);
 }
 
 void Spline::CalcDirPos(float p, Vector3 & dir, Vector3 & pos)

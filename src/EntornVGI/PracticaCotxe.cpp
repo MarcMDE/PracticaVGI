@@ -10,8 +10,8 @@ void PracticaCotxe::glTranslateV(const Vector3 & v)
 void PracticaCotxe::glRotateV(const Vector3 & v)
 {
 	glRotatef(v.X() * RAD_TO_DEG, 0, 1, 0);
+	//glRotatef(v.Y() * RAD_TO_DEG, 0, 0, 1);
 	//glRotatef(v.Z() * RAD_TO_DEG, 0, 0, 1);
-	//glRotatef(v.X(), 1, 0, 0);
 }
 
 void PracticaCotxe::glScaleV(const Vector3 & v)
@@ -332,36 +332,25 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 
 		case DAV:
 			m_carProgress += m_carInc;
-
 			if (m_carProgress >= 1) m_carProgress -= 1;
 
 			dir = m_circuit.CalcDirection(m_carProgress);
 			dir.Normalize();
-			
-			//pos = m_circuit.CalcPosition(m_carProgress);
 
 			newPos = m_circuit.CalcPosition(m_carProgress);
-			m_car.SetPosition(newPos);
-			rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(dir), 0, 0);
-			//rotation = dir.GetAngles();
-			//rotation = rotation * RAD_TO_DEG;
-
-			//rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(Vector3(rx, ry, rz)), 0, 0);
-
-			if (dir.Z() > 0) rotation = Vector3(-rotation.X(), rotation.Y(), rotation.Z());
-			//rotation = Vector3(rx, ry, rz).GetAngles();
-			m_car.SetRotation(rotation);
 			
+			m_car.Move(newPos, dir);
+
 			//a += 0.5f;
 
 			break;
 
 		case DAR:
 
-			//m_car.Translate(Vector3(-1, 0, 0));
-			m_carProgress -= m_carInc;
-			if (m_carProgress <= 0) m_carProgress += 1;
-			m_car.SetPosition(m_circuit.CalcPosition(m_carProgress));
+			////m_car.Translate(Vector3(-1, 0, 0));
+			//m_carProgress -= m_carInc;
+			//if (m_carProgress <= 0) m_carProgress += 1;
+			//m_car.SetPosition(m_circuit.CalcPosition(m_carProgress));
 
 			break;
 
