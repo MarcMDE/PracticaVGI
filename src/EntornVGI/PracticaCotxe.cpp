@@ -49,7 +49,7 @@ PracticaCotxe::PracticaCotxe()
 	m_carProgress = 0;
 	m_carInc = 0.005f;
 
-	m_circuit.Load(CIRCUIT_2);
+	m_circuit.Load(CERCLE);
 
 	m_car.SetBody(OBJ_CAR, TXT_CAR, Vector3().Zero(), Vector3().Zero(), Vector3().One());
 

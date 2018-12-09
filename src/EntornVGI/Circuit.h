@@ -3,13 +3,13 @@
 #include "Spline.h"
 #include "Vector3.h"
 
-enum Circuits {CIRCUIT_1 = 0, CIRCUIT_2 = 1};
+enum Circuits {CIRCUIT_1 = 0, CIRCUIT_2 = 1, CERCLE = 2};
 
 class Circuit : public OGLObject
 {
 private:
-	const string CircuitsFileNames[2] = { "circuits/c1.txt", "circuits/c2.txt" };
-	const int CircuitsResolutions[2] = { 50, 20 };
+	const string CircuitsFileNames[3] = { "circuits/c1.txt", "circuits/c2.txt", "circuits/c3.txt" };
+	const int CircuitsResolutions[3] = { 50, 100, 30 };
 	const int CarrilWidth = 30;
 
 	Circuits m_index;

@@ -95,7 +95,7 @@ void Circuit::Draw()
 	Vector3 pr = p + (perp * width);
 
 	glTexCoord2f(0.0, 0.0); glVertex3f(pl.X(), pl.Y(), pl.Z());
-	glTexCoord2f(1.0, 0.0); glVertex3f(pr.X(), pr.Y(), pr.Z());
+	glTexCoord2f(1.0 * m_carrils, 0.0); glVertex3f(pr.X(), pr.Y(), pr.Z());
 
 	for (f = inc; f < 1; f += inc)
 	{
@@ -108,9 +108,9 @@ void Circuit::Draw()
 		pr = p + (perp * width);
 
 		glTexCoord2f(0.0, 1.0); glVertex3f(pl.X(), pl.Y(), pl.Z());
-		glTexCoord2f(1.0, 1.0); glVertex3f(pr.X(), pr.Y(), pr.Z());
+		glTexCoord2f(1.0 * m_carrils, 1.0); glVertex3f(pr.X(), pr.Y(), pr.Z());
 		glTexCoord2f(0.0, 0.0); glVertex3f(pl.X(), pl.Y(), pl.Z());
-		glTexCoord2f(1.0, 0.0); glVertex3f(pr.X(), pr.Y(), pr.Z());
+		glTexCoord2f(1.0 * m_carrils, 0.0); glVertex3f(pr.X(), pr.Y(), pr.Z());
 	}
 
 	// Ultim vertex = posicio inicial
@@ -123,7 +123,7 @@ void Circuit::Draw()
 	pr = p + (perp * width);
 
 	glTexCoord2f(0.0, 1.0); glVertex3f(pl.X(), pl.Y(), pl.Z());
-	glTexCoord2f(1.0, 1.0); glVertex3f(pr.X(), pr.Y(), pr.Z());
+	glTexCoord2f(1.0 * m_carrils, 1.0); glVertex3f(pr.X(), pr.Y(), pr.Z());
 
 	glEnd();
 }
