@@ -16,11 +16,17 @@ private:
 	int m_carrils;
 	Spline m_spline;
 
+	void m_GenRoadTexture();
+	GLubyte m_roadImg[8][8][4];
+	GLuint m_roadTextureId = -1;
+
 public:
 	Circuit() : m_carrils(1), OGLObject() {};
 	Circuit(int carrils) : m_carrils(carrils), OGLObject() {};
 	~Circuit();
 	
+	void Init();
+
 	Vector3 CalcPosition(float f);
 	Vector3 CalcDirection(float f);
 	void CalcDirPos(float f, Vector3 & direction, Vector3 & position);

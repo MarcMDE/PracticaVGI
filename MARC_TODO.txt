@@ -1,0 +1,7 @@
+DOING: Arreglar rotacio Y cotxe
+
+TODO:
+- Treure textura de parametre cotxe i rodes
+- Fer rotacio Z cotxe
+- Fer interpolacions circuit proporcionals a la dist
+- Fer camara 

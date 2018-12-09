@@ -39,6 +39,9 @@ private:
 public:
 	PracticaCotxe();
 	~PracticaCotxe();
+
+	void Init();
+
 	void Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/);
 	void Procesa_Teclat(UINT nChar, UINT nRepCnt);
 

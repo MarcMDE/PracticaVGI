@@ -30,7 +30,6 @@ void PracticaCotxe::DrawRec(OGLObject * obj)
 
 	obj->Draw();
 
-
 	int cLength = obj->GetChildsLength();
 
 	// For each child
@@ -69,7 +68,7 @@ PracticaCotxe::PracticaCotxe()
 	m_mainObj.SetChildsLength(1);
 	m_mainObj.SetChild(0, &m_circuit);
 
-	m_car.SetPosition(m_circuit.CalcPosition(m_carProgress));
+	//m_car.SetPosition(m_circuit.CalcPosition(m_carProgress));
 
 	glEnable(GL_LIGHT1);
 
@@ -275,6 +274,11 @@ PracticaCotxe::~PracticaCotxe()
 {
 }
 
+void PracticaCotxe::Init()
+{
+	m_circuit.Init();
+}
+
 void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 {
 	// Assignació de les variables de color i reflexió als valors de les variables per paràmetre
@@ -292,8 +296,23 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	glPopMatrix();*/
 	// -----------
 	
+	glColor3f(1, 1, 1);
 	glEnable(GL_TEXTURE_2D);
 	DrawRec(&m_mainObj);
+
+	// Test textura
+	
+	//glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, TXT_TEST);
+	glBegin(GL_QUADS);
+
+		glTexCoord2f(0.0, 0.0); glVertex3f(-2.0, -2.0, 0.0); 
+		glTexCoord2f(0.0, 1.0); glVertex3f(-2.0, 2.0, 0.0);
+		glTexCoord2f(1.0, 1.0); glVertex3f(2.0, 2.0, 0.0);
+		glTexCoord2f(1.0, 0.0); glVertex3f(2.0, -2.0, 0.0);
+
+	glEnd();
+	// ----
 
 	// Enviar les comandes gràfiques a pantalla
 	glFlush();
@@ -301,32 +320,39 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 	Vector3 rotation;
+	Vector3 rotation2;
 	Vector3 newPos;
 	Vector3 dir;
 	Vector3 pos;
+	int rx = 0;
+	int ry = 0;
+	int rz = 0;
 
 	switch (nChar) {
 
 		case DAV:
-
-			//m_car.Translate(Vector3(1, 0, 0));
 			m_carProgress += m_carInc;
 
 			if (m_carProgress >= 1) m_carProgress -= 1;
 
 			dir = m_circuit.CalcDirection(m_carProgress);
 			dir.Normalize();
-			pos = m_circuit.CalcPosition(m_carProgress);
+			
+			//pos = m_circuit.CalcPosition(m_carProgress);
 
 			newPos = m_circuit.CalcPosition(m_carProgress);
 			m_car.SetPosition(newPos);
-			rotation = dir.GetAngles();
-			//rotation = (newPos - m_carPrevPos).GetAngles();
-			//rotation = Vector3(-rotation.X(), rotation.Y(), rotation.Z());
-			m_car.SetRotation(rotation);
-			rotation = rotation * RAD_TO_DEG;
+			rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(dir), 0, 0);
+			//rotation = dir.GetAngles();
+			//rotation = rotation * RAD_TO_DEG;
 
-			a += 0.5f;
+			//rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(Vector3(rx, ry, rz)), 0, 0);
+
+			if (dir.Z() > 0) rotation = Vector3(-rotation.X(), rotation.Y(), rotation.Z());
+			//rotation = Vector3(rx, ry, rz).GetAngles();
+			m_car.SetRotation(rotation);
+			
+			//a += 0.5f;
 
 			break;
 

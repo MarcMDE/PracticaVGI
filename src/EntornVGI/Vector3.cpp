@@ -117,6 +117,8 @@ float Vector3::AngleZ() const
 Vector3 Vector3::GetAngles() const
 {
 	float magnitude = Magnitude();
+	if (magnitude == 0) return Vector3().Zero();
+
 	Vector3 ret = Vector3(
 		acos(m_x / magnitude),
 		acos(m_y / magnitude),

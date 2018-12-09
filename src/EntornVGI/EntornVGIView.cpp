@@ -2824,7 +2824,7 @@ void CEntornVGIView::OnObjecteTruck()
 
 	wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);	// Activem contexte OpenGL
 // Inicialitza vector imatges textura pel Truck.
-	Init_Textures();
+	//Init_Textures();
 	wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);	// Desactivem contexte OpenGL
 
 //  Modificar R per centrar la Vista a la mida de l'objecte (Perspectiva)
@@ -3641,27 +3641,30 @@ void CEntornVGIView::OnPracticaCotxe()
 		// Carregar cotxe
 		if (ObOBJ == NULL) ObOBJ = new COBJModel;
 		ObOBJ->LoadModel("res/models/basic_car.obj", OBJ_CAR, true);	// Carregar model obj cotxe amb textura
-		// Carregar textura cotxe
-		loadIMA("textures/ProjecteCotxe/cotxe_vermell.png", TXT_CAR);
 
 		ObOBJ = new COBJModel;
-		ObOBJ->LoadModel("res/models/basic_wheel.obj", OBJ_WHEEL, false);	// Carregar model obj amb sense textura
-		// Carregar textura roda
-		loadIMA("textures/ProjecteCotxe/roda.png", TXT_WHEEL);
+		ObOBJ->LoadModel("res/models/basic_wheel.obj", OBJ_WHEEL, true);	// Carregar model obj roda amb textura
+
+		// Carregar textura test
+		loadIMA("textures/ProjecteCotxe/test.bmp", TXT_TEST);
+
+		// Parametres textures ----
+			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
+			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);	
+			 
+			/*glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);	
+			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER, GL_LINEAR);*/
+			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER, GL_NEAREST);	
+			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			// PC_Q_TPARAM
+			
+			glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE) ;
+		// ------------------------
+
+		practicaCotxe.Init();
 
 		// Timer ("FPS")
 		SetTimer(WM_TIMER, 10, NULL);
-
-		// Parametres textures ----
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		// ------------------------
-
 
 		wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);	// Desactivem contexte OpenGL
 	}
