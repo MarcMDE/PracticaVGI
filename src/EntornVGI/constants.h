@@ -60,7 +60,7 @@
 // Textures
 #define TXT_CAR 1
 #define TXT_WHEEL 2
-#define TXT_TEST 5
+#define TXT_TEST 3
 
 // -------------- VGI: Definició dels valors del pla near i far del Volum de Visualització en Perspectiva
 const int p_near=1;

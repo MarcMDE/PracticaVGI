@@ -88,6 +88,11 @@ void Vector3::Normalize()
 	*this /= Magnitude();
 }
 
+Vector3 Vector3::AnglesBtw(Vector3 v)
+{
+	return Vector3();
+}
+
 float Vector3::AngleXBtw(Vector3 v)
 {
 	//v = Vector3(v.X(), 0, v.Z());
@@ -99,6 +104,11 @@ float Vector3::AngleXBtw(Vector3 v)
 	float ret = me.DotP(v) / (vMag * mag);
 
 	return acos(ret);
+}
+
+float Vector3::AngleYBtw(Vector3 v)
+{
+	return 0.0f;
 }
 
 float Vector3::AngleX() const

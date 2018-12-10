@@ -31,7 +31,10 @@ public:
 	Vector3 CrossP(Vector3 v);
 	float Magnitude() const;
 	void Normalize();
+	Vector3 AnglesBtw(Vector3 v);
 	float AngleXBtw(Vector3 v);
+	float AngleYBtw(Vector3 v);
+	float AngleZBtw(Vector3 v);
 	float AngleX() const;
 	float AngleY() const;
 	float AngleZ() const;

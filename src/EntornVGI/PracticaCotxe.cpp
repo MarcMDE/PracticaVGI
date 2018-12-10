@@ -10,7 +10,7 @@ void PracticaCotxe::glTranslateV(const Vector3 & v)
 void PracticaCotxe::glRotateV(const Vector3 & v)
 {
 	glRotatef(v.X() * RAD_TO_DEG, 0, 1, 0);
-	//glRotatef(v.Y() * RAD_TO_DEG, 0, 0, 1);
+	glRotatef(v.Y() * RAD_TO_DEG, 0, 0, 1);
 	//glRotatef(v.Z() * RAD_TO_DEG, 0, 0, 1);
 }
 
@@ -335,7 +335,7 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 			if (m_carProgress >= 1) m_carProgress -= 1;
 
 			dir = m_circuit.CalcDirection(m_carProgress);
-			dir.Normalize();
+			//dir.Normalize();
 
 			newPos = m_circuit.CalcPosition(m_carProgress);
 			

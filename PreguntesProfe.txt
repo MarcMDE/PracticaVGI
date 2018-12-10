@@ -1,2 +1,2 @@
 - Al crear textura road del circuit, la textura test no està a cap lloc i a més la textura road es genera a posició 4 pero està a posició 3 ( PCQ_TXTID )
-- Parametres de textura (linear, nearest) s'han de cambiar per cada dibuixat concret? Es poden lligar textura? ( PC_Q_TPARAM )
+- Parametres de textura (linear, nearest) s'han de cambiar per cada dibuixat concret? Es poden lligar textura? ( PC_Q_TPARAM ) S'ha de posar cada cop!
