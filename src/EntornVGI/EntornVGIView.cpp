@@ -3726,6 +3726,9 @@ void CEntornVGIView::OnPracticaCotxe()
 		// Carregar textura test
 		loadIMA("textures/ProjecteCotxe/test.bmp", TXT_TEST);
 
+		// Carregar textura boto inici
+		loadIMA("textures/ProjecteCotxe/btn_inici.png", TXT_BOTO_INICI);
+
 		// Parametres textures ----
 			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
 			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);	

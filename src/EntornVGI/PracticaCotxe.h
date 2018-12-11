@@ -13,6 +13,9 @@
 #define ESQ 65 // A
 #define DRT 68 // D
 #define ESP 32 // Espai
+#define PAUSE 80 // P
+
+enum SCREENS {INICI=0, SELECCIO=1, GAMEPLAY=2};
 
 
 class PracticaCotxe
@@ -30,6 +33,8 @@ private:
 	LLUM m_sun;
 	Circuit m_circuit;
 	camara m_cam = camara(-100, 0, 0, 0, 25, 0, 0, 5, 0);
+	SCREENS m_currScreen;
+	bool m_isPaused;
 
 	float m_carProgress;
 	float m_carInc;
@@ -39,6 +44,8 @@ private:
 	void glScaleV(const Vector3& v);
 	void DrawRec(OGLObject* obj);
 	void Iluminacio(char ilumin, bool ifix, bool ll_amb, LLUM lumin, bool textur, bool textur_map, char obj, bool bc_lin, int step);
+	void DrawUIElement(int texture, int posX, int posY, int width, int heigth);
+	void DrawUIElement(CColor color, int posX, int posY, int width, int heigth);
 public:
 	PracticaCotxe();
 	~PracticaCotxe();

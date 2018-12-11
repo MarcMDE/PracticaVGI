@@ -48,6 +48,8 @@ PracticaCotxe::PracticaCotxe()
 
 	m_carProgress = 0;
 	m_carInc = 0.005f;
+	m_isPaused = false;
+	m_currScreen = INICI;
 
 	m_circuit.Load(CIRCUIT_6);
 
@@ -278,6 +280,29 @@ void PracticaCotxe::Iluminacio(char ilumin, bool ifix, bool ll_amb, LLUM lumin, 
 	glEndList();
 }
 
+void PracticaCotxe::DrawUIElement(int texture, int posX, int posY, int width, int heigth)
+{
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glBegin(GL_QUADS);
+	//glColor3f(1.0f, 0.0f, 0.0f); // Red
+	glTexCoord2f(1.0, 0.0); glVertex2f(posX+width/2, posY+heigth/2);
+	glTexCoord2f(0.0, 0.0); glVertex2f(posX-width/2, posY+heigth/2);
+	glTexCoord2f(0.0, 1.0); glVertex2f(posX-width/2, posY-heigth/2);
+	glTexCoord2f(1.0, 1.0); glVertex2f(posX+width/2, posY-heigth/2);
+	glEnd();
+}
+
+void PracticaCotxe::DrawUIElement(CColor color, int posX, int posY, int width, int heigth)
+{
+	glColor4f(color.r, color.g, color.b, color.a);
+	glBegin(GL_QUADS);
+	glTexCoord2f(1.0, 0.0); glVertex2f(posX + width / 2, posY + heigth / 2);
+	glTexCoord2f(0.0, 0.0); glVertex2f(posX - width / 2, posY + heigth / 2);
+	glTexCoord2f(0.0, 1.0); glVertex2f(posX - width / 2, posY - heigth / 2);
+	glTexCoord2f(1.0, 1.0); glVertex2f(posX + width / 2, posY - heigth / 2);
+	glEnd();
+}
+
 void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 {
 	// Assignació de les variables de color i reflexió als valors de les variables per paràmetre
@@ -347,14 +372,35 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 void PracticaCotxe::DrawInterface(int w, int h)
 {
-	glBindTexture(GL_TEXTURE_2D, TXT_TEST);
-	glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
-	//glColor3f(1.0f, 0.0f, 0.0f); // Red
-	glTexCoord2f(0.0, 0.0); glVertex2f(w / 2 - 100, 200);    // x, y
-	glTexCoord2f(1.0, 0.0); glVertex2f(w / 2 + 100, 200);
-	glTexCoord2f(1.0, 1.0); glVertex2f(w / 2 + 100, 300);
-	glTexCoord2f(0.0, 1.0); glVertex2f(w / 2 - 100, 300);
-	glEnd();
+	switch (m_currScreen)
+	{
+	case INICI:
+		// TODO: Dibuixar boto inici i boto sortir
+
+		// Exemple de boto d'inici
+		DrawUIElement(TXT_BOTO_INICI, w/2, h/2 - 250, 300, 100);
+
+		break;
+	case SELECCIO:
+		// TODO: Dibuixar 4 botons seleccio circuit i 4 botons seleccio jugadors + etiquetes Circuit i Jugadors
+
+		break;
+	case GAMEPLAY:
+		// TODO: Dibuixar botons per cada jugador (accions restants i voltes que porten (les voltes encara no les feu))
+
+		if (m_isPaused)
+		{
+			// Fons gris quan pantalla pausa
+			// TODO: Arreglar transparencia (no funciona :S)
+			DrawUIElement({ 0, 0, 0, 0.2f }, w / 2, h / 2, w, h);
+
+			// TODO: Dibuixar text pausa
+		}
+
+		break;
+	default:
+		break;
+	}
 }
 
 void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
@@ -368,6 +414,14 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 	int rz = 0;
 
 	switch (nChar) {
+
+		case PAUSE:
+			if (m_currScreen == GAMEPLAY)
+			{
+				// Pause només funciona a gameplay screen
+				m_isPaused = !m_isPaused;
+			}
+			break;
 
 		case DAV:
 			m_carProgress += m_carInc;

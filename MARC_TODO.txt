@@ -1,5 +1,0 @@
-DOING: Fer interpolacions circuit proporcionals a la dist
-
-TODO:
-- Treure textura de parametre cotxe i rodes
-- Fer camara 
