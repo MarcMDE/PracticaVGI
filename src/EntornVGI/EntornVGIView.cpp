@@ -654,20 +654,31 @@ void CEntornVGIView::OnPaint()
 		glPushMatrix();
 		configura_Escena();     // Aplicar Transformacions Geometriques segons persiana Transformacio i configurar objectes.
 		//dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
+
+		// Dibuixat escena 3d
 		practicaCotxe.Draw();
+		// -----------
+
 		glPopMatrix();
 
-		// -----------
-		// TODO: Dibuixar interficie
-		glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
-		glColor3f(1.0f, 0.0f, 0.0f); // Red
-		glVertex2f(-0.5f, -0.5f);    // x, y
-		glVertex2f(0.5f, -0.5f);
-		glVertex2f(0.5f, 0.5f);
-		glVertex2f(-0.5f, 0.5f);
-		glEnd();
 
+
+		glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		glOrtho(0, w, h, 0, 0, 100);
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
+
+		// Dibuixat interficie
+		practicaCotxe.DrawInterface(w, h);
 		// -----------
+
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
 
 		// Intercanvia l'escena al front de la pantalla
 		SwapBuffers(m_pDC->GetSafeHdc());

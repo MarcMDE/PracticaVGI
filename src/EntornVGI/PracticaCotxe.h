@@ -27,7 +27,7 @@ private:
 
 	Car m_car = Car(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
 	OGLObject m_mainObj;
-	LLUM m_sun; // Light 1
+	LLUM m_sun;
 	Circuit m_circuit;
 	camara m_cam = camara(-100, 0, 0, 0, 25, 0, 0, 5, 0);
 
@@ -46,6 +46,7 @@ public:
 	void Init();
 
 	void Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/);
+	void DrawInterface(int w, int h);
 	void Procesa_Teclat(UINT nChar, UINT nRepCnt);
 
 };
