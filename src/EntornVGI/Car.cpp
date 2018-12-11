@@ -20,6 +20,7 @@ void Car::Move(Vector3 pos, Vector3 dir)
 {
 	//rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(dir), 0, 0);
 	Vector3 rotation = dir.GetAngles();
+	dir.Normalize();
 	//rotation = rotation * RAD_TO_DEG;
 
 	//rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(Vector3(rx, ry, rz)), 0, 0);
@@ -38,6 +39,12 @@ void Car::Move(Vector3 pos, Vector3 dir)
 
 	SetRotation(rotation);
 	SetPosition(pos);
+	m_direction = dir;
+}
+
+Vector3 Car::GetDirection() const
+{
+	return m_direction;
 }
 
 Car::~Car()

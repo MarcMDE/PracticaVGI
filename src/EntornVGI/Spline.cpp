@@ -141,7 +141,7 @@ void Spline::Debug(bool cp, int res) const
 {
 	if (cp)
 	{
-		float cpRad = 3;
+		float cpRad = 20;
 		glColor3f(5, 0.7, 1);
 		// For each control point
 		for (int i=0; i < m_size; i++)

@@ -205,10 +205,10 @@ CEntornVGIView::CEntornVGIView()
 	transX = false;	transY = false;	transZ = false;
 
 // Entorn VGI: Variables de control per les opcions de menú Ocultacions
-	oculta = false;			test_vis = false;			back_line = false;
+	oculta = true;/*false;*/			test_vis = false;			back_line = false;
 
 // Entorn VGI: Variables de control del menú Iluminació		
-	ilumina = FILFERROS;			ifixe = false;
+	ilumina = GOURAUD;/*FILFERROS;*/			ifixe = false;
 // Reflexions actives: Ambient [1], Difusa [2] i Especular [3]. No actives: Emission [0]. 
 	sw_material[0] = false;			sw_material[1] = true;			sw_material[2] = true;			sw_material[3] = true;
 	sw_material_old[0] = false;		sw_material_old[1] = true;		sw_material_old[2] = true;		sw_material_old[3] = true;
@@ -617,163 +617,232 @@ void CEntornVGIView::OnDraw(CDC* /*pDC*/)
 
 void CEntornVGIView::OnPaint()
 {
-	CPaintDC dc(this); // device context for painting
-// TODO: Agregue aquí su código de controlador de mensajes
-	GLfloat vpv[3] = { 0.0, 0.0, 1.0 };
-
-// Entorn VGI: Activació el contexte OpenGL
-	wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);
-
-// Cridem a les funcions de l'escena i la projecció segons s'hagi 
-// seleccionat una projecció o un altra
-	switch (projeccio)
+	if (escena == ESCENA_PRACTICA_COTXE_1)
 	{
-	case AXONOM:
-// PROJECCIÓ AXONOMÈTRICA
-// Activació del retall de pantalla
-		glEnable(GL_SCISSOR_TEST);
+		CPaintDC dc(this); // device context for painting
+		// TODO: Agregue aquí su código de controlador de mensajes
 
-// Retall
-		glScissor(0, 0, w, h);
-		glViewport(0, 0, w, h);
+		// Entorn VGI: Activació el contexte OpenGL
+		wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);
 
-// Aquí farem les crides per a definir Viewport, Projecció i Càmara: INICI -------------------------
 
-// Aquí farem les cridesper a definir Viewport, Projecció i Càmara:: FI -------------------------
-		// Dibuixar Model (escena)
-		glPushMatrix();
-			configura_Escena();     // Aplicar Transformacions Geometriques segons persiana Transformacio i configurar objectes
-			// glScalef();			// Escalat d'objectes, per adequar-los a les vistes ortogràfiques
-			dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
-		glPopMatrix();
+		// --------------------------------------------------------------------------------------------------------------------------------------
 
-// Intercanvia l'escena al front de la pantalla
-		SwapBuffers(m_pDC->GetSafeHdc());
-		break;
-
-	case ORTO:
-// PROJECCIÓ ORTOGRÀFICA
-// Activació del retall de pantalla
-		glEnable(GL_SCISSOR_TEST);
-
-// Retall
-		glScissor(0, 0, w, h);
-		glViewport(0, 0, w, h);
-
-// Fons condicionat al color de fons
-		if ((c_fons.r < 0.5) || (c_fons.g < 0.5) || (c_fons.b<0.5))
-			FonsB();
-		else
-			FonsN();
-
-// Aquí farem les quatre crides a ProjeccioOrto i Ortografica per obtenir 
-// les quatre vistes ortogràfiques
-// ---------- Entorn VGI: DESCOMENTAR QUAN S'IMPLEMENTI PROJECCIO ORTOGRÀFICA
-// PLANTA (Inferior Esquerra)
-		// Definició de Viewport, Projecció i Càmara
-		Projeccio_Orto();
-		Vista_Ortografica(0, OPV.R, c_fons, col_obj, objecte, mida, pas, oculta,
-			test_vis, back_line, ilumina, llum_ambient, llumGL, textura, textura_map, ifixe, eixos);
-		// Dibuix de l'Objecte o l'Escena
-		glPushMatrix();
-			configura_Escena();     // Aplicar Transformacions Geometriques segons persiana Transformacio i configurar objectes
-			// glScalef();			// Escalat d'objectes, per adequar-los a les vistes ortogràfiques (Pràctica 2)
-			dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
-		glPopMatrix();
-
-// ISOMÈTRICA (Inferior Dreta)
-		// Definició de Viewport, Projecció i Càmara
-		Projeccio_Orto();
-		Vista_Ortografica(3, OPV.R, c_fons, col_obj, objecte, mida, pas, oculta,
-			test_vis, back_line, ilumina, llum_ambient, llumGL, textura, textura_map, ifixe, eixos);
-		// Dibuix de l'Objecte o l'Escena
-		glPushMatrix();
-			configura_Escena();     // Aplicar Transformacions Geometriques segons persiana Transformacio i configurar objectes
-			// glScalef();			// Escalat d'objectes, per adequar-los a les vistes ortogràfiques (Pràctica 2)
-			dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
-		glPopMatrix();
-
-// ALÇAT (Superior Esquerra)
-		// Definició de Viewport, Projecció i Càmara
-		Projeccio_Orto();
-		Vista_Ortografica(1, OPV.R, c_fons, col_obj, objecte, mida, pas, oculta,
-			test_vis, back_line, ilumina, llum_ambient, llumGL, textura, textura_map, ifixe, eixos);
-		// Dibuix de l'Objecte o l'Escena
-		glPushMatrix();
-			configura_Escena();     // Aplicar Transformacions Geom?triques segons persiana Transformacio i configurar objectes
-			//glScalef();			// Escalat d'objectes, per adequar-los a les vistes ortogràfiques (Pràctica 2)
-			dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
-		glPopMatrix();
-
-// PERFIL (Superior Dreta)
-		// Definició de Viewport, Projecció i Càmara
-		Projeccio_Orto();
-		Vista_Ortografica(2, OPV.R, c_fons, col_obj, objecte, mida, pas, oculta,
-			test_vis, back_line, ilumina, llum_ambient, llumGL, textura, textura_map, ifixe, eixos);
-		// Dibuix de l'Objecte o l'Escena
-		glPushMatrix();
-			configura_Escena();     // Aplicar Transformacions Geom?triques segons persiana Transformacio i configurar objectes
- 			// glScalef();			// Escalat d'objectes, per adequar-los a les vistes ortogràfiques (Pràctica 2)
-			dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
-		glPopMatrix();
-
-// Intercanvia l'escena al front de la pantalla
-		SwapBuffers(m_pDC->GetSafeHdc());
-		break;
-
-	case PERSPECT:
-// PROJECCIÓ PERSPECTIVA
+		// PROJECCIÓ PERSPECTIVA
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // Set Perspective Calculations To Most Accurate
 		glDisable(GL_SCISSOR_TEST);		// Desactivació del retall de pantalla
 
 		// Definició de Viewport, Projecció i Càmara
-		Projeccio_Perspectiva(0, 0, w, h, OPV.R);
-		if (navega)	{	Vista_Navega(opvN, false, n, vpv, pan, tr_cpv, tr_cpvF, c_fons, col_obj, objecte, true, pas,
-							oculta, test_vis, back_line, ilumina, llum_ambient, llumGL, textura, textura_map, ifixe, eixos);
-					}
-		else {	n[0] = 0;		n[1] = 0;		n[2] = 0;
+		float zoom = OPV.R;
+		Projeccio_Perspectiva(0, 0, w, h, zoom);
+
+#ifdef PC_DEVELOP
+		GLfloat vpv[3] = { 0.0, 0.0, 1.0 };
+
+		if (navega) {
+			Vista_Navega(opvN, false, n, vpv, pan, tr_cpv, tr_cpvF, c_fons, col_obj, objecte, true, pas,
+				oculta, test_vis, back_line, ilumina, llum_ambient, llumGL, textura, textura_map, ifixe, eixos);
+		}
+		else {
+			n[0] = 0;		n[1] = 0;		n[2] = 0;
+			Vista_Esferica(OPV, Vis_Polar, pan, tr_cpv, tr_cpvF, c_fons, col_obj, objecte, mida, pas,
+				oculta, test_vis, back_line, ilumina, llum_ambient, llumGL, textura,
+				textura_map, ifixe, eixos);
+		}
+#endif
+		// Dibuix de l'Objecte o l'Escena
+		glPushMatrix();
+		configura_Escena();     // Aplicar Transformacions Geometriques segons persiana Transformacio i configurar objectes.
+		//dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
+		practicaCotxe.Draw();
+		glPopMatrix();
+
+		// -----------
+		// TODO: Dibuixar interficie
+		glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
+		glColor3f(1.0f, 0.0f, 0.0f); // Red
+		glVertex2f(-0.5f, -0.5f);    // x, y
+		glVertex2f(0.5f, -0.5f);
+		glVertex2f(0.5f, 0.5f);
+		glVertex2f(-0.5f, 0.5f);
+		glEnd();
+
+		// -----------
+
+		// Intercanvia l'escena al front de la pantalla
+		SwapBuffers(m_pDC->GetSafeHdc());
+
+		// --------------------------------------------------------------------------------------------------------------------------------------
+
+
+		// Entorn VGI: Activació el contexte OpenGL. Permet la coexistencia d'altres contextes de generació
+		wglMakeCurrent(m_pDC->GetSafeHdc(), NULL);
+
+		//  Actualitzar la barra d'estat de l'aplicació amb els valors R,A,B,PVx,PVy,PVz
+		Barra_Estat();
+	}
+	else
+	{
+		CPaintDC dc(this); // device context for painting
+		// TODO: Agregue aquí su código de controlador de mensajes
+		GLfloat vpv[3] = { 0.0, 0.0, 1.0 };
+
+		// Entorn VGI: Activació el contexte OpenGL
+		wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);
+
+		// Cridem a les funcions de l'escena i la projecció segons s'hagi 
+		// seleccionat una projecció o un altra
+		switch (projeccio)
+		{
+		case AXONOM:
+			// PROJECCIÓ AXONOMÈTRICA
+			// Activació del retall de pantalla
+			glEnable(GL_SCISSOR_TEST);
+
+			// Retall
+			glScissor(0, 0, w, h);
+			glViewport(0, 0, w, h);
+
+			// Aquí farem les crides per a definir Viewport, Projecció i Càmara: INICI -------------------------
+
+			// Aquí farem les cridesper a definir Viewport, Projecció i Càmara:: FI -------------------------
+					// Dibuixar Model (escena)
+			glPushMatrix();
+			configura_Escena();     // Aplicar Transformacions Geometriques segons persiana Transformacio i configurar objectes
+			// glScalef();			// Escalat d'objectes, per adequar-los a les vistes ortogràfiques
+			dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
+			glPopMatrix();
+
+			// Intercanvia l'escena al front de la pantalla
+			SwapBuffers(m_pDC->GetSafeHdc());
+			break;
+
+		case ORTO:
+			// PROJECCIÓ ORTOGRÀFICA
+			// Activació del retall de pantalla
+			glEnable(GL_SCISSOR_TEST);
+
+			// Retall
+			glScissor(0, 0, w, h);
+			glViewport(0, 0, w, h);
+
+			// Fons condicionat al color de fons
+			if ((c_fons.r < 0.5) || (c_fons.g < 0.5) || (c_fons.b < 0.5))
+				FonsB();
+			else
+				FonsN();
+
+			// Aquí farem les quatre crides a ProjeccioOrto i Ortografica per obtenir 
+			// les quatre vistes ortogràfiques
+			// ---------- Entorn VGI: DESCOMENTAR QUAN S'IMPLEMENTI PROJECCIO ORTOGRÀFICA
+			// PLANTA (Inferior Esquerra)
+					// Definició de Viewport, Projecció i Càmara
+			Projeccio_Orto();
+			Vista_Ortografica(0, OPV.R, c_fons, col_obj, objecte, mida, pas, oculta,
+				test_vis, back_line, ilumina, llum_ambient, llumGL, textura, textura_map, ifixe, eixos);
+			// Dibuix de l'Objecte o l'Escena
+			glPushMatrix();
+			configura_Escena();     // Aplicar Transformacions Geometriques segons persiana Transformacio i configurar objectes
+			// glScalef();			// Escalat d'objectes, per adequar-los a les vistes ortogràfiques (Pràctica 2)
+			dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
+			glPopMatrix();
+
+			// ISOMÈTRICA (Inferior Dreta)
+					// Definició de Viewport, Projecció i Càmara
+			Projeccio_Orto();
+			Vista_Ortografica(3, OPV.R, c_fons, col_obj, objecte, mida, pas, oculta,
+				test_vis, back_line, ilumina, llum_ambient, llumGL, textura, textura_map, ifixe, eixos);
+			// Dibuix de l'Objecte o l'Escena
+			glPushMatrix();
+			configura_Escena();     // Aplicar Transformacions Geometriques segons persiana Transformacio i configurar objectes
+			// glScalef();			// Escalat d'objectes, per adequar-los a les vistes ortogràfiques (Pràctica 2)
+			dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
+			glPopMatrix();
+
+			// ALÇAT (Superior Esquerra)
+					// Definició de Viewport, Projecció i Càmara
+			Projeccio_Orto();
+			Vista_Ortografica(1, OPV.R, c_fons, col_obj, objecte, mida, pas, oculta,
+				test_vis, back_line, ilumina, llum_ambient, llumGL, textura, textura_map, ifixe, eixos);
+			// Dibuix de l'Objecte o l'Escena
+			glPushMatrix();
+			configura_Escena();     // Aplicar Transformacions Geom?triques segons persiana Transformacio i configurar objectes
+			//glScalef();			// Escalat d'objectes, per adequar-los a les vistes ortogràfiques (Pràctica 2)
+			dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
+			glPopMatrix();
+
+			// PERFIL (Superior Dreta)
+					// Definició de Viewport, Projecció i Càmara
+			Projeccio_Orto();
+			Vista_Ortografica(2, OPV.R, c_fons, col_obj, objecte, mida, pas, oculta,
+				test_vis, back_line, ilumina, llum_ambient, llumGL, textura, textura_map, ifixe, eixos);
+			// Dibuix de l'Objecte o l'Escena
+			glPushMatrix();
+			configura_Escena();     // Aplicar Transformacions Geom?triques segons persiana Transformacio i configurar objectes
+			// glScalef();			// Escalat d'objectes, per adequar-los a les vistes ortogràfiques (Pràctica 2)
+			dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
+			glPopMatrix();
+
+			// Intercanvia l'escena al front de la pantalla
+			SwapBuffers(m_pDC->GetSafeHdc());
+			break;
+
+		case PERSPECT:
+			// PROJECCIÓ PERSPECTIVA
+			glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // Set Perspective Calculations To Most Accurate
+			glDisable(GL_SCISSOR_TEST);		// Desactivació del retall de pantalla
+
+			// Definició de Viewport, Projecció i Càmara
+			Projeccio_Perspectiva(0, 0, w, h, OPV.R);
+			if (navega) {
+				Vista_Navega(opvN, false, n, vpv, pan, tr_cpv, tr_cpvF, c_fons, col_obj, objecte, true, pas,
+					oculta, test_vis, back_line, ilumina, llum_ambient, llumGL, textura, textura_map, ifixe, eixos);
+			}
+			else {
+				n[0] = 0;		n[1] = 0;		n[2] = 0;
 				Vista_Esferica(OPV, Vis_Polar, pan, tr_cpv, tr_cpvF, c_fons, col_obj, objecte, mida, pas,
 					oculta, test_vis, back_line, ilumina, llum_ambient, llumGL, textura,
 					textura_map, ifixe, eixos);
 			}
 
-		// Dibuix de l'Objecte o l'Escena
-		glPushMatrix();
+			// Dibuix de l'Objecte o l'Escena
+			glPushMatrix();
 			configura_Escena();     // Aplicar Transformacions Geometriques segons persiana Transformacio i configurar objectes.
 			dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
-		glPopMatrix();
+			glPopMatrix();
 
-// Intercanvia l'escena al front de la pantalla
-		SwapBuffers(m_pDC->GetSafeHdc());
-		break;
+			// Intercanvia l'escena al front de la pantalla
+			SwapBuffers(m_pDC->GetSafeHdc());
+			break;
 
-	default:
-// Entorn VGI: Creació de la llista que dibuixarà els eixos Coordenades Món. Funció on està codi per dibuixar eixos	
-		glNewList(EIXOS, GL_COMPILE);
-		  // Dibuix dels eixos sense il.luminació
-		  glDisable(GL_LIGHTING);
-		  // Dibuixar eixos sense textures
-		  glDisable(GL_TEXTURE_2D);
-		  // Desactivar boira
-		  glDisable(GL_FOG);
-		  deixos();						// Funció que dibuixa els Eixos Coordenades Món
-		  if (ilumina != FILFERROS) glEnable(GL_LIGHTING);
-		  if (textura) glEnable(GL_TEXTURE_2D);
-		glEndList();
+		default:
+			// Entorn VGI: Creació de la llista que dibuixarà els eixos Coordenades Món. Funció on està codi per dibuixar eixos	
+			glNewList(EIXOS, GL_COMPILE);
+			// Dibuix dels eixos sense il.luminació
+			glDisable(GL_LIGHTING);
+			// Dibuixar eixos sense textures
+			glDisable(GL_TEXTURE_2D);
+			// Desactivar boira
+			glDisable(GL_FOG);
+			deixos();						// Funció que dibuixa els Eixos Coordenades Món
+			if (ilumina != FILFERROS) glEnable(GL_LIGHTING);
+			if (textura) glEnable(GL_TEXTURE_2D);
+			glEndList();
 
-// Crida a la funció Fons Blanc
-		FonsB();
+			// Crida a la funció Fons Blanc
+			FonsB();
 
-// Intercanvia l'escena al front de la pantalla
-		SwapBuffers(m_pDC->GetSafeHdc());
-		break;
-}
+			// Intercanvia l'escena al front de la pantalla
+			SwapBuffers(m_pDC->GetSafeHdc());
+			break;
+		}
 
-// Entorn VGI: Activació el contexte OpenGL. Permet la coexistencia d'altres contextes de generació
-	wglMakeCurrent(m_pDC->GetSafeHdc(), NULL);
+		// Entorn VGI: Activació el contexte OpenGL. Permet la coexistencia d'altres contextes de generació
+		wglMakeCurrent(m_pDC->GetSafeHdc(), NULL);
 
-//  Actualitzar la barra d'estat de l'aplicació amb els valors R,A,B,PVx,PVy,PVz
-	Barra_Estat();
+		//  Actualitzar la barra d'estat de l'aplicació amb els valors R,A,B,PVx,PVy,PVz
+		Barra_Estat();
+	}
 }
 
 

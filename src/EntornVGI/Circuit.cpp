@@ -87,7 +87,7 @@ void Circuit::Draw()
 	float inc = 1.0f / CircuitsResolutions[(int)m_index];
 	int width = CarrilWidth * m_carrils;
 
-	//m_spline.Debug(true, CircuitsResolutions[(int)m_index]);
+	m_spline.Debug(true, CircuitsResolutions[(int)m_index]);
 
 	glBindTexture(GL_TEXTURE_2D, m_roadTextureId);
 	glBegin(GL_QUAD_STRIP);

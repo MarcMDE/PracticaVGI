@@ -9,6 +9,7 @@ private:
 	OGLObject m_body;
 	MobileOGLObject** m_wheels;
 	int m_wheelsLength;
+	Vector3 m_direction;
 
 	Vector3 m_speed;
 public:
@@ -18,6 +19,8 @@ public:
 		m_position = position;
 		m_rotation = rotation;
 		m_scale = scale;
+
+		m_direction = Vector3().Zero();
 
 		if (wheelsLength > 0)
 		{
@@ -34,6 +37,7 @@ public:
 	void SetWheel(int index, GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
 	void SetBody(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
 	void Move(Vector3 pos, Vector3 dir);
+	Vector3 GetDirection() const;
 
 	//Car & Car::operator=(const Car & c);
 	~Car();

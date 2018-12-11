@@ -5,6 +5,8 @@
 #include "DynamicOGLObject.h"
 #include "Circuit.h"
 
+#define PC_DEVELOP
+
 // Definició de les tecles del teclat W, A, S, D, Espai
 #define DAV 87 // W
 #define DAR 83 // S
@@ -36,6 +38,7 @@ private:
 	void glRotateV(const Vector3& v);
 	void glScaleV(const Vector3& v);
 	void DrawRec(OGLObject* obj);
+	void Iluminacio(char ilumin, bool ifix, bool ll_amb, LLUM lumin, bool textur, bool textur_map, char obj, bool bc_lin, int step);
 public:
 	PracticaCotxe();
 	~PracticaCotxe();
