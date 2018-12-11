@@ -347,12 +347,13 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 void PracticaCotxe::DrawInterface(int w, int h)
 {
+	glBindTexture(GL_TEXTURE_2D, TXT_TEST);
 	glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
-	glColor3f(1.0f, 0.0f, 0.0f); // Red
-	glVertex2f(w / 2 - 100, 200);    // x, y
-	glVertex2f(w / 2 + 100, 200);
-	glVertex2f(w / 2 + 100, 300);
-	glVertex2f(w / 2 - 100, 300);
+	//glColor3f(1.0f, 0.0f, 0.0f); // Red
+	glTexCoord2f(0.0, 0.0); glVertex2f(w / 2 - 100, 200);    // x, y
+	glTexCoord2f(1.0, 0.0); glVertex2f(w / 2 + 100, 200);
+	glTexCoord2f(1.0, 1.0); glVertex2f(w / 2 + 100, 300);
+	glTexCoord2f(0.0, 1.0); glVertex2f(w / 2 - 100, 300);
 	glEnd();
 }
 

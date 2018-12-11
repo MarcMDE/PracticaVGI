@@ -661,8 +661,6 @@ void CEntornVGIView::OnPaint()
 
 		glPopMatrix();
 
-
-
 		glMatrixMode(GL_PROJECTION);
 		glPushMatrix();
 		glLoadIdentity();
