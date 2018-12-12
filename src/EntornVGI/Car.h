@@ -6,9 +6,9 @@
 class Car : public MobileOGLObject
 {
 private:
-	const float m_friction = 0.0001;
-	const float m_gravity = 0.003;
-	const float m_boostSpeed = 0.005;
+	const float m_friction = 0.00001;
+	const float m_gravity = 0.0002;
+	const float m_boostSpeed = 0.0035;
 
 	OGLObject m_body;
 	MobileOGLObject** m_wheels;

@@ -57,13 +57,13 @@ PracticaCotxe::~PracticaCotxe()
 
 void PracticaCotxe::Init()
 {
-	m_circuit.Init(3);
-	m_circuit.Load(CIRCUIT_4);
+	m_circuit.Init(1);
+	m_circuit.Load(CIRCUIT_2);
 
 	m_mainObj.SetChildsLength(1);
 	m_mainObj.SetChild(0, &m_circuit);
 
-	setNJugadors(3);
+	setNJugadors(1);
 
 
 	m_sun.encesa = true;

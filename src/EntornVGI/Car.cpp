@@ -42,7 +42,8 @@ void Car::SetBody(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 
 void Car::Move(Vector3 pos, Vector3 dir)
 {
 	m_progress += m_speed;
-	if (m_progress >= 1) m_progress -= 1;
+	if (m_progress > 1) m_progress -= 1;
+	if (m_progress < 0) m_progress += 1;
 	
 	//rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(dir), 0, 0);
 	Vector3 rotation = dir.GetAngles();
@@ -67,8 +68,20 @@ void Car::Move(Vector3 pos, Vector3 dir)
 	SetPosition(pos);
 	m_direction = dir;
 
-	m_speed -= m_friction;
-	if (m_speed < 0) m_speed = 0;
+
+	// A través del raonament amb el dot product concluim....
+	m_speed += m_gravity * -1 * dir.Y();
+
+	if (m_speed > 0)
+	{
+		if (m_speed - m_friction < 0) m_speed = 0;
+		else m_speed -= m_friction;
+	}
+	else if (m_speed < 0)
+	{
+		if (m_speed + m_friction > 0) m_speed = 0;
+		else m_speed += m_friction;
+	}
 }
 
 Vector3 Car::GetDirection() const
