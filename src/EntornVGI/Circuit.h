@@ -10,7 +10,7 @@ class Circuit : public OGLObject
 private:
 	const string CircuitsFileNames[6] = { "circuits/c1.txt", "circuits/c2.txt", "circuits/c3.txt", "circuits/c4.txt", "circuits/c5.txt", "circuits/c6.txt" };
 	const int CircuitsResolutions[6] = { 50, 100, 30, 150, 70, 25};
-	const int CarrilWidth = 30;
+	const int CarrilWidth = 40;
 
 	Circuits m_index;
 	int m_carrils;
@@ -22,14 +22,13 @@ private:
 
 public:
 	Circuit() : m_carrils(3), OGLObject() {};
-	Circuit(int carrils) : m_carrils(carrils), OGLObject() {};
 	~Circuit();
 	
-	void Init();
+	void Init(int carrils);
 
 	Vector3 CalcPosition(float f);
 	Vector3 CalcDirection(float f);
-	void CalcDirPos(float f, Vector3 & direction, Vector3 & position);
+	void CalcDirPos(float f, int c, Vector3 & direction, Vector3 & position);
 	
 	void Load(Circuits c);
 

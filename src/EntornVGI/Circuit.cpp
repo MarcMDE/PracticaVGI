@@ -56,8 +56,9 @@ Circuit::~Circuit()
 
 }
 
-void Circuit::Init()
+void Circuit::Init(int carrils)
 {
+	m_carrils = carrils;
 	m_GenRoadTexture();
 }
 
@@ -71,9 +72,27 @@ Vector3 Circuit::CalcDirection(float f)
 	return m_spline.CalcDirection(f);
 }
 
-void Circuit::CalcDirPos(float f, Vector3 & direction, Vector3 & position)
+void Circuit::CalcDirPos(float f, int c, Vector3 & direction, Vector3 & position)
 {
 	m_spline.CalcDirPos(f, direction, position);
+	direction.Normalize();
+	Vector3 perp = direction.DirCrossP(Vector3(0, 1, 0));
+
+	//if (m_carrils > 1)
+	{
+		position = position - perp * (CarrilWidth * (m_carrils / 2) - (!(m_carrils%2) * CarrilWidth/2));
+		if (m_carrils % 2 == 0)
+		{
+			position -= perp * CarrilWidth / 2;
+		}
+
+		int i = 0;
+		while (i < c)
+		{
+			position += perp * CarrilWidth;
+			i++;
+		}
+	}
 }
 
 void Circuit::Load(Circuits c)
@@ -85,9 +104,9 @@ void Circuit::Load(Circuits c)
 void Circuit::Draw()
 {
 	float inc = 1.0f / CircuitsResolutions[(int)m_index];
-	int width = CarrilWidth * m_carrils;
+	int width = CarrilWidth * m_carrils / 2;
 
-	m_spline.Debug(true, CircuitsResolutions[(int)m_index]);
+	//m_spline.Debug(true, CircuitsResolutions[(int)m_index]);
 
 	glBindTexture(GL_TEXTURE_2D, m_roadTextureId);
 	glBegin(GL_QUAD_STRIP);

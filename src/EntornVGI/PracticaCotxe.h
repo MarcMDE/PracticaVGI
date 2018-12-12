@@ -22,7 +22,7 @@
 #define ESP 32 // Espai
 #define PAUSE 80 // P
 
-const int DAV[3] = { 87, 84, 73 }; // W, T, I
+const int DAV[MAX_JUGADORS] = { 87, 84, 73 }; // W, T, I
 
 enum SCREENS {INICI=0, SELECCIO=1, GAMEPLAY=2};
 
@@ -66,7 +66,7 @@ public:
 	void Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/);
 	void DrawInterface(int w, int h);
 	void Procesa_Teclat(UINT nChar, UINT nRepCnt);
-
+	void Update();
 	void setNJugadors(int i);
 };
 

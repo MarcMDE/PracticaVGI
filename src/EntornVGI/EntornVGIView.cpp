@@ -1388,10 +1388,10 @@ void CEntornVGIView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 			else if (navega) Teclat_Navega(nChar, nRepCnt);
 		}
 
+		// Crida a OnPaint() per redibuixar l'escena
+		InvalidateRect(NULL, false);
 	}
 
-// Crida a OnPaint() per redibuixar l'escena
-	InvalidateRect(NULL, false);
 
 	CView::OnKeyDown(nChar, nRepCnt, nFlags);
 }
@@ -2345,8 +2345,8 @@ void CEntornVGIView::OnTimer(UINT_PTR nIDEvent)
 // TODO: Agregue aquí su código de controlador de mensajes o llame al valor predeterminado
 	if (escena == ESCENA_PRACTICA_COTXE_1) {
 
-		//practicaCotxe.Procesa_Teclat(87, 1);
-		//InvalidateRect(NULL, false);
+		practicaCotxe.Update();
+		InvalidateRect(NULL, false);
 	}
 	else {
 		if (anima) {
