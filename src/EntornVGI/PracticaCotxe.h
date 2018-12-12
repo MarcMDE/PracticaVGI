@@ -7,13 +7,22 @@
 
 #define PC_DEVELOP
 
-// Definició de les tecles del teclat W, A, S, D, Espai
+#define MAX_JUGADORS 3
+
+// Definició de les tecles del teclat i del ratolí
+/*
+
 #define DAV 87 // W
 #define DAR 83 // S
 #define ESQ 65 // A
 #define DRT 68 // D
+
+*/
+
 #define ESP 32 // Espai
 #define PAUSE 80 // P
+
+const int DAV[3] = { 87, 84, 73 }; // W, T, I
 
 enum SCREENS {INICI=0, SELECCIO=1, GAMEPLAY=2};
 
@@ -28,7 +37,9 @@ private:
 	float vY = 1;
 	float vZ = 0;
 
-	Car m_car = Car(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
+	//Car m_car = Car(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
+	Car *m_cars;
+	int m_nJugadors;
 	OGLObject m_mainObj;
 	LLUM m_sun;
 	Circuit m_circuit;
@@ -56,5 +67,6 @@ public:
 	void DrawInterface(int w, int h);
 	void Procesa_Teclat(UINT nChar, UINT nRepCnt);
 
+	void setNJugadors(int i);
 };
 

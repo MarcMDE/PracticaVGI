@@ -20,7 +20,7 @@ private:
 
 public:
 	Car() : MobileOGLObject() {};
-	Car(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 scale) : MobileOGLObject()
+	void Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 scale)
 	{
 		m_position = position;
 		m_rotation = rotation;
