@@ -48,21 +48,28 @@ PracticaCotxe::PracticaCotxe()
 
 	m_carProgress = 0;
 	m_carInc = 0.005f;
-
 	m_isPaused = false;
-
 	m_currScreen = INICI;
 
 	m_circuit.Load(CIRCUIT_6);
 
+	m_car.SetBody(OBJ_CAR, TXT_CAR, Vector3().Zero(), Vector3().Zero(), Vector3().One());
+
+	m_car.SetWheel(0, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
+	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
+	m_car.SetWheel(1, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+	m_car.SetWheel(2, OBJ_WHEEL, TXT_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
+	// Pos Z debería ser -7 pero para estar siendo afectada por la escala
+	m_car.SetWheel(3, OBJ_WHEEL, TXT_WHEEL, Vector3(-14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+
+	//m_car.SetChild(5, &m_cam);
+
+	m_circuit.SetChildsLength(1);
+	m_circuit.SetChild(0, &m_car);
+
 	m_mainObj.SetChildsLength(1);
 	m_mainObj.SetChild(0, &m_circuit);
 
-	setNJugadors(1);
-	/*
-	
-	
-	*/
 
 	m_sun.encesa = true;
 	m_sun.difusa[0] = 1.0f;		m_sun.difusa[1] = 1.0f;		m_sun.difusa[2] = 1.0f;		m_sun.difusa[3] = 1.0f;
@@ -409,17 +416,14 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 	switch (nChar) {
 
 		case PAUSE:
-			
-			if (m_currScreen == GAMEPLAY) {
-
+			if (m_currScreen == GAMEPLAY)
+			{
 				// Pause només funciona a gameplay screen
 				m_isPaused = !m_isPaused;
-			
 			}
-			
 			break;
 
-		/*case DAV[0]:
+		case DAV:
 			m_carProgress += m_carInc;
 			if (m_carProgress >= 1) m_carProgress -= 1;
 
@@ -446,81 +450,23 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 
 		case ESQ:
 
-			//m_car.Translate(Vector3(0, 0, -1));
+			m_car.Translate(Vector3(0, 0, -1));
 
 			break;
 
 
 		case DRT:
 
-			//m_car.Translate(Vector3(0, 0, 1));
+			m_car.Translate(Vector3(0, 0, 1));
 
-			break;*/
+			break;
 
 
 		case ESP:
 
-			for (int i = 0; i < m_nJugadors; i++) {
-
-				m_cars[i].SetPosition(Vector3().Zero());
-
-			}
-			
-			break;
-
-		default:
-
-			int i = 0;
-
-			while (i < m_nJugadors && DAV[i] != nChar) i++;
-
-			if (i != m_nJugadors) {
-
-				// El jugador i ha apretat la tecla cap endavant
-
-				//m_carProgress += m_carInc;
-				
-				if (m_carProgress >= 1) m_carProgress -= 1;
-
-				dir = m_circuit.CalcDirection(m_carProgress);
-				//dir.Normalize();
-
-				newPos = m_circuit.CalcPosition(m_carProgress);
-
-				m_cars[i].Move(newPos, dir);
-			
-			}
-
+			m_car.SetPosition(Vector3().Zero());
 			break;
 	
-	}
-
-}
-
-void PracticaCotxe::setNJugadors(int nJugadors) {
-
-	if (nJugadors <= MAX_JUGADORS) {
-
-		m_nJugadors = nJugadors;
-
-		m_cars = new Car[nJugadors];
-		m_circuit.SetChildsLength(m_nJugadors);
-
-		for (int i = 0; i < m_nJugadors; i++) {
-
-			m_cars[i] = Car(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
-
-			m_cars[i].SetBody(OBJ_CAR, TXT_CAR, Vector3().Zero(), Vector3().Zero(), Vector3().One());
-
-			m_cars[i].SetWheel(0, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
-			// Pos Z debería ser -7 pero para estar siendo afectada por la escala
-			m_cars[i].SetWheel(1, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
-			m_cars[i].SetWheel(2, OBJ_WHEEL, TXT_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
-			// Pos Z debería ser -7 pero para estar siendo afectada por la escala
-			m_cars[i].SetWheel(3, OBJ_WHEEL, TXT_WHEEL, Vector3(-14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
-
-			m_circuit.SetChild(i, &m_cars[i]);
-		}
 	}
 
 }
