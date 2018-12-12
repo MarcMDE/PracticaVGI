@@ -49,9 +49,9 @@ PracticaCotxe::PracticaCotxe()
 	m_carProgress = 0;
 	m_carInc = 0.005f;
 	m_isPaused = false;
-	m_currScreen = INICI;
 
-	m_circuit.Load(CIRCUIT_6);
+	m_currScreen = GAMEPLAY;
+	m_circuit.Load(CIRCUIT_4);
 
 	m_car.SetBody(OBJ_CAR, TXT_CAR, Vector3().Zero(), Vector3().Zero(), Vector3().One());
 

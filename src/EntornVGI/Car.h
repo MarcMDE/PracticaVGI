@@ -6,12 +6,18 @@
 class Car : public MobileOGLObject
 {
 private:
+	const float m_friction = 0.001;
+	const float m_gravity = 0.003;
+	const float m_boostSpeed = 0.05;
+
 	OGLObject m_body;
 	MobileOGLObject** m_wheels;
 	int m_wheelsLength;
-	Vector3 m_direction;
 
-	Vector3 m_speed;
+	Vector3 m_direction;
+	float m_speed;
+	float m_progress;
+
 public:
 	Car() : MobileOGLObject() {};
 	Car(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 scale) : MobileOGLObject()
@@ -21,6 +27,8 @@ public:
 		m_scale = scale;
 
 		m_direction = Vector3().Zero();
+		m_speed = 0;
+		m_progress = 0;
 
 		if (wheelsLength > 0)
 		{
@@ -37,7 +45,8 @@ public:
 	void SetWheel(int index, GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
 	void SetBody(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
 	void Move(Vector3 pos, Vector3 dir);
-	Vector3 GetDirection() const;
+	//Vector3 GetDirection() const;
+	void Boost();
 
 	//Car & Car::operator=(const Car & c);
 	~Car();

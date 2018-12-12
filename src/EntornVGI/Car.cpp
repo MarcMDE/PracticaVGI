@@ -18,6 +18,9 @@ void Car::SetBody(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 
 
 void Car::Move(Vector3 pos, Vector3 dir)
 {
+	m_progress += m_speed;
+	if (m_progress >= 1) m_progress -= 1;
+	
 	//rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(dir), 0, 0);
 	Vector3 rotation = dir.GetAngles();
 	dir.Normalize();
@@ -40,11 +43,18 @@ void Car::Move(Vector3 pos, Vector3 dir)
 	SetRotation(rotation);
 	SetPosition(pos);
 	m_direction = dir;
+
+	m_speed -= m_friction;
 }
 
-Vector3 Car::GetDirection() const
+//Vector3 Car::GetDirection() const
+//{
+//	return m_direction;
+//}
+
+void Car::Boost()
 {
-	return m_direction;
+	m_speed += m_boostSpeed;
 }
 
 Car::~Car()
