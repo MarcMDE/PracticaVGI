@@ -277,6 +277,9 @@ void PracticaCotxe::DrawUIElement(int texture, int posX, int posY, int width, in
 
 void PracticaCotxe::DrawUIElement(CColor color, int posX, int posY, int width, int heigth)
 {
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
 	glColor4f(color.r, color.g, color.b, color.a);
 	glBegin(GL_QUADS);
 	glTexCoord2f(1.0, 0.0); glVertex2f(posX + width / 2, posY + heigth / 2);
@@ -284,6 +287,8 @@ void PracticaCotxe::DrawUIElement(CColor color, int posX, int posY, int width, i
 	glTexCoord2f(0.0, 1.0); glVertex2f(posX - width / 2, posY - heigth / 2);
 	glTexCoord2f(1.0, 1.0); glVertex2f(posX + width / 2, posY - heigth / 2);
 	glEnd();
+
+	glDisable(GL_BLEND);
 }
 
 void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
@@ -375,7 +380,7 @@ void PracticaCotxe::DrawInterface(int w, int h)
 		{
 			// Fons gris quan pantalla pausa
 			// TODO: Arreglar transparencia (no funciona :S)
-			//DrawUIElement({ 0, 0, 0, 0.2f }, w / 2, h / 2, w, h);
+			DrawUIElement({ 0.2, 0.2, 0.2, 0.6f }, w / 2, h / 2, w, h);
 
 			// TODO: Dibuixar text pausa
 		}
