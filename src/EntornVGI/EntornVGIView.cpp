@@ -620,9 +620,9 @@ void CEntornVGIView::OnPaint()
 	if (escena == ESCENA_PRACTICA_COTXE_1)
 	{
 		CPaintDC dc(this); // device context for painting
-		// TODO: Agregue aquí su código de controlador de mensajes
+						   // TODO: Agregue aquí su código de controlador de mensajes
 
-		// Entorn VGI: Activació el contexte OpenGL
+						   // Entorn VGI: Activació el contexte OpenGL
 		wglMakeCurrent(m_pDC->GetSafeHdc(), m_hRC);
 
 
@@ -632,11 +632,14 @@ void CEntornVGIView::OnPaint()
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); // Set Perspective Calculations To Most Accurate
 		glDisable(GL_SCISSOR_TEST);		// Desactivació del retall de pantalla
 
-		// Definició de Viewport, Projecció i Càmara
+										// Definició de Viewport, Projecció i Càmara
 		float zoom = OPV.R;
-		Projeccio_Perspectiva(0, 0, w, h, zoom);
+		//glScissor(0, 0, w, h);
+		//Projeccio_Perspectiva(w / 2, 0, w, h, zoom);
 
 #ifdef PC_DEVELOP
+		Projeccio_Perspectiva(0, 0, w, h, zoom);
+
 		GLfloat vpv[3] = { 0.0, 0.0, 1.0 };
 
 		if (navega) {
@@ -653,8 +656,9 @@ void CEntornVGIView::OnPaint()
 		// Dibuix de l'Objecte o l'Escena
 		glPushMatrix();
 		configura_Escena();     // Aplicar Transformacions Geometriques segons persiana Transformacio i configurar objectes.
-		//dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
-
+								//dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
+								// Activació del retall de pantalla
+		glEnable(GL_SCISSOR_TEST);
 		// Dibuixat escena 3d
 		practicaCotxe.Draw();
 		// -----------
@@ -3746,7 +3750,7 @@ void CEntornVGIView::OnPracticaCotxe()
 			glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE) ;
 		// ------------------------
 
-		practicaCotxe.Init();
+		practicaCotxe.Init(w, h);
 
 		// Timer ("FPS")
 		SetTimer(WM_TIMER, 10, NULL);
