@@ -79,7 +79,6 @@ void PracticaCotxe::Init(int w, int h)
 
 void PracticaCotxe::Iluminacio(char ilumin, bool ifix, bool ll_amb, LLUM lumin, bool textur, bool textur_map, char obj, bool bc_lin, int step)
 {
-	//a
 	//bool ll_amb=true;
 	GLfloat angv, angh;
 
