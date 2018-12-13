@@ -371,6 +371,9 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 void PracticaCotxe::DrawInterface(int w, int h)
 {
+	glDisable(GL_SCISSOR_TEST);
+	glViewport(0, 0, w, h);
+
 	glDisable(GL_TEXTURE_2D);
 	GLfloat ambientgi[] = { 1,1,1,1 };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientgi);
@@ -572,35 +575,11 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 		}
 		else { //For 3 or 4 players
 
-			   // Player 1 ==================
-
-			   // Inici
-			m_w[0][0] = 0;
-			m_h[0][0] = 0;
-
-			// Fi
-			m_w[0][1] = w / 2;
-			m_h[0][1] = h / 2;
-
-			// ===========================
-
-			// Player 2 ==================
-
-			// Inici
-			m_w[1][0] = w / 2;
-			m_h[1][0] = 0;
-
-			// Fi
-			m_w[1][1] = w / 2;
-			m_h[1][1] = h / 2;
-
-			// ===========================
-
-			// Player 3 ==================
+			// Player 1 ==================
 
 			// Inici
 			m_w[2][0] = 0;
-			m_h[2][0] = h / 2;
+			m_h[2][0] = 0;
 
 			// Fi
 			m_w[2][1] = w / 2;
@@ -608,15 +587,39 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 
 			// ===========================
 
-			// Player 4 ==================
+			// Player 2 ==================
 
 			// Inici
 			m_w[3][0] = w / 2;
-			m_h[3][0] = h / 2;
+			m_h[3][0] = 0;
 
 			// Fi
 			m_w[3][1] = w / 2;
 			m_h[3][1] = h / 2;
+
+			// ===========================
+
+			// Player 3 ==================
+
+			// Inici
+			m_w[0][0] = 0;
+			m_h[0][0] = h / 2;
+
+			// Fi
+			m_w[0][1] = w / 2;
+			m_h[0][1] = h / 2;
+
+			// ===========================
+
+			// Player 4 ==================
+
+			// Inici
+			m_w[1][0] = w / 2;
+			m_h[1][0] = h / 2;
+
+			// Fi
+			m_w[1][1] = w / 2;
+			m_h[1][1] = h / 2;
 
 			// ===========================
 
