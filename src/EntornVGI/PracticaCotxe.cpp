@@ -55,15 +55,15 @@ PracticaCotxe::~PracticaCotxe()
 {
 }
 
-void PracticaCotxe::Init()
+void PracticaCotxe::Init(int w, int h)
 {
-	m_circuit.Init(1);
-	m_circuit.Load(CIRCUIT_2);
+	m_circuit.Init(4);
+	m_circuit.Load(CIRCUIT_4);
 
 	m_mainObj.SetChildsLength(1);
 	m_mainObj.SetChild(0, &m_circuit);
 
-	setNJugadors(1);
+	setNJugadors(4, w, h);
 
 
 	m_sun.encesa = true;
@@ -303,12 +303,29 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	col_fons.b = 0;
 	col_fons.a = 1;
 
-	Fons(col_fons);
+	/*Fons(col_fons);*/
 
-	Vector3 cameraPosition = m_cars[0].GetPosition();
+	for (int i = 0; i < m_nJugadors; i++) {
+
+		Vector3 cameraPosition = m_cars[i].GetPosition();
+		cameraPosition -= Vector3(m_cars[i].GetDirection().X() * 60, 0, m_cars[i].GetDirection().Z() * 60);
+		cameraPosition += Vector3(0, 35, 0);
+
+		glViewport(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
+		glScissor(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
+		Fons(col_fons);
+
+		Projeccio_Perspectiva(0, 0, m_w[i][1], m_h[i][1], 75);
+
+		glLoadIdentity();
+		gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), m_cars[i].GetPosition().X(), m_cars[i].GetPosition().Y() + 20, m_cars[i].GetPosition().Z(), 0, 1, 0);
+		DrawRec(&m_mainObj);
+	}
+
+	/*Vector3 cameraPosition = m_cars[0].GetPosition();
 	cameraPosition-= Vector3(m_cars[0].GetDirection().X() * 60, 0, m_cars[0].GetDirection().Z() * 60);
 	cameraPosition += Vector3(0, 35, 0);
-	gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), m_cars[0].GetPosition().X(), m_cars[0].GetPosition().Y() + 20, m_cars[0].GetPosition().Z(), 0, 1, 0);
+	gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), m_cars[0].GetPosition().X(), m_cars[0].GetPosition().Y() + 20, m_cars[0].GetPosition().Z(), 0, 1, 0);*/
 
 	// Iluminacio fixe respecte la camara (després glLookAt)
 	Iluminacio(GOURAUD, true, true, m_sun, true, true, 'a', false, 0);
@@ -496,11 +513,99 @@ void PracticaCotxe::Update()
 	}
 }
 
-void PracticaCotxe::setNJugadors(int nJugadors) {
+void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 
 	if (nJugadors <= MAX_JUGADORS) {
 
 		m_nJugadors = nJugadors;
+
+		if (nJugadors == 1) { // For SOLO mode
+
+			// Inici
+			m_w[0][0] = 0;
+			m_h[0][0] = 0;
+			
+			// Fi
+			m_w[0][1] = w;
+			m_h[0][1] = h;
+
+		} else if (nJugadors == 2) { // For 2 players
+
+			// Player 1 ==================
+			
+			// Inici
+			m_w[0][0] = 0;
+			m_h[0][0] = 0;
+
+			// Fi
+			m_w[0][1] = w / 2;
+			m_h[0][1] = h;
+
+			// ===========================
+
+			// Player 2 ==================
+			
+			// Inici
+			m_w[1][0] = w / 2;
+			m_h[1][0] = 0;
+
+			// Fi
+			m_w[1][1] = w / 2;
+			m_h[1][1] = h;
+
+			// ===========================
+
+		} else { //For 3 or 4 players
+
+			// Player 1 ==================
+			
+			// Inici
+			m_w[0][0] = 0;
+			m_h[0][0] = 0;
+
+			// Fi
+			m_w[0][1] = w / 2;
+			m_h[0][1] = h / 2;
+
+			// ===========================
+
+			// Player 2 ==================
+			
+			// Inici
+			m_w[1][0] = w / 2;
+			m_h[1][0] = 0;
+
+			// Fi
+			m_w[1][1] = w;
+			m_h[1][1] = h / 2;
+
+			// ===========================
+
+			// Player 3 ==================
+			
+			// Inici
+			m_w[2][0] = 0;
+			m_h[2][0] = h / 2;
+
+			// Fi
+			m_w[2][1] = w / 2;
+			m_h[2][1] = h;
+
+			// ===========================
+
+			// Player 4 ==================
+			
+			// Inici
+			m_w[3][0] = w / 2;
+			m_h[3][0] = h / 2;
+
+			// Fi
+			m_w[3][1] = w;
+			m_h[3][1] = h;
+
+			// ===========================
+
+		}
 
 		m_cars = new Car[nJugadors];
 		m_circuit.SetChildsLength(m_nJugadors);

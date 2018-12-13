@@ -634,9 +634,12 @@ void CEntornVGIView::OnPaint()
 
 		// Definició de Viewport, Projecció i Càmara
 		float zoom = OPV.R;
-		Projeccio_Perspectiva(0, 0, w, h, zoom);
+		//glScissor(0, 0, w, h);
+		//Projeccio_Perspectiva(w / 2, 0, w, h, zoom);
 
 #ifdef PC_DEVELOP
+		Projeccio_Perspectiva(0, 0, w, h, zoom);
+
 		GLfloat vpv[3] = { 0.0, 0.0, 1.0 };
 
 		if (navega) {
@@ -654,7 +657,8 @@ void CEntornVGIView::OnPaint()
 		glPushMatrix();
 		configura_Escena();     // Aplicar Transformacions Geometriques segons persiana Transformacio i configurar objectes.
 		//dibuixa_Escena();		// Dibuix geometria de l'escena amb comandes GL.
-
+		// Activació del retall de pantalla
+		glEnable(GL_SCISSOR_TEST);
 		// Dibuixat escena 3d
 		practicaCotxe.Draw();
 		// -----------
@@ -3742,7 +3746,7 @@ void CEntornVGIView::OnPracticaCotxe()
 			glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE) ;
 		// ------------------------
 
-		practicaCotxe.Init();
+		practicaCotxe.Init(w, h);
 
 		// Timer ("FPS")
 		SetTimer(WM_TIMER, 10, NULL);
