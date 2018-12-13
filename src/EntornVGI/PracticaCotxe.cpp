@@ -366,7 +366,9 @@ void PracticaCotxe::DrawInterface(int w, int h)
 		// TODO: Dibuixar boto inici i boto sortir
 
 		// Exemple de boto d'inici
-		DrawUIElement(TXT_BOTO_INICI, w/2, h/2 - 250, 300, 100);
+		DrawUIElement(TXT_BOTO_QUIT, w/2 ,h/1.1 - 250, 300, 100);
+		DrawUIElement(TXT_BOTO_PLAY, w/2, h /1.5 - 250, 300, 100);
+
 
 		break;
 	case SELECCIO:
@@ -378,6 +380,8 @@ void PracticaCotxe::DrawInterface(int w, int h)
 
 		if (m_isPaused)
 		{
+
+			DrawUIElement(TXT_BOTO_QUIT, w / 2, h / 1.5 - 250, 300, 100);
 			// Fons gris quan pantalla pausa
 			// TODO: Arreglar transparencia (no funciona :S)
 			DrawUIElement({ 0.2, 0.2, 0.2, 0.6f }, w / 2, h / 2, w, h);
