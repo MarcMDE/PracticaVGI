@@ -52,10 +52,6 @@ private:
 	float m_carProgress;
 	float m_carInc;
 
-	// Coordenades pantalla
-	int m_w[MAX_JUGADORS][2];
-	int m_h[MAX_JUGADORS][2];
-
 	void glTranslateV(const Vector3& v);
 	void glRotateV(const Vector3& v);
 	void glScaleV(const Vector3& v);
@@ -67,12 +63,12 @@ public:
 	PracticaCotxe();
 	~PracticaCotxe();
 
-	void Init(int w, int h);
+	void Init();
 
 	void Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/);
 	void DrawInterface(int w, int h);
 	void Procesa_Teclat(UINT nChar, UINT nRepCnt);
 	void Update();
-	void setNJugadors(int i, int w, int h);
+	void setNJugadors(int i);
 };
 
