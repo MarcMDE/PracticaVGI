@@ -57,13 +57,13 @@ PracticaCotxe::~PracticaCotxe()
 
 void PracticaCotxe::Init(int w, int h)
 {
-	m_circuit.Init(1);
-	m_circuit.Load(CIRCUIT_4);
+	m_circuit.Init(4);
+	m_circuit.Load(CIRCUIT_2);
 
 	m_mainObj.SetChildsLength(1);
 	m_mainObj.SetChild(0, &m_circuit);
 
-	setNJugadors(1, w, h);
+	setNJugadors(4, w, h);
 
 
 	m_sun.encesa = true;
@@ -265,6 +265,7 @@ void PracticaCotxe::Iluminacio(char ilumin, bool ifix, bool ll_amb, LLUM lumin, 
 
 void PracticaCotxe::DrawUIElement(int texture, int posX, int posY, int width, int heigth)
 {
+	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glBegin(GL_QUADS);
 	//glColor3f(1.0f, 0.0f, 0.0f); // Red
@@ -273,6 +274,7 @@ void PracticaCotxe::DrawUIElement(int texture, int posX, int posY, int width, in
 	glTexCoord2f(0.0, 1.0); glVertex2f(posX-width/2, posY-heigth/2);
 	glTexCoord2f(1.0, 1.0); glVertex2f(posX+width/2, posY-heigth/2);
 	glEnd();
+	glDisable(GL_TEXTURE_2D);
 }
 
 void PracticaCotxe::DrawUIElement(CColor color, int posX, int posY, int width, int heigth)
@@ -297,7 +299,7 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	//color_objecte = col_object;
 	//reflexio_material = ref_mat;
 	//for (int i = 0; i < 4; i++) sw_materials[i] = sw_mat[i];
-
+	glColor4f(1, 1, 1, 1);
 
 #ifndef PC_DEVELOP
 	// CAMARA ----------------------------------------------------------------------------
@@ -309,6 +311,8 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	col_fons.a = 1;
 
 	/*Fons(col_fons);*/
+	// Iluminacio fixe respecte la camara (després glLookAt)
+	Iluminacio(GOURAUD, true, true, m_sun, true, true, 'a', false, 0);
 
 	for (int i = 0; i < m_nJugadors; i++) {
 
@@ -316,19 +320,18 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 		cameraPosition -= Vector3(m_cars[i].GetDirection().X() * 60, 0, m_cars[i].GetDirection().Z() * 60);
 		cameraPosition += Vector3(0, 35, 0);
 
-		glViewport(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
+		Projeccio_Perspectiva(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1], 75);
+		//glViewport(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
 		glScissor(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
 		Fons(col_fons);
 
-		Projeccio_Perspectiva(0, 0, m_w[i][1], m_h[i][1], 75);
 
 		glLoadIdentity();
 		gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), m_cars[i].GetPosition().X(), m_cars[i].GetPosition().Y() + 20, m_cars[i].GetPosition().Z(), 0, 1, 0);
 		DrawRec(&m_mainObj);
 	}
 
-	// Iluminacio fixe respecte la camara (després glLookAt)
-	Iluminacio(GOURAUD, true, true, m_sun, true, true, 'a', false, 0);
+
 
 	// Test de Visibilitat
 	//if (testv) glEnable(GL_CULL_FACE);
@@ -372,6 +375,10 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 void PracticaCotxe::DrawInterface(int w, int h)
 {
+	glDisable(GL_TEXTURE_2D);
+	GLfloat ambientgi[] = { 1,1,1,1 };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientgi);
+
 	switch (m_currScreen)
 	{
 	case INICI:
@@ -390,8 +397,8 @@ void PracticaCotxe::DrawInterface(int w, int h)
 	case GAMEPLAY:
 		// TODO: Dibuixar botons per cada jugador (accions restants i voltes que porten (les voltes encara no les feu))
 
-		DrawUIElement(TXT_BOTO_INICI, w/2, h/2, 256, 80);
-		DrawUIElement({1, 0, 0, 1}, w / 2, h / 2 + 150, 64, 64);
+		//DrawUIElement(TXT_BOTO_INICI, w/2, h/2, 256, 80);
+		//DrawUIElement({1, 0, 0, 1}, w / 2, h / 2 + 150, 64, 64);
 
 		if (m_isPaused)
 		{
@@ -408,6 +415,9 @@ void PracticaCotxe::DrawInterface(int w, int h)
 	default:
 		break;
 	}
+
+	GLfloat ambientg[] = { .5,.5,.5,1.0 };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientg);
 }
 
 void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
