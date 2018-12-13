@@ -5,7 +5,7 @@
 #include "DynamicOGLObject.h"
 #include "Circuit.h"
 
-//#define PC_DEVELOP
+#define PC_DEVELOP
 
 #define MAX_JUGADORS 4
 

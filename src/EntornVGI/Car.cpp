@@ -93,7 +93,11 @@ Vector3 Car::GetDirection() const
 
 void Car::Boost()
 {
-	m_speed += m_boostSpeed;
+	if (m_boosts > 0)
+	{
+		m_speed += m_boostSpeed;
+		m_boosts--;
+	}
 }
 
 void Car::Brake()
@@ -119,6 +123,12 @@ void Car::ResetProgress()
 {
 	m_progress = 0;
 	m_speed = 0;
+	m_boosts = m_initialBoosts;
+}
+
+void Car::AddBoost()
+{
+	if (m_boosts < m_maxBoosts) m_boosts++;
 }
 
 Car::~Car()
