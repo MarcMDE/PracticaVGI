@@ -78,11 +78,11 @@ void PracticaCotxe::Init(int w, int h)
 }
 
 void PracticaCotxe::Iluminacio(char ilumin, bool ifix, bool ll_amb, LLUM lumin, bool textur, bool textur_map, char obj, bool bc_lin, int step)
-{
+{      
 	//bool ll_amb=true;
 	GLfloat angv, angh;
 
-	// Configuració de la font de llum LIGHT0
+	// Configuració de la font de llum LIGHT0.
 	GLfloat position[] = { 0.0,0.0,200.0,1.0 };
 	GLfloat especular[] = { 0.0,0.0,0.0,1.0 };
 	GLfloat ambientg[] = { .5,.5,.5,1.0 };
