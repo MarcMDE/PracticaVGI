@@ -57,13 +57,13 @@ PracticaCotxe::~PracticaCotxe()
 
 void PracticaCotxe::Init(int w, int h)
 {
-	m_circuit.Init(1);
+	m_circuit.Init(4);
 	m_circuit.Load(CIRCUIT_2);
 
 	m_mainObj.SetChildsLength(1);
 	m_mainObj.SetChild(0, &m_circuit);
 
-	setNJugadors(1, w, h);
+	setNJugadors(4, w, h);
 
 
 	m_sun.encesa = true;
@@ -313,7 +313,6 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	/*Fons(col_fons);*/
 
 	for (int i = 0; i < m_nJugadors; i++) {
-
 		Vector3 cameraPosition = m_cars[i].GetPosition();
 		cameraPosition -= Vector3(m_cars[i].GetDirection().X() * 60, 0, m_cars[i].GetDirection().Z() * 60);
 		cameraPosition += Vector3(0, 35, 0);
@@ -346,14 +345,12 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 	// -----------------------------------------------------------------------------------
 #else
+	DrawRec(&m_mainObj);
 	// Dibuix dels eixos
 	glCallList(EIXOS);
 #endif
 
-	glColor3f(1, 1, 1);
-	glEnable(GL_TEXTURE_2D);
-
-	DrawRec(&m_mainObj);
+	//DrawRec(&m_mainObj);
 
 	/*
 	glBindTexture(GL_TEXTURE_2D, TXT_TEST);

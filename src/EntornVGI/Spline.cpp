@@ -365,6 +365,7 @@ void Spline::CalcDirPos(float p, Vector3 & dir, Vector3 & pos)
 
 	dir = m_BSplineD(p, cps);
 	pos = m_BSpline(p, cps);
+	//pos = m_CubicInterpolate(p, cps);
 }
 
 /*

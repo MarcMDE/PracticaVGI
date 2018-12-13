@@ -19,12 +19,12 @@
 
 //const int DAV[MAX_JUGADORS] = { 87, 84, 73 }; // W, T, I
 const int DAV[MAX_JUGADORS] = { 50, 53, 56, 39 }; // 2, 5, 8, '
-const int DAR[MAX_JUGADORS] = { 49, 52, 55, 58 }; // 1, 4, 7, 9
+const int DAR[MAX_JUGADORS] = { 49, 52, 55, 58 }; // 1, 4, 7, 0
 
 enum SCREENS { INICI=0, SELECCIO=1, GAMEPLAY=2 };
 enum B_INICI { START=0, EXIT=1 };
 enum B_SELEC { P1=0, P2, P3, P4, C1, C2, C3, C4, NEXT };
-enum B_PAUSE { EXITB =0 };
+enum B_PAUSE { EXITB=0 };
 
 class PracticaCotxe
 {
@@ -46,7 +46,7 @@ private:
 	OGLObject m_mainObj;
 	LLUM m_sun;
 	Circuit m_circuit;
-	camara m_cam = camara(-100, 0, 0, 0, 25, 0, 0, 5, 0);
+	//camara m_cam = camara(-100, 0, 0, 0, 25, 0, 0, 5, 0);
 	SCREENS m_currScreen;
 	bool m_isPaused;
 

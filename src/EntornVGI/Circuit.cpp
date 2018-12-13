@@ -69,12 +69,23 @@ Vector3 Circuit::CalcPosition(float f)
 
 Vector3 Circuit::CalcDirection(float f)
 {
-	return m_spline.CalcDirection(f);
+	//return m_spline.CalcDirection(f);
+
+	Vector3 posF = m_spline.CalcPosition(f);
+
+	if (f + 0.001 < 1) f += 0.001;
+	else f = 0;
+
+	Vector3 posN = m_spline.CalcPosition(f);
+
+	return (posN - posF);
 }
 
 void Circuit::CalcDirPos(float f, int c, Vector3 & direction, Vector3 & position)
 {
 	m_spline.CalcDirPos(f, direction, position);
+	//direction = CalcDirection(f);
+
 	direction.Normalize();
 	Vector3 perp = direction.DirCrossP(Vector3(0, 1, 0));
 
