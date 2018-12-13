@@ -257,7 +257,7 @@ void Projeccio_Perspectiva(int minx,int miny,GLsizei w,GLsizei h,float zoom)
 {
 
 // Definició Viewport
-	glViewport(minx,miny,w,h);
+	//glViewport(minx,miny,w,h);
 	if (h==0) h=1;
 
 // Activació i inicialització matriu PROJECTION

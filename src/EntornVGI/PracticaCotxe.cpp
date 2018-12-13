@@ -320,8 +320,8 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 		cameraPosition -= Vector3(m_cars[i].GetDirection().X() * 60, 0, m_cars[i].GetDirection().Z() * 60);
 		cameraPosition += Vector3(0, 35, 0);
 
-		Projeccio_Perspectiva(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1], 75);
-		//glViewport(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
+		//Projeccio_Perspectiva(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1], 75);
+		glViewport(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
 		glScissor(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
 		Fons(col_fons);
 
@@ -557,7 +557,7 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 
 			// Fi
 			m_w[0][1] = w / 2;
-			m_h[0][1] = h;
+			m_h[0][1] = h / 2;
 
 			// ===========================
 
@@ -569,7 +569,7 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 
 			// Fi
 			m_w[1][1] = w / 2;
-			m_h[1][1] = h;
+			m_h[1][1] = h / 2;
 
 			// ===========================
 
@@ -595,7 +595,7 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 			m_h[1][0] = 0;
 
 			// Fi
-			m_w[1][1] = w;
+			m_w[1][1] = w / 2;
 			m_h[1][1] = h / 2;
 
 			// ===========================
@@ -608,7 +608,7 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 
 			// Fi
 			m_w[2][1] = w / 2;
-			m_h[2][1] = h;
+			m_h[2][1] = h / 2;
 
 			// ===========================
 
@@ -619,8 +619,8 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 			m_h[3][0] = h / 2;
 
 			// Fi
-			m_w[3][1] = w;
-			m_h[3][1] = h;
+			m_w[3][1] = w / 2;
+			m_h[3][1] = h / 2;
 
 			// ===========================
 

@@ -635,7 +635,7 @@ void CEntornVGIView::OnPaint()
 										// Definició de Viewport, Projecció i Càmara
 		float zoom = OPV.R;
 		//glScissor(0, 0, w, h);
-		//Projeccio_Perspectiva(0, 0, w, h, zoom);
+		Projeccio_Perspectiva(0, 0, w, h, zoom);
 
 #ifdef PC_DEVELOP
 		Projeccio_Perspectiva(0, 0, w, h, zoom);
