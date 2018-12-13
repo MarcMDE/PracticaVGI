@@ -57,13 +57,13 @@ PracticaCotxe::~PracticaCotxe()
 
 void PracticaCotxe::Init(int w, int h)
 {
-	m_circuit.Init(4);
+	m_circuit.Init(1);
 	m_circuit.Load(CIRCUIT_4);
 
 	m_mainObj.SetChildsLength(1);
 	m_mainObj.SetChild(0, &m_circuit);
 
-	setNJugadors(4, w, h);
+	setNJugadors(1, w, h);
 
 
 	m_sun.encesa = true;
@@ -389,6 +389,9 @@ void PracticaCotxe::DrawInterface(int w, int h)
 		break;
 	case GAMEPLAY:
 		// TODO: Dibuixar botons per cada jugador (accions restants i voltes que porten (les voltes encara no les feu))
+
+		DrawUIElement(TXT_BOTO_INICI, w/2, h/2, 256, 80);
+		DrawUIElement({1, 0, 0, 1}, w / 2, h / 2 + 150, 64, 64);
 
 		if (m_isPaused)
 		{
