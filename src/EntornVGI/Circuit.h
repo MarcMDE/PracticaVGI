@@ -9,7 +9,7 @@ class Circuit : public OGLObject
 {
 private:
 	const string CircuitsFileNames[6] = { "circuits/c1.txt", "circuits/c2.txt", "circuits/c3.txt", "circuits/c4.txt", "circuits/c5.txt", "circuits/c6.txt" };
-	const int CircuitsResolutions[6] = { 50, 100, 30, 150, 70, 25};
+	const int CircuitsResolutions[6] = { 50, 100, 30, 150, 70, 20};
 	const int CarrilWidth = 40;
 
 	Circuits m_index;

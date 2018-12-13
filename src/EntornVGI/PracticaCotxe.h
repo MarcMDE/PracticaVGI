@@ -14,16 +14,6 @@
 #define BUTTONS_SELEC 9
 #define BUTTONS_PAUSE 1
 
-// Definició de les tecles del teclat i del ratolí
-/*
-
-#define DAV 87 // W
-#define DAR 83 // S
-#define ESQ 65 // A
-#define DRT 68 // D
-
-*/
-
 #define ESP 32 // Espai
 #define PAUSE 80 // P
 

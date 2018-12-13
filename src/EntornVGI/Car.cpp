@@ -61,7 +61,7 @@ void Car::Move(Vector3 pos, Vector3 dir)
 	//rotation += Vector3(0, pi/2, 0);
 	//rotation -= Vector3(0, (pi / 2), 0);
 
-	if (dir.Y() < 0) rotation = Vector3(rotation.X(), rotation.Y(), -rotation.Z());
+	//if (dir.Y() < 0) rotation = Vector3(rotation.X(), rotation.Y(), -rotation.Z());
 	if (dir.Z() > 0) rotation = Vector3(-rotation.X(), rotation.Y(), rotation.Z());
 	//rotation = Vector3(rx, ry, rz).GetAngles();
 	
