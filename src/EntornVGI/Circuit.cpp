@@ -80,12 +80,10 @@ void Circuit::CalcDirPos(float f, int c, Vector3 & direction, Vector3 & position
 
 	//if (m_carrils > 1)
 	{
-		position = position - perp * (CarrilWidth * (m_carrils / 2) - (!(m_carrils%2) * CarrilWidth/2));
-		if (m_carrils % 2 == 0)
-		{
-			position -= perp * CarrilWidth / 2;
-		}
-
+		position = position - perp * (CarrilWidth * m_carrils / 2);
+		
+		position += perp * CarrilWidth/2;
+		
 		int i = 0;
 		while (i < c)
 		{

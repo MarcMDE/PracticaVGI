@@ -57,13 +57,13 @@ PracticaCotxe::~PracticaCotxe()
 
 void PracticaCotxe::Init(int w, int h)
 {
-	m_circuit.Init(4);
+	m_circuit.Init(1);
 	m_circuit.Load(CIRCUIT_2);
 
 	m_mainObj.SetChildsLength(1);
 	m_mainObj.SetChild(0, &m_circuit);
 
-	setNJugadors(4, w, h);
+	setNJugadors(1, w, h);
 
 
 	m_sun.encesa = true;
@@ -311,8 +311,6 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	col_fons.a = 1;
 
 	/*Fons(col_fons);*/
-	// Iluminacio fixe respecte la camara (després glLookAt)
-	Iluminacio(GOURAUD, true, true, m_sun, true, true, 'a', false, 0);
 
 	for (int i = 0; i < m_nJugadors; i++) {
 
@@ -325,9 +323,10 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 		glScissor(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
 		Fons(col_fons);
 
-
 		glLoadIdentity();
 		gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), m_cars[i].GetPosition().X(), m_cars[i].GetPosition().Y() + 20, m_cars[i].GetPosition().Z(), 0, 1, 0);
+		// Iluminacio fixe respecte la camara (després glLookAt)
+		Iluminacio(GOURAUD, true, true, m_sun, true, true, 'a', false, 0);
 		DrawRec(&m_mainObj);
 	}
 
