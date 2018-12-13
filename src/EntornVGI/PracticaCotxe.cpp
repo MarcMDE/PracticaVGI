@@ -10,7 +10,7 @@ void PracticaCotxe::glTranslateV(const Vector3 & v)
 void PracticaCotxe::glRotateV(const Vector3 & v)
 {
 	glRotatef(v.X() * RAD_TO_DEG, 0, 1, 0);
-	//glRotatef(v.Y() * RAD_TO_DEG, 0, 0, 1);
+	//glRotatef(v.Z() * RAD_TO_DEG, 0, 0, 1);
 	//glRotatef(v.Z() * RAD_TO_DEG, 0, 0, 1);
 }
 
@@ -375,7 +375,7 @@ void PracticaCotxe::DrawInterface(int w, int h)
 		{
 			// Fons gris quan pantalla pausa
 			// TODO: Arreglar transparencia (no funciona :S)
-			DrawUIElement({ 0, 0, 0, 0.2f }, w / 2, h / 2, w, h);
+			//DrawUIElement({ 0, 0, 0, 0.2f }, w / 2, h / 2, w, h);
 
 			// TODO: Dibuixar text pausa
 		}
@@ -468,6 +468,15 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 			m_cars[i].Boost();
 		}
 
+		i = 0;
+		while (i < m_nJugadors && DAR[i] != nChar) i++;
+
+		if (i != m_nJugadors) {
+
+			// El jugador i ha apretat la tecla cap endarrere
+			m_cars[i].Brake();
+		}
+
 		break;
 
 	}
@@ -476,11 +485,14 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 
 void PracticaCotxe::Update()
 {
-	Vector3 dir, pos;
-	for (int i = 0; i < m_nJugadors; i++)
+	if (!m_isPaused)
 	{
-		m_circuit.CalcDirPos(m_cars[i].GetProgress(), i, dir, pos);
-		m_cars[i].Move(pos, dir);
+		Vector3 dir, pos;
+		for (int i = 0; i < m_nJugadors; i++)
+		{
+			m_circuit.CalcDirPos(m_cars[i].GetProgress(), i, dir, pos);
+			m_cars[i].Move(pos, dir);
+		}
 	}
 }
 

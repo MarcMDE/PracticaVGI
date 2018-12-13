@@ -9,6 +9,7 @@ private:
 	const float m_friction = 0.00001;
 	const float m_gravity = 0.0002;
 	const float m_boostSpeed = 0.0035;
+	const float m_brakeSpeed = 0.001;
 
 	OGLObject m_body;
 	MobileOGLObject** m_wheels;
@@ -26,6 +27,7 @@ public:
 	void Move(Vector3 pos, Vector3 dir);
 	Vector3 GetDirection() const;
 	void Boost();
+	void Brake();
 	float GetProgress() const;
 	void ResetProgress();
 

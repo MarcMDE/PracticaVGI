@@ -93,6 +93,14 @@ Vector3 Vector3::AnglesBtw(Vector3 v)
 	return Vector3();
 }
 
+Vector3 Vector3::LookAtRotation()
+{
+	return Vector3(
+		atan2(m_x, sqrt(m_y*m_y + m_z*m_z)),
+		atan2(m_y, sqrt(m_x*m_x + m_z*m_z)), 
+		0);
+}
+
 float Vector3::AngleXBtw(Vector3 v)
 {
 	//v = Vector3(v.X(), 0, v.Z());
@@ -127,7 +135,11 @@ float Vector3::AngleZ() const
 Vector3 Vector3::GetAngles() const
 {
 	float magnitude = Magnitude();
-	if (magnitude == 0) return Vector3().Zero();
+	//float magnitude = sqrtf(m_x*m_x + m_z * m_z);
+	if (magnitude == 0)
+	{
+		return Vector3().Zero();
+	}
 
 	Vector3 ret = Vector3(
 		acos(m_x / magnitude),

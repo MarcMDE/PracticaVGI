@@ -32,6 +32,7 @@ public:
 	float Magnitude() const;
 	void Normalize();
 	Vector3 AnglesBtw(Vector3 v);
+	Vector3 LookAtRotation();
 	float AngleXBtw(Vector3 v);
 	float AngleYBtw(Vector3 v);
 	float AngleZBtw(Vector3 v);

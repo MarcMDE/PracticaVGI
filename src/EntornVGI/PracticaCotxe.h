@@ -5,9 +5,9 @@
 #include "DynamicOGLObject.h"
 #include "Circuit.h"
 
-#define PC_DEVELOP
+//#define PC_DEVELOP
 
-#define MAX_JUGADORS 3
+#define MAX_JUGADORS 4
 
 // Definició de les tecles del teclat i del ratolí
 /*
@@ -22,7 +22,9 @@
 #define ESP 32 // Espai
 #define PAUSE 80 // P
 
-const int DAV[MAX_JUGADORS] = { 87, 84, 73 }; // W, T, I
+//const int DAV[MAX_JUGADORS] = { 87, 84, 73 }; // W, T, I
+const int DAV[MAX_JUGADORS] = { 50, 53, 56, 39 }; // 2, 5, 8, '
+const int DAR[MAX_JUGADORS] = { 49, 52, 55, 58 }; // 1, 4, 7, 9
 
 enum SCREENS {INICI=0, SELECCIO=1, GAMEPLAY=2};
 

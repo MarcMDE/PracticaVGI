@@ -46,24 +46,26 @@ void Car::Move(Vector3 pos, Vector3 dir)
 	if (m_progress < 0) m_progress += 1;
 	
 	//rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(dir), 0, 0);
+	//dir = Vector3().Zero();
 	Vector3 rotation = dir.GetAngles();
 	dir.Normalize();
 	//rotation = rotation * RAD_TO_DEG;
 
-	//rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(Vector3(rx, ry, rz)), 0, 0);
+	//rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(dir), 0, 0);
 
 	//https://math.stackexchange.com/questions/575472/getting-angles-for-rotating-3d-vector-to-point-in-direction-of-another-3d-ve
 
 	//int x = 0, y = 0, z = 0;
 	//Vector3 rotation = Vector3(x, y, z).GetAngles();
 
-	rotation -= Vector3(0, (pi / 2), 0);
+	//rotation += Vector3(0, pi/2, 0);
+	//rotation -= Vector3(0, (pi / 2), 0);
 
+	if (dir.Y() < 0) rotation = Vector3(rotation.X(), rotation.Y(), -rotation.Z());
 	if (dir.Z() > 0) rotation = Vector3(-rotation.X(), rotation.Y(), rotation.Z());
 	//rotation = Vector3(rx, ry, rz).GetAngles();
 	
 	pos += Vector3(0, 5, 0);
-
 	SetRotation(rotation);
 	SetPosition(pos);
 	m_direction = dir;
@@ -92,6 +94,20 @@ Vector3 Car::GetDirection() const
 void Car::Boost()
 {
 	m_speed += m_boostSpeed;
+}
+
+void Car::Brake()
+{
+	if (m_speed < 0)
+	{
+		if (m_speed + m_brakeSpeed > 0) m_speed = 0;
+		else m_speed += m_brakeSpeed;
+	}
+	else if (m_speed > 0)
+	{
+		if (m_speed - m_brakeSpeed < 0) m_speed = 0;
+		else m_speed -= m_brakeSpeed;
+	}
 }
 
 float Car::GetProgress() const
