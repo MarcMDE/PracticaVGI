@@ -651,7 +651,7 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 
 			m_cars[i].Init(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
 
-			m_cars[i].SetBody(OBJ_CAR, TXT_CAR, Vector3().Zero(), Vector3().Zero(), Vector3().One());
+			m_cars[i].SetBody(OBJ_CAR+i, TXT_CAR, Vector3().Zero(), Vector3().Zero(), Vector3().One());
 
 			m_cars[i].SetWheel(0, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
 			m_cars[i].SetWheel(1, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));

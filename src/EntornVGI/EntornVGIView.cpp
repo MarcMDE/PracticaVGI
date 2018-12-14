@@ -3727,7 +3727,10 @@ void CEntornVGIView::OnPracticaCotxe()
 
 		// Carregar cotxe
 		if (ObOBJ == NULL) ObOBJ = new COBJModel;
-		ObOBJ->LoadModel("res/models/basic_car.obj", OBJ_CAR, true);	// Carregar model obj cotxe amb textura
+		ObOBJ->LoadModel("res/models/basic_car_vermell.obj", OBJ_CAR, true);	// Carregar model obj cotxe amb textura
+		ObOBJ->LoadModel("res/models/basic_car_blau.obj", OBJ_CAR+1, true);	// Carregar model obj cotxe amb textura
+		ObOBJ->LoadModel("res/models/basic_car_groc.obj", OBJ_CAR+2, true);	// Carregar model obj cotxe amb textura
+		ObOBJ->LoadModel("res/models/basic_car_rosa.obj", OBJ_CAR+3, true);	// Carregar model obj cotxe amb textura
 
 		ObOBJ = new COBJModel;
 		ObOBJ->LoadModel("res/models/basic_wheel.obj", OBJ_WHEEL, true);	// Carregar model obj roda amb textura
