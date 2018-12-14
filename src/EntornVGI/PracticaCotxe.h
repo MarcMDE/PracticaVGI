@@ -5,10 +5,11 @@
 #include "DynamicOGLObject.h"
 #include "Circuit.h"
 #include "UIButton.h"
+#include "SkyBox.h"
 
 #include "Sound.h"
 
-//#define PC_DEVELOP
+#define PC_DEVELOP
 
 #define MAX_JUGADORS 4
 
@@ -59,6 +60,8 @@ private:
 
 	float m_carProgress;
 	float m_carInc;
+
+	SkyBox m_skyBox = SkyBox(5000, TXT_TEST);
 
 	// Coordenades pantalla
 	int m_w[MAX_JUGADORS][2];

@@ -61,7 +61,11 @@ void PracticaCotxe::Init(int w, int h)
 	m_circuit.Load(CIRCUIT_2);
 
 	m_mainObj.SetChildsLength(1);
-	m_mainObj.SetChild(0, &m_circuit);
+	m_mainObj.SetChild(0, &m_skyBox);
+
+	m_skyBox.SetChildsLength(1);
+	m_skyBox.SetChild(0, &m_circuit);
+
 
 	setNJugadors(4, w, h);
 	

@@ -300,6 +300,9 @@
     <ClInclude Include="UIButton.h">
       <Filter>Archivos de encabezado\ClasesCarProj</Filter>
     </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Archivos de encabezado\ClasesCarProj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EntornVGI.cpp">
@@ -387,6 +390,9 @@
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
     <ClCompile Include="UIButton.cpp">
+      <Filter>Archivos de código fuente\ClasesCarProj</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
   </ItemGroup>
