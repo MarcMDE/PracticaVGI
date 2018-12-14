@@ -15,19 +15,9 @@ Sound::~Sound() {
 
 }
 
-void Sound::playSound() {
+void Sound::play() {
 
-	if (m_Psound) {
-
-		PlaySound(std::wstring(m_sound.begin(), m_sound.end()).c_str(), NULL, SND_FILENAME | SND_ASYNC);
-
-	}
-
-}
-
-void Sound::playMusic() {
-
-	if (m_Pmusic) {
+	if (m_play) {
 		
 		PlaySound(std::wstring(m_music.begin(), m_music.end()).c_str(), NULL, SND_FILENAME | SND_ASYNC);
 
@@ -35,60 +25,30 @@ void Sound::playMusic() {
 
 }
 
-void Sound::stopMusic() {
+void Sound::stop() {
 
-	
-
-}
-
-void Sound::stopSound() {
-
-
+	PlaySound(NULL, NULL, NULL);
 
 }
 
-void Sound::toggleMusic() {
+void Sound::toggle() {
 
-	if (!m_Pmusic) {
+	if (!m_play) {
 
-		m_Pmusic = true;	
-		playMusic();
+		m_play = true;	
+		play();
 	
 	} else {
 
-		m_Pmusic = false;
-		stopMusic();
+		m_play = false;
+		stop();
 
 	}
 
 }
 
-void Sound::toggleSound() {
+void Sound::setOpt(bool value) {
 
-	if (!m_Psound) {
-
-		m_Psound = true;
-
-		playSound();
-
-	} else {
-
-		m_Psound = false;
-
-		stopSound();
-
-	}
-
-}
-
-void Sound::setMusicOpt(bool value) {
-
-	m_Pmusic = value;
-
-}
-
-void Sound::setSoundOpt(bool value) {
-
-	m_Psound = value;
+	m_play = value;
 
 }

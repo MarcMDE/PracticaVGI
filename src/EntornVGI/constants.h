@@ -58,13 +58,10 @@
 #define OBJ_WHEEL 8		// Roda obj
 
 // Textures
-#define TXT_CAR 1
-#define TXT_WHEEL 2
-#define TXT_TEST 3
-#define TXT_BOTO_INICI 4
-#define TXT_BOTO_PLAY 5
-#define TXT_BOTO_QUIT 6
-#define TXT_BOTO_CONTINUE 7
+#define TXT_TEST 6
+#define TXT_BUTTONS_INICI 7
+#define TXT_BUTTONS_SELEC 9
+#define TXT_BUTTONS_GAMEPLAY 19
 // -------------- VGI: Definició dels valors del pla near i far del Volum de Visualització en Perspectiva
 const int p_near=1;
 const int p_far=50000;

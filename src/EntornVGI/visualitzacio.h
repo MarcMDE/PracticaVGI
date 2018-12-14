@@ -7,6 +7,8 @@
 #ifndef GLVIS_H
 #define GLVIS_H
 
+#include <string>
+
 /* ------------------------------------------------------------------------- */
 /*                                Funcions                                   */
 /* ------------------------------------------------------------------------- */
@@ -44,7 +46,7 @@ void FonsB(void);
 
 // Entorn VGI: Carregar fitxer imatge de formats admesos per la llibreria DevIL/OpenIL 
 //				com a textura
-bool loadIMA(char *filename, int texID);
+bool loadIMA(std::string filename, int texID);
 
 // Entorn VGI: Textures Objecte Truck
 void Init_Textures();
