@@ -66,7 +66,7 @@ void PracticaCotxe::Init(int w, int h)
 	setNJugadors(4, w, h);
 	
 	// Musica de fons... es para a 3 segons de reproducció, si prem 2 vegades M es reprodueix be
-	m_music.playMusic();
+	m_music.play();
 
 	m_sun.encesa = true;
 	m_sun.difusa[0] = 1.0f;		m_sun.difusa[1] = 1.0f;		m_sun.difusa[2] = 1.0f;		m_sun.difusa[3] = 1.0f;
@@ -530,13 +530,7 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 
 	case MUSIC:
 
-		m_music.toggleMusic();
-
-		break;
-
-	case SOUND:
-
-		m_sound.toggleSound();
+		m_music.toggle();
 
 		break;
 
@@ -597,7 +591,6 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 		if (i != m_nJugadors) {
 
 			// El jugador i ha apretat la tecla cap endavant
-			m_sound.playSound();
 			m_cars[i].Boost();
 
 		}
@@ -608,7 +601,6 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 		if (i != m_nJugadors) {
 
 			// El jugador i ha apretat la tecla cap endarrere
-			m_sound.playSound();
 			m_cars[i].Brake();
 
 		}
