@@ -73,7 +73,7 @@ StyleCopReport.xml
 *_i.h
 *.ilk
 *.meta
-*.obj
+**/src/EntornVGI/Debug/*.obj
 *.iobj
 *.pch
 *.pdb
