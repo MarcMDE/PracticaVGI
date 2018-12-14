@@ -442,19 +442,6 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 	//DrawRec(&m_mainObj);
 
-	
-	glBindTexture(GL_TEXTURE_2D, TXT_TEST);
-	glutSolidCube(10);
-	glBegin(GL_QUADS);
-
-		glTexCoord2f(0.0, 0.0); glVertex3f(-2.0, -2.0, 0.0); 
-		glTexCoord2f(0.0, 1.0); glVertex3f(-2.0, 2.0, 0.0);
-		glTexCoord2f(1.0, 1.0); glVertex3f(2.0, 2.0, 0.0);
-		glTexCoord2f(1.0, 0.0); glVertex3f(2.0, -2.0, 0.0);
-
-	glEnd();
-	
-
 	// Enviar les comandes gràfiques a pantalla
 	glFlush();
 }
