@@ -72,7 +72,7 @@ void PracticaCotxe::Init(int w, int h)
 	m_sun.difusa[0] = 1.0f;		m_sun.difusa[1] = 1.0f;		m_sun.difusa[2] = 1.0f;		m_sun.difusa[3] = 1.0f;
 	m_sun.especular[0] = 1.0f;		m_sun.especular[1] = 1.0f;		m_sun.especular[2] = 1.0f;		m_sun.especular[3] = 1.0f;
 
-	m_sun.posicio.R = 75.0;		m_sun.posicio.alfa = 90.0;		m_sun.posicio.beta = 0.0;		// Posició llum (x,y,z)=(0,0,75)
+	m_sun.posicio.R = -300.0;		m_sun.posicio.alfa = 90.0;		m_sun.posicio.beta = 0.0;		// Posició llum (x,y,z)=(0,0,75)
 	m_sun.atenuacio.a = 0.0;		m_sun.atenuacio.b = 0.0;		m_sun.atenuacio.c = 1.0;		// Llum sense atenuació per distància (a,b,c)=(0,0,1)
 	m_sun.restringida = false;
 	m_sun.spotdirection[0] = 0.0;	m_sun.spotdirection[1] = 0.0;	m_sun.spotdirection[2] = 0.0;
