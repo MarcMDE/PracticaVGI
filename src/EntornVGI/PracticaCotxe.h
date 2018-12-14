@@ -71,7 +71,11 @@ private:
 	void Iluminacio(char ilumin, bool ifix, bool ll_amb, LLUM lumin, bool textur, bool textur_map, char obj, bool bc_lin, int step);
 	void DrawUIElement(int texture, int posX, int posY, int width, int heigth);
 	void DrawUIElement(CColor color, int posX, int posY, int width, int heigth);
-	void OnButtonClick();
+
+	void OnButtonClickInici(B_INICI b);
+	void OnButtonClickSelec(B_SELEC b);
+	void OnButtonClickPause(B_PAUSE b);
+
 public:
 	PracticaCotxe();
 	~PracticaCotxe();

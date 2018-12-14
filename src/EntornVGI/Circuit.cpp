@@ -104,6 +104,11 @@ void Circuit::CalcDirPos(float f, int c, Vector3 & direction, Vector3 & position
 	}
 }
 
+Circuits Circuit::GetCurrCircuit()
+{
+	return m_index;
+}
+
 void Circuit::Load(Circuits c)
 {
 	m_index = c;
