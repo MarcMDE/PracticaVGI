@@ -8,27 +8,21 @@ class Sound {
 
 private:
 
-	std::string m_music = "res/audio/music.wav";
-	std::string m_sound = "res/audio/car.wav";
-	bool m_Pmusic = true;
-	bool m_Psound = true;
+	std::string m_music = "res/audio/music2.wav";
+	bool m_play = true;
 
 public:
 
 	Sound();
 	~Sound();
 
-	void playSound();
-	void playMusic();
+	void play();
 
-	void stopMusic();
-	void stopSound();
+	void stop();
 
-	void toggleMusic();
-	void toggleSound();
+	void toggle();
 
-	void setMusicOpt(bool value);
-	void setSoundOpt(bool value);
+	void setOpt(bool value);
 
 };
 

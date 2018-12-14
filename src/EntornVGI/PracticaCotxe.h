@@ -19,7 +19,6 @@
 #define ESP 32 // Espai
 #define PAUSE 80 // P
 #define MUSIC 77 // M
-#define SOUND 83 // S
 
 //const int DAV[MAX_JUGADORS] = { 87, 84, 73 }; // W, T, I 
 const int DAV[MAX_JUGADORS] = { 50, 53, 56, 219 }; // 2, 5, 8, '
@@ -55,7 +54,6 @@ private:
 	bool m_isPaused;
 
 	Sound m_music;
-	Sound m_sound;
 
 	float m_carProgress;
 	float m_carInc;
