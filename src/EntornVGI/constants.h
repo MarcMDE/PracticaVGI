@@ -51,10 +51,10 @@
 #define EIXOS 1			// Eixos
 #define FRACTAL 2		// Fractal
 #define OBJECTE3DS 3	// Objecte 3DS sense textures
-#define OBJECTE3DST 4	// Objecte 3DS amb textures
-#define OBJECTEOBJ 5	// Objecte OBJ sense textures
+#define OBJECTE3DST 14	// Objecte 3DS amb textures
+#define OBJECTEOBJ 15	// Objecte OBJ sense textures
 #define OBJECTEOBJT 6   // Objecte OBJ amb textures
-#define OBJ_CAR 7		// Cotxe obj
+#define OBJ_CAR 4		// Cotxe obj
 #define OBJ_WHEEL 8		// Roda obj
 
 // Textures
