@@ -65,7 +65,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;devil.lib;ilu.lib;ilut.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;glew32s.lib;devil.lib;ilu.lib;ilut.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib;libcmt.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <Midl>
@@ -190,6 +190,7 @@
     <ClInclude Include="Circuit.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Spline.h" />
     <ClInclude Include="DynamicOGLObject.h" />
     <ClInclude Include="EntornVGI.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="Circuit.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Spline.cpp" />
     <ClCompile Include="DynamicOGLObject.cpp" />
     <ClCompile Include="EntornVGI.cpp" />

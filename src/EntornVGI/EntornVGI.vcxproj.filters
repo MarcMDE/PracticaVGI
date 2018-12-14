@@ -294,8 +294,11 @@
     <ClInclude Include="camara.h">
       <Filter>Archivos de encabezado\ClasesCarProj</Filter>
     </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Archivos de encabezado\ClasesCarProj</Filter>
+    </ClInclude>
     <ClInclude Include="UIButton.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\ClasesCarProj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -380,8 +383,11 @@
     <ClCompile Include="camara.cpp">
       <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Archivos de código fuente\ClasesCarProj</Filter>
+    </ClCompile>
     <ClCompile Include="UIButton.cpp">
-      <Filter>Archivos de código fuente</Filter>
+      <Filter>Archivos de código fuente\ClasesCarProj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
