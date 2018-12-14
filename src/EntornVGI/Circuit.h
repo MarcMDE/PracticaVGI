@@ -29,6 +29,7 @@ public:
 	Vector3 CalcPosition(float f);
 	Vector3 CalcDirection(float f);
 	void CalcDirPos(float f, int c, Vector3 & direction, Vector3 & position);
+	Circuits GetCurrCircuit();
 	
 	void Load(Circuits c);
 

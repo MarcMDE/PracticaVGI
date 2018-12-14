@@ -35,12 +35,32 @@ bool UIButton::IsClicked(int x, int y) const
 
 void UIButton::Draw() const
 {
+	if (m_selected)
+	{
+		//glColor3f(1.0f, 0.0f, 0.0f); // Red
+		glBegin(GL_QUADS);
+			glVertex2f(m_posX + m_w / 2 + m_selectOffset, m_posY + m_h / 2 + m_selectOffset);
+			glVertex2f(m_posX - m_w / 2 - m_selectOffset, m_posY + m_h / 2 + m_selectOffset);
+			glVertex2f(m_posX - m_w / 2 - m_selectOffset, m_posY - m_h / 2 - m_selectOffset);
+			glVertex2f(m_posX + m_w / 2 + m_selectOffset, m_posY - m_h / 2 - m_selectOffset);
+		glEnd();
+		//glColor3f(1.0f, 0.0f, 0.0f); // Red
+	}
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glBegin(GL_QUADS);
-	//glColor3f(1.0f, 0.0f, 0.0f); // Red
-	glTexCoord2f(1.0, 0.0); glVertex2f(m_posX + m_w / 2, m_posY + m_h / 2);
-	glTexCoord2f(0.0, 0.0); glVertex2f(m_posX - m_w / 2, m_posY + m_h / 2);
-	glTexCoord2f(0.0, 1.0); glVertex2f(m_posX - m_w / 2, m_posY - m_h / 2);
-	glTexCoord2f(1.0, 1.0); glVertex2f(m_posX + m_w / 2, m_posY - m_h / 2);
+		glTexCoord2f(1.0, 0.0); glVertex2f(m_posX + m_w / 2, m_posY + m_h / 2);
+		glTexCoord2f(0.0, 0.0); glVertex2f(m_posX - m_w / 2, m_posY + m_h / 2);
+		glTexCoord2f(0.0, 1.0); glVertex2f(m_posX - m_w / 2, m_posY - m_h / 2);
+		glTexCoord2f(1.0, 1.0); glVertex2f(m_posX + m_w / 2, m_posY - m_h / 2);
 	glEnd();
+}
+
+void UIButton::Select()
+{
+	m_selected = true;
+}
+
+void UIButton::Unselect()
+{
+	m_selected = false;
 }

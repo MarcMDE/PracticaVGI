@@ -295,6 +295,90 @@ void PracticaCotxe::DrawUIElement(CColor color, int posX, int posY, int width, i
 	glDisable(GL_BLEND);
 }
 
+void PracticaCotxe::OnButtonClickInici(B_INICI b)
+{
+	switch (b)
+	{
+	case START:
+		m_currScreen = SELECCIO;
+		break;
+	case EXIT:
+		// TODO: EXIT
+		break;
+	default:
+		break;
+	}
+}
+
+void PracticaCotxe::OnButtonClickSelec(B_SELEC b)
+{
+	for (int i = 0; i < BUTTONS_SELEC; i++) m_buttonsSelec[i].Unselect();
+
+	m_buttonsSelec[b].Select();
+
+	switch (b)
+	{
+	case P1:
+		m_nJugadors = 1;
+		break;
+	case P2:
+		m_nJugadors = 2;
+		break;
+	case P3:
+		m_nJugadors = 3;
+		break;
+	case P4:
+		m_nJugadors = 4;
+		break;
+	case C1:
+		if (m_circuit.GetCurrCircuit() != CIRCUIT_1)
+		{
+			m_circuit.Load(CIRCUIT_1);
+		}
+		break;
+	case C2:
+		if (m_circuit.GetCurrCircuit() != CIRCUIT_2)
+		{
+			m_circuit.Load(CIRCUIT_2);
+		}
+		break;
+	case C3:
+		if (m_circuit.GetCurrCircuit() != CIRCUIT_4)
+		{
+			m_circuit.Load(CIRCUIT_4);
+		}
+		break;
+	case C4:
+
+		if (m_circuit.GetCurrCircuit() != CIRCUIT_6)
+		{
+			m_circuit.Load(CIRCUIT_6);
+		}
+
+		break;
+	case NEXT:
+
+		m_buttonsSelec[b].Unselect();
+		m_currScreen = GAMEPLAY;
+
+		break;
+	default:
+		break;
+	}
+}
+
+void PracticaCotxe::OnButtonClickPause(B_PAUSE b)
+{
+	switch (b)
+	{
+	case EXITB:
+		m_currScreen = INICI;
+		break;
+	default:
+		break;
+	}
+}
+
 void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 {
 	// Assignació de les variables de color i reflexió als valors de les variables per paràmetre
@@ -537,14 +621,40 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 
 void PracticaCotxe::Update()
 {
-	if (!m_isPaused)
+	switch (m_currScreen)
 	{
-		Vector3 dir, pos;
-		for (int i = 0; i < m_nJugadors; i++)
+	case INICI:
+
+		for (int i = 0; i < BUTTONS_INICI; i++)
 		{
-			m_circuit.CalcDirPos(m_cars[i].GetProgress(), i, dir, pos);
-			m_cars[i].Move(pos, dir);
+
 		}
+
+		break;
+	case SELECCIO:
+
+
+
+		break;
+	case GAMEPLAY:
+
+		if (!m_isPaused)
+		{
+			Vector3 dir, pos;
+			for (int i = 0; i < m_nJugadors; i++)
+			{
+				m_circuit.CalcDirPos(m_cars[i].GetProgress(), i, dir, pos);
+				m_cars[i].Move(pos, dir);
+			}
+		}
+		else
+		{
+
+		}
+
+		break;
+	default:
+		break;
 	}
 }
 
@@ -568,7 +678,6 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 		else if (nJugadors == 2) { // For 2 players
 
 								   // Player 1 ==================
-
 								   // Inici
 			m_w[0][0] = 0;
 			m_h[0][0] = 0;
