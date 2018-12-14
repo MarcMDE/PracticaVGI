@@ -15,6 +15,7 @@
 #include "stdafx.h"
 #include "visualitzacio.h"
 #include "escena.h"
+#include <string>
 
 // TEXTURES: Vector de noms de textura
 GLuint textures[NUM_MAX_TEXTURES]={0,1,2,3,4,5,6,7,8,9};
@@ -478,7 +479,7 @@ void FonsB()
 //					BMP, JPG, TIFF, TGA, GIF, i d'altres suportats per OpenIL
 //		- texID: Identificador dins la taula textures on volem
 //                assignar la imatge
-bool loadIMA(char * filename, int texID)
+bool loadIMA(std::string filename, int texID)
 {
 	FILE *file = NULL;
 	int errno = 0;
@@ -486,7 +487,7 @@ bool loadIMA(char * filename, int texID)
 
 // Open the image file for reading
 //  file=fopen(nomf,"r");					// Funció Visual Studio 6.0
-	errno = fopen_s(&file, filename, "rb");		// Funció Visual 2010
+	errno = fopen_s(&file, filename.c_str(), "rb");		// Funció Visual 2010
 
 // If the file is empty (or non existent) print an error and return false
 // if (file == NULL)
@@ -500,7 +501,7 @@ bool loadIMA(char * filename, int texID)
 	fclose(file);
 
 // strcpy_s: Conversió variable char* --> char[255]
-	strcpy_s(szFilePath, filename); // Copiar path sencer amb nom de fitxer.
+	strcpy_s(szFilePath, filename.c_str()); // Copiar path sencer amb nom de fitxer.
 
 // reinterpret_cast: Funció de converió d'una variable char * -> wchar_t *
 	wchar_t *nomf = reinterpret_cast <wchar_t *> (szFilePath);

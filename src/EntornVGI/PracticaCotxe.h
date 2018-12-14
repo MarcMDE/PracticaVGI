@@ -28,7 +28,7 @@ const int DAR[MAX_JUGADORS] = { 49, 52, 55, 48 }; // 1, 4, 7, 0
 enum SCREENS { INICI=0, SELECCIO=1, GAMEPLAY=2 };
 enum B_INICI { START=0, EXIT=1 };
 enum B_SELEC { P1=0, P2, P3, P4, C1, C2, C3, C4, NEXT };
-enum B_PAUSE { EXITB=0 };
+enum B_PAUSE { BOOST=0, LAP, EXITB };
 
 class PracticaCotxe
 {
@@ -42,7 +42,7 @@ private:
 
 	UIButton m_buttonsInici[BUTTONS_INICI];
 	UIButton m_buttonsSelec[BUTTONS_SELEC];
-	UIButton m_buttonsPause[BUTTONS_PAUSE];
+	UIButton m_buttonsGameplay[BUTTONS_PAUSE];
 
 	//Car m_car = Car(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
 	Car *m_cars;

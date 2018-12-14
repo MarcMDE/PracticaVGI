@@ -36,6 +36,8 @@
 #include "visualitzacio.h"	// Include funcions de projeció i il.luminació
 #include "escena.h"			// Include funcions d'objectes OpenGL
 
+#include <string>
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -3739,10 +3741,27 @@ void CEntornVGIView::OnPracticaCotxe()
 		loadIMA("textures/ProjecteCotxe/test.bmp", TXT_TEST);
 
 		// Carregar textura boto inici
-		loadIMA("textures/ProjecteCotxe/btn_inici.png", TXT_BOTO_INICI);
-		loadIMA("textures/ProjecteCotxe/Playbtn.png", TXT_BOTO_PLAY);
-		loadIMA("textures/ProjecteCotxe/quitbtn.png", TXT_BOTO_QUIT);
-		loadIMA("textures/ProjecteCotxe/continue.png", TXT_BOTO_CONTINUE);
+
+		for (int i = 0; i < BUTTONS_INICI; i++)
+		{
+			string path = "textures/ProjecteCotxe/b_inici_" + i;
+			path = path + ".png";
+			loadIMA(path, TXT_BUTTONS_INICI);
+		}
+
+		for (int i = 0; i < BUTTONS_SELEC; i++)
+		{
+			/*string path = "textures/ProjecteCotxe/b_selec_" + i;
+			path = path + ".png";
+			loadIMA(path.c_str, TXT_BUTTONS_SELEC);*/
+		}
+
+		for (int i = 0; i < BUTTONS_PAUSE; i++)
+		{
+			//string path = "textures/ProjecteCotxe/b_gameplay_" + i;
+			//path = path + ".png";
+			//loadIMA(&path.c_str, TXT_BUTTONS_GAMEPLAY);
+		}
 
 
 		// Parametres textures ----

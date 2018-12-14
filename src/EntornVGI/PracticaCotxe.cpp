@@ -438,7 +438,7 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 	//DrawRec(&m_mainObj);
 
-	/*
+	
 	glBindTexture(GL_TEXTURE_2D, TXT_TEST);
 	glutSolidCube(10);
 	glBegin(GL_QUADS);
@@ -449,7 +449,7 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 		glTexCoord2f(1.0, 0.0); glVertex3f(2.0, -2.0, 0.0);
 
 	glEnd();
-	*/
+	
 
 	// Enviar les comandes gràfiques a pantalla
 	glFlush();
@@ -468,31 +468,39 @@ void PracticaCotxe::DrawInterface(int w, int h)
 	switch (m_currScreen)
 	{
 	case INICI:
-		// TODO: Dibuixar boto inici i boto sortir
 
-		// Exemple de boto d'inici
-		DrawUIElement(TXT_BOTO_QUIT, w/2 ,h/1.1 - 250, 300, 100);
-		DrawUIElement(TXT_BOTO_PLAY, w/2, h /1.5 - 250, 300, 100);
-
+		// TODO: Dibuixar titol
+		//DrawUIElement(TXT_TITLE, w/2, h /2 - 250, 400, 200);
+		
+		for(int i=0; i<BUTTONS_INICI; i++)
+		{
+			m_buttonsInici[i].Draw();
+		}
 
 		break;
 	case SELECCIO:
-		// TODO: Dibuixar 4 botons seleccio circuit i 4 botons seleccio jugadors + etiquetes Circuit i Jugadors
+
+		// TODO: Dibuixar etiquetes Circuit i Jugadors
+
+		for (int i = 0; i < BUTTONS_SELEC; i++)
+		{
+			m_buttonsSelec[i].Draw();
+		}
 
 		break;
 	case GAMEPLAY:
 		// TODO: Dibuixar botons per cada jugador (accions restants i voltes que porten (les voltes encara no les feu))
 
-		//DrawUIElement(TXT_BOTO_INICI, w/2, h/2, 256, 80);
-		//DrawUIElement({1, 0, 0, 1}, w / 2, h / 2 + 150, 64, 64);
+		for (int i = 0; i < BUTTONS_SELEC; i++)
+		{
+			m_buttonsSelec[i].Draw();
+		}
 
 		if (m_isPaused)
 		{
 
-			DrawUIElement(TXT_BOTO_QUIT, w / 2, h / 1.5 - 250, 300, 100);
-			// Fons gris quan pantalla pausa
-			// TODO: Arreglar transparencia (no funciona :S)
 			DrawUIElement({ 0.2f, 0.2f, 0.2f, 0.6f }, w / 2, h / 2, w, h);
+			// DRAW exit button
 
 			// TODO: Dibuixar text pausa
 		}
@@ -760,12 +768,12 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 
 			m_cars[i].Init(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
 
-			m_cars[i].SetBody(OBJ_CAR+i, TXT_CAR, Vector3().Zero(), Vector3().Zero(), Vector3().One());
+			m_cars[i].SetBody(OBJ_CAR+i, -1, Vector3().Zero(), Vector3().Zero(), Vector3().One());
 
-			m_cars[i].SetWheel(0, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
-			m_cars[i].SetWheel(1, OBJ_WHEEL, TXT_WHEEL, Vector3(14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
-			m_cars[i].SetWheel(2, OBJ_WHEEL, TXT_WHEEL, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
-			m_cars[i].SetWheel(3, OBJ_WHEEL, TXT_WHEEL, Vector3(-14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+			m_cars[i].SetWheel(0, OBJ_WHEEL, -1, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
+			m_cars[i].SetWheel(1, OBJ_WHEEL, -1, Vector3(14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+			m_cars[i].SetWheel(2, OBJ_WHEEL, -1, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
+			m_cars[i].SetWheel(3, OBJ_WHEEL, -1, Vector3(-14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
 
 			m_circuit.SetChild(i, &m_cars[i]);
 		}
