@@ -2048,11 +2048,11 @@ void CEntornVGIView::OnLButtonDown(UINT nFlags, CPoint point)
 
 		break;
 	case SELECCIO:
-
+		practicaCotxe.OnButtonClickSelec(point.x, point.y);
 		break;
 
 	case GAMEPLAY:
-
+		practicaCotxe.OnButtonClickPause(point.x, point.y);
 		break;
 
 	default:
@@ -3764,10 +3764,10 @@ void CEntornVGIView::OnPracticaCotxe()
 		loadIMA("textures/ProjecteCotxe/b_inici_0.png", TXT_B_START);
 		loadIMA("textures/ProjecteCotxe/b_inici_1.png", TXT_B_EXIT);
 		loadIMA("textures/ProjecteCotxe/b_next.png", TXT_B_NEXT);
-		//loadIMA("textures/ProjecteCotxe/test.bmp", TXT_B_SELEC_PC_1);
-		//loadIMA("textures/ProjecteCotxe/test.bmp", TXT_B_SELEC_PC_2);
-		//loadIMA("textures/ProjecteCotxe/test.bmp", TXT_B_SELEC_PC_3);
-		//loadIMA("textures/ProjecteCotxe/test.bmp", TXT_B_SELEC_PC_4);
+		loadIMA("textures/ProjecteCotxe/b_1.png", TXT_B_SELEC_PC_1);
+		loadIMA("textures/ProjecteCotxe/b_2.png", TXT_B_SELEC_PC_2);
+		loadIMA("textures/ProjecteCotxe/b_3.png", TXT_B_SELEC_PC_3);
+		loadIMA("textures/ProjecteCotxe/b_4.png", TXT_B_SELEC_PC_4);
 
 		// Parametres textures ----
 			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
