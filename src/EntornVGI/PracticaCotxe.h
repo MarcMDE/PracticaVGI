@@ -42,7 +42,7 @@ private:
 
 	UIButton m_buttonsInici[BUTTONS_INICI];
 	UIButton m_buttonsSelec[BUTTONS_SELEC];
-	UIButton m_buttonsGameplay[BUTTONS_PAUSE];
+	UIButton m_buttonsPause[BUTTONS_PAUSE];
 
 	//Car m_car = Car(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
 	Car *m_cars;
@@ -73,9 +73,6 @@ private:
 	void DrawUIElement(int texture, int posX, int posY, int width, int heigth);
 	void DrawUIElement(CColor color, int posX, int posY, int width, int heigth);
 
-	void OnButtonClickInici(B_INICI b);
-	void OnButtonClickSelec(B_SELEC b);
-	void OnButtonClickPause(B_PAUSE b);
 
 public:
 	PracticaCotxe();
@@ -88,5 +85,11 @@ public:
 	void Procesa_Teclat(UINT nChar, UINT nRepCnt);
 	void Update();
 	void setNJugadors(int nJugadors, int w, int h);
+
+	SCREENS GetCurrScreen();
+
+	void OnButtonClickInici(int x, int y);
+	void OnButtonClickSelec(int x, int y);
+	void OnButtonClickPause(int x, int y);
 };
 

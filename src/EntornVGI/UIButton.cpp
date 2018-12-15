@@ -11,13 +11,14 @@ UIButton::~UIButton()
 {
 }
 
-void UIButton::Set(int x, int y, int w, int h, int t)
+void UIButton::Set(int x, int y, int w, int h, int t, bool s)
 {
 	m_posX = x;
 	m_posY = y;
 	m_w = w;
 	m_h = h;
 	m_texture = t;
+	m_selected = s;
 }
 
 bool UIButton::IsClicked(int x, int y) const
@@ -46,6 +47,7 @@ void UIButton::Draw() const
 		glEnd();
 		//glColor3f(1.0f, 0.0f, 0.0f); // Red
 	}
+	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 	glBegin(GL_QUADS);
 		glTexCoord2f(1.0, 0.0); glVertex2f(m_posX + m_w / 2, m_posY + m_h / 2);
@@ -53,6 +55,7 @@ void UIButton::Draw() const
 		glTexCoord2f(0.0, 1.0); glVertex2f(m_posX - m_w / 2, m_posY - m_h / 2);
 		glTexCoord2f(1.0, 1.0); glVertex2f(m_posX + m_w / 2, m_posY - m_h / 2);
 	glEnd();
+	glDisable(GL_TEXTURE_2D);
 }
 
 void UIButton::Select()

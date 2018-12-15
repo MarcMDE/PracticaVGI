@@ -57,6 +57,14 @@ PracticaCotxe::~PracticaCotxe()
 
 void PracticaCotxe::Init(int w, int h)
 {
+	m_buttonsInici[START].Set(w / 2, h / 2, 200, 75, TXT_B_START, false);
+	m_buttonsInici[EXIT].Set(w / 2, h / 2 + 180, 200, 75, TXT_B_EXIT, false);
+	m_buttonsSelec[C1].Set(200, 100, 75, 75, TXT_B_SELEC_PC_1, false);
+	m_buttonsSelec[C2].Set(200, 100, 75, 75, TXT_B_SELEC_PC_1, false);
+	m_buttonsSelec[C3].Set(200, 100, 75, 75, TXT_B_SELEC_PC_1, false);
+	m_buttonsSelec[C4].Set(200, 100, 75, 75, TXT_B_SELEC_PC_1, false);
+	m_buttonsSelec[NEXT].Set(200, 100, 75, 75, TXT_B_NEXT, false);
+
 	m_circuit.Init(4);
 	m_circuit.Load(CIRCUIT_2);
 
@@ -299,87 +307,126 @@ void PracticaCotxe::DrawUIElement(CColor color, int posX, int posY, int width, i
 	glDisable(GL_BLEND);
 }
 
-void PracticaCotxe::OnButtonClickInici(B_INICI b)
+void PracticaCotxe::OnButtonClickInici(int x, int y)
 {
-	switch (b)
+	B_INICI b;
+
+	int i = 0;
+	while (i < BUTTONS_INICI && !m_buttonsInici[i].IsClicked(x, y))
 	{
-	case START:
-		m_currScreen = SELECCIO;
-		break;
-	case EXIT:
-		// TODO: EXIT
-		break;
-	default:
-		break;
+		i++;
+	}
+
+	if (i < BUTTONS_INICI)
+	{
+		b = (B_INICI)i;
+
+		switch (b)
+		{
+		case START:
+			m_currScreen = SELECCIO;
+			break;
+		case EXIT:
+			// TODO: EXIT
+			break;
+		default:
+			break;
+		}
+	}
+
+}
+
+void PracticaCotxe::OnButtonClickSelec(int x, int y)
+{
+	B_SELEC b;
+
+	int i = 0;
+	while (i < BUTTONS_SELEC && !m_buttonsSelec[i].IsClicked(x, y))
+	{
+		i++;
+	}
+
+	if (i < BUTTONS_SELEC)
+	{
+		b = (B_SELEC)i;
+
+		for (int i = 0; i < BUTTONS_SELEC; i++) m_buttonsSelec[i].Unselect();
+
+		m_buttonsSelec[b].Select();
+
+		switch (b)
+		{
+		case P1:
+			m_nJugadors = 1;
+			break;
+		case P2:
+			m_nJugadors = 2;
+			break;
+		case P3:
+			m_nJugadors = 3;
+			break;
+		case P4:
+			m_nJugadors = 4;
+			break;
+		case C1:
+			if (m_circuit.GetCurrCircuit() != CIRCUIT_1)
+			{
+				m_circuit.Load(CIRCUIT_1);
+			}
+			break;
+		case C2:
+			if (m_circuit.GetCurrCircuit() != CIRCUIT_2)
+			{
+				m_circuit.Load(CIRCUIT_2);
+			}
+			break;
+		case C3:
+			if (m_circuit.GetCurrCircuit() != CIRCUIT_4)
+			{
+				m_circuit.Load(CIRCUIT_4);
+			}
+			break;
+		case C4:
+
+			if (m_circuit.GetCurrCircuit() != CIRCUIT_6)
+			{
+				m_circuit.Load(CIRCUIT_6);
+			}
+
+			break;
+		case NEXT:
+
+			m_buttonsSelec[b].Unselect();
+			m_currScreen = GAMEPLAY;
+
+			break;
+		default:
+			break;
+		}
 	}
 }
 
-void PracticaCotxe::OnButtonClickSelec(B_SELEC b)
+void PracticaCotxe::OnButtonClickPause(int x, int y)
 {
-	for (int i = 0; i < BUTTONS_SELEC; i++) m_buttonsSelec[i].Unselect();
+	B_PAUSE b;
 
-	m_buttonsSelec[b].Select();
-
-	switch (b)
+	int i = 0;
+	while (i < BUTTONS_PAUSE && !m_buttonsPause[i].IsClicked(x, y))
 	{
-	case P1:
-		m_nJugadors = 1;
-		break;
-	case P2:
-		m_nJugadors = 2;
-		break;
-	case P3:
-		m_nJugadors = 3;
-		break;
-	case P4:
-		m_nJugadors = 4;
-		break;
-	case C1:
-		if (m_circuit.GetCurrCircuit() != CIRCUIT_1)
-		{
-			m_circuit.Load(CIRCUIT_1);
-		}
-		break;
-	case C2:
-		if (m_circuit.GetCurrCircuit() != CIRCUIT_2)
-		{
-			m_circuit.Load(CIRCUIT_2);
-		}
-		break;
-	case C3:
-		if (m_circuit.GetCurrCircuit() != CIRCUIT_4)
-		{
-			m_circuit.Load(CIRCUIT_4);
-		}
-		break;
-	case C4:
-
-		if (m_circuit.GetCurrCircuit() != CIRCUIT_6)
-		{
-			m_circuit.Load(CIRCUIT_6);
-		}
-
-		break;
-	case NEXT:
-
-		m_buttonsSelec[b].Unselect();
-		m_currScreen = GAMEPLAY;
-
-		break;
-	default:
-		break;
+		i++;
 	}
-}
 
-void PracticaCotxe::OnButtonClickPause(B_PAUSE b)
-{
-	switch (b)
+	if (i < BUTTONS_PAUSE)
 	{
-	case EXITB:
-		m_currScreen = INICI;
-		break;
-	default:
-		break;
+		b = (B_PAUSE)i;
+		switch (b)
+		{
+		case EXITB:
+			m_currScreen = INICI;
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -452,6 +499,8 @@ void PracticaCotxe::DrawInterface(int w, int h)
 	glDisable(GL_SCISSOR_TEST);
 	glViewport(0, 0, w, h);
 
+	glColor3f(1, 1, 1);
+
 	glDisable(GL_TEXTURE_2D);
 	GLfloat ambientgi[] = { 1,1,1,1 };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientgi);
@@ -461,7 +510,7 @@ void PracticaCotxe::DrawInterface(int w, int h)
 	case INICI:
 
 		// TODO: Dibuixar titol
-		//DrawUIElement(TXT_TITLE, w/2, h /2 - 250, 400, 200);
+		DrawUIElement(TXT_TITLE,w/2, h /2 - 200, 400, 200);
 		
 		for(int i=0; i<BUTTONS_INICI; i++)
 		{
@@ -616,15 +665,8 @@ void PracticaCotxe::Update()
 	{
 	case INICI:
 
-		for (int i = 0; i < BUTTONS_INICI; i++)
-		{
-
-		}
-
 		break;
 	case SELECCIO:
-
-
 
 		break;
 	case GAMEPLAY:
@@ -765,4 +807,9 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 		Update();
 	}
 
+}
+
+SCREENS PracticaCotxe::GetCurrScreen()
+{
+	return m_currScreen;
 }

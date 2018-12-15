@@ -2041,6 +2041,23 @@ void CEntornVGIView::Teclat_TransTraslada(UINT nChar, UINT nRepCnt)
 // OnLButtonDown: Funció que es crida quan s'apreta el botó esquerra del mouse.
 void CEntornVGIView::OnLButtonDown(UINT nFlags, CPoint point)
 {
+	switch (practicaCotxe.GetCurrScreen())
+	{
+	case INICI:
+		practicaCotxe.OnButtonClickInici(point.x, point.y);
+
+		break;
+	case SELECCIO:
+
+		break;
+
+	case GAMEPLAY:
+
+		break;
+
+	default:
+		break;
+	}
 // TODO: Agregue aquí su código de controlador de mensajes o llame al valor predeterminado
 
 // Entorn VGI: Detectem en quina posició s'ha apretat el botó esquerra del
@@ -3741,28 +3758,16 @@ void CEntornVGIView::OnPracticaCotxe()
 		loadIMA("textures/ProjecteCotxe/test.bmp", TXT_TEST);
 
 		// Carregar textura boto inici
-
-		for (int i = 0; i < BUTTONS_INICI; i++)
-		{
-			string path = "textures/ProjecteCotxe/b_inici_" + i;
-			path = path + ".png";
-			loadIMA(path, TXT_BUTTONS_INICI);
-		}
-
-		for (int i = 0; i < BUTTONS_SELEC; i++)
-		{
-			/*string path = "textures/ProjecteCotxe/b_selec_" + i;
-			path = path + ".png";
-			loadIMA(path.c_str, TXT_BUTTONS_SELEC);*/
-		}
-
-		for (int i = 0; i < BUTTONS_PAUSE; i++)
-		{
-			//string path = "textures/ProjecteCotxe/b_gameplay_" + i;
-			//path = path + ".png";
-			//loadIMA(&path.c_str, TXT_BUTTONS_GAMEPLAY);
-		}
-
+		loadIMA("textures/ProjecteCotxe/titol.png", TXT_TITLE);
+		loadIMA("textures/ProjecteCotxe/lap.png", TXT_LAP);
+		loadIMA("textures/ProjecteCotxe/boost.png", TXT_BOOST);
+		loadIMA("textures/ProjecteCotxe/b_inici_0.png", TXT_B_START);
+		loadIMA("textures/ProjecteCotxe/b_inici_1.png", TXT_B_EXIT);
+		loadIMA("textures/ProjecteCotxe/b_next.png", TXT_B_NEXT);
+		//loadIMA("textures/ProjecteCotxe/test.bmp", TXT_B_SELEC_PC_1);
+		//loadIMA("textures/ProjecteCotxe/test.bmp", TXT_B_SELEC_PC_2);
+		//loadIMA("textures/ProjecteCotxe/test.bmp", TXT_B_SELEC_PC_3);
+		//loadIMA("textures/ProjecteCotxe/test.bmp", TXT_B_SELEC_PC_4);
 
 		// Parametres textures ----
 			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
