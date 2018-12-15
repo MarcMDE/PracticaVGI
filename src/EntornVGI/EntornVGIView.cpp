@@ -3755,7 +3755,7 @@ void CEntornVGIView::OnPracticaCotxe()
 		ObOBJ->LoadModel("res/models/basic_wheel.obj", OBJ_WHEEL, true);	// Carregar model obj roda amb textura
 
 		// Carregar textura test
-		loadIMA("textures/ProjecteCotxe/test.bmp", TXT_TEST);
+		loadIMA("textures/ProjecteCotxe/skybox_01.png", TXT_TEST);
 
 		// Carregar textura boto inici
 		loadIMA("textures/ProjecteCotxe/titol.png", TXT_TITLE);
