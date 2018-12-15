@@ -76,6 +76,8 @@ void PracticaCotxe::Init(int w, int h)
 
 	float dist = m_circuit.getDistance();
 
+	m_guanyador = 0;
+
 	setNJugadors(4, w, h, dist);
 	
 	// Musica de fons... es para a 3 segons de reproducció, si prem 2 vegades M es reprodueix be
@@ -683,6 +685,8 @@ void PracticaCotxe::Update()
 				if (m_cars[i].getLaps() >= MAX_LAPS) {
 
 					m_isPaused = true;
+					m_music.stop();
+					m_guanyador = i + 1;
 
 				}
 			}

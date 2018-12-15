@@ -9,7 +9,7 @@
 
 #include "Sound.h"
 
-#define PC_DEVELOP
+//#define PC_DEVELOP
 
 #define MAX_JUGADORS 4
 #define MAX_LAPS 3
@@ -59,6 +59,8 @@ private:
 
 	float m_carProgress;
 	float m_carInc;
+
+	int m_guanyador;
 
 	SkyBox m_skyBox = SkyBox(5000, TXT_TEST);
 
