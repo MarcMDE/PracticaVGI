@@ -16,7 +16,7 @@ public:
 	UIButton();
 	~UIButton();
 
-	void Set(int x, int y, int w, int h, int t);
+	void Set(int x, int y, int w, int h, int t, bool s);
 	bool IsClicked(int x, int y) const;
 	void Draw() const;
 	void Select();

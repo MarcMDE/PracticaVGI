@@ -59,9 +59,17 @@
 
 // Textures
 #define TXT_TEST 6
-#define TXT_BUTTONS_INICI 7
-#define TXT_BUTTONS_SELEC 9
-#define TXT_BUTTONS_GAMEPLAY 19
+#define TXT_TITLE 7
+#define TXT_LAP 8
+#define TXT_BOOST 9
+#define TXT_B_START 10
+#define TXT_B_EXIT 11
+#define TXT_B_NEXT 12
+#define TXT_B_SELEC_PC_1 13
+#define TXT_B_SELEC_PC_2 14
+#define TXT_B_SELEC_PC_3 15
+#define TXT_B_SELEC_PC_4 16
+
 // -------------- VGI: Definició dels valors del pla near i far del Volum de Visualització en Perspectiva
 const int p_near=1;
 const int p_far=50000;
@@ -74,7 +82,7 @@ const int p_far=50000;
 
 // -------------- VGI: CONSTANTS TEXTURES
 // Nombre màxim de textures
-#define NUM_MAX_TEXTURES 10
+#define NUM_MAX_TEXTURES 25
 
 // Tipus de textures
 #define CAP ' '
