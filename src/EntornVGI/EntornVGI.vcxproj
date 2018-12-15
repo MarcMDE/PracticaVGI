@@ -190,6 +190,7 @@
     <ClInclude Include="Circuit.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="PowerUp.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Spline.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="ChildFrm.cpp" />
     <ClCompile Include="Circuit.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Spline.cpp" />
