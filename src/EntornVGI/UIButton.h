@@ -4,7 +4,7 @@
 class UIButton
 {
 private:
-	const int m_selectOffset = 5;
+	const int m_selectOffset = 8;
 	int m_posX;
 	int m_posY;
 	int m_w;
