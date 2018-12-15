@@ -3761,6 +3761,8 @@ void CEntornVGIView::OnPracticaCotxe()
 		loadIMA("textures/ProjecteCotxe/titol.png", TXT_TITLE);
 		loadIMA("textures/ProjecteCotxe/lap.png", TXT_LAP);
 		loadIMA("textures/ProjecteCotxe/boost.png", TXT_BOOST);
+		loadIMA("textures/ProjecteCotxe/circuit.png", TXT_CIRCUIT);
+		loadIMA("textures/ProjecteCotxe/jugadors.png", TXT_PLAYERS);
 		loadIMA("textures/ProjecteCotxe/b_inici_0.png", TXT_B_START);
 		loadIMA("textures/ProjecteCotxe/b_inici_1.png", TXT_B_EXIT);
 		loadIMA("textures/ProjecteCotxe/b_next.png", TXT_B_NEXT);

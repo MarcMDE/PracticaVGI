@@ -59,14 +59,14 @@ void PracticaCotxe::Init(int w, int h)
 {
 	m_buttonsInici[START].Set(w / 2, h / 2, 200, 75, TXT_B_START, false);
 	m_buttonsInici[EXIT].Set(w / 2, h / 2 + 180, 200, 75, TXT_B_EXIT, false);
-	m_buttonsSelec[P1].Set(w-400, 100, 75, 75, TXT_B_SELEC_PC_1, true);
-	m_buttonsSelec[P2].Set(w-300, 100, 75, 75, TXT_B_SELEC_PC_2, false);
-	m_buttonsSelec[P3].Set(w-200, 100, 75, 75, TXT_B_SELEC_PC_3, false);
-	m_buttonsSelec[P4].Set(w-100, 100, 75, 75, TXT_B_SELEC_PC_4, false);
-	m_buttonsSelec[C1].Set(200, h-100, 75, 75, TXT_B_SELEC_PC_1, true);
-	m_buttonsSelec[C2].Set(300, h-100, 75, 75, TXT_B_SELEC_PC_2, false);
-	m_buttonsSelec[C3].Set(400, h-100, 75, 75, TXT_B_SELEC_PC_3, false);
-	m_buttonsSelec[C4].Set(500, h-100, 75, 75, TXT_B_SELEC_PC_4, false);
+	m_buttonsSelec[P1].Set(400, 100, 75, 75, TXT_B_SELEC_PC_1, true);
+	m_buttonsSelec[P2].Set(500, 100, 75, 75, TXT_B_SELEC_PC_2, false);
+	m_buttonsSelec[P3].Set(600, 100, 75, 75, TXT_B_SELEC_PC_3, false);
+	m_buttonsSelec[P4].Set(700, 100, 75, 75, TXT_B_SELEC_PC_4, false);
+	m_buttonsSelec[C1].Set(400, h-100, 75, 75, TXT_B_SELEC_PC_1, true);
+	m_buttonsSelec[C2].Set(500, h-100, 75, 75, TXT_B_SELEC_PC_2, false);
+	m_buttonsSelec[C3].Set(600, h-100, 75, 75, TXT_B_SELEC_PC_3, false);
+	m_buttonsSelec[C4].Set(700, h-100, 75, 75, TXT_B_SELEC_PC_4, false);
 	m_buttonsSelec[NEXT].Set(w-200, h/2, 200, 75, TXT_B_NEXT, false);
 
 	m_circuit.Init(4);
@@ -535,6 +535,8 @@ void PracticaCotxe::DrawInterface(int w, int h)
 	case SELECCIO:
 
 		// TODO: Dibuixar etiquetes Circuit i Jugadors
+		DrawUIElement(TXT_PLAYERS, 150, 100, 200, 75);
+		DrawUIElement(TXT_CIRCUIT, 150, h - 100, 200, 75);
 
 		for (int i = 0; i < BUTTONS_SELEC; i++)
 		{

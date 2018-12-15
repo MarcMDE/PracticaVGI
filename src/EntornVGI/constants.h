@@ -62,13 +62,15 @@
 #define TXT_TITLE 7
 #define TXT_LAP 8
 #define TXT_BOOST 9
-#define TXT_B_START 10
-#define TXT_B_EXIT 11
-#define TXT_B_NEXT 12
-#define TXT_B_SELEC_PC_1 13
-#define TXT_B_SELEC_PC_2 14
-#define TXT_B_SELEC_PC_3 15
-#define TXT_B_SELEC_PC_4 16
+#define TXT_CIRCUIT 10
+#define TXT_PLAYERS 11
+#define TXT_B_START 12
+#define TXT_B_EXIT 13
+#define TXT_B_NEXT 14
+#define TXT_B_SELEC_PC_1 15
+#define TXT_B_SELEC_PC_2 16
+#define TXT_B_SELEC_PC_3 17
+#define TXT_B_SELEC_PC_4 18
 
 // -------------- VGI: Definició dels valors del pla near i far del Volum de Visualització en Perspectiva
 const int p_near=1;

@@ -109,6 +109,11 @@ Circuits Circuit::GetCurrCircuit()
 	return m_index;
 }
 
+void Circuit::SetCarrils(int c)
+{
+	m_carrils = c;
+}
+
 void Circuit::Load(Circuits c)
 {
 	m_index = c;
