@@ -12,6 +12,7 @@
 #define PC_DEVELOP
 
 #define MAX_JUGADORS 4
+#define MAX_LAPS 3
 
 #define BUTTONS_INICI 2
 #define BUTTONS_SELEC 9
@@ -84,7 +85,7 @@ public:
 	void DrawInterface(int w, int h);
 	void Procesa_Teclat(UINT nChar, UINT nRepCnt);
 	void Update();
-	void setNJugadors(int nJugadors, int w, int h);
+	void setNJugadors(int nJugadors, int w, int h, float dist);
 
 	SCREENS GetCurrScreen();
 
