@@ -1,11 +1,17 @@
 #include "stdafx.h"
 #include "Car.h"
 
-void Car::Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 scale)
+void Car::Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 scale, float dist)
 {
 	m_position = position;
 	m_rotation = rotation;
 	m_scale = scale;
+	m_laps = 0;
+
+	m_friction = 0;//dist / m_frictionC;
+	m_gravity = 0;// dist / m_gravityC;
+	m_boostSpeed = m_boostSpeedC / dist;
+	m_brakeSpeed = m_brakeSpeedC / dist;
 
 	m_direction = Vector3().Zero();
 	m_speed = 0;
@@ -42,13 +48,19 @@ void Car::SetBody(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 
 void Car::Move(Vector3 pos, Vector3 dir)
 {
 	m_progress += m_speed;
-	if (m_progress > 1) m_progress -= 1;
+	if (m_progress > 1) {
+
+		m_progress -= 1;
+		m_laps++;
+
+	}
+
 	if (m_progress < 0) m_progress += 1;
 	
 	//rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(dir), 0, 0);
 	//dir = Vector3().Zero();
-	Vector3 rotation = dir.GetAngles();
 	dir.Normalize();
+	Vector3 rotation = dir.GetAngles();
 	//rotation = rotation * RAD_TO_DEG;
 
 	//rotation = Vector3(Vector3(1, 0, 0).AngleXBtw(dir), 0, 0);
@@ -61,7 +73,7 @@ void Car::Move(Vector3 pos, Vector3 dir)
 	//rotation += Vector3(0, pi/2, 0);
 	//rotation -= Vector3(0, (pi / 2), 0);
 
-	if (dir.Y() < 0) rotation = Vector3(rotation.X(), rotation.Y(), -rotation.Z());
+	//if (dir.Y() < 0) rotation = Vector3(rotation.X(), rotation.Y(), -rotation.Z());
 	if (dir.Z() > 0) rotation = Vector3(-rotation.X(), rotation.Y(), rotation.Z());
 	//rotation = Vector3(rx, ry, rz).GetAngles();
 	
@@ -128,6 +140,13 @@ void Car::ResetProgress()
 void Car::AddBoost()
 {
 	if (m_boosts < m_maxBoosts) m_boosts++;
+}
+
+int Car::getLaps()
+{
+
+	return m_laps;
+
 }
 
 Car::~Car()

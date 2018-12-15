@@ -10,7 +10,7 @@ void PracticaCotxe::glTranslateV(const Vector3 & v)
 void PracticaCotxe::glRotateV(const Vector3 & v)
 {
 	glRotatef(v.X() * RAD_TO_DEG, 0, 1, 0);
-	//glRotatef(v.Z() * RAD_TO_DEG, 0, 0, 1);
+	//glRotatef(v.Y() * RAD_TO_DEG, 0, 0, 1);
 	//glRotatef(v.Z() * RAD_TO_DEG, 0, 0, 1);
 }
 
@@ -66,8 +66,9 @@ void PracticaCotxe::Init(int w, int h)
 	m_skyBox.SetChildsLength(1);
 	m_skyBox.SetChild(0, &m_circuit);
 
+	float dist = m_circuit.getDistance();
 
-	setNJugadors(4, w, h);
+	setNJugadors(4, w, h, dist);
 	
 	// Musica de fons... es para a 3 segons de reproducció, si prem 2 vegades M es reprodueix be
 	m_music.play();
@@ -636,6 +637,12 @@ void PracticaCotxe::Update()
 			{
 				m_circuit.CalcDirPos(m_cars[i].GetProgress(), i, dir, pos);
 				m_cars[i].Move(pos, dir);
+
+				if (m_cars[i].getLaps() >= MAX_LAPS) {
+
+					m_isPaused = true;
+
+				}
 			}
 		}
 		else
@@ -649,7 +656,7 @@ void PracticaCotxe::Update()
 	}
 }
 
-void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
+void PracticaCotxe::setNJugadors(int nJugadors, int w, int h, float dist) {
 
 	if (nJugadors <= MAX_JUGADORS) {
 
@@ -749,7 +756,7 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h) {
 
 		for (int i = 0; i < m_nJugadors; i++) {
 
-			m_cars[i].Init(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
+			m_cars[i].Init(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One(), dist);
 
 			m_cars[i].SetBody(OBJ_CAR+i, -1, Vector3().Zero(), Vector3().Zero(), Vector3().One());
 

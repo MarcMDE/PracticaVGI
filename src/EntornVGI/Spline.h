@@ -32,6 +32,7 @@ private:
 
 public:
 	Spline();
+	float getdistance();
 	void Load(string fileName);
 	void Debug(bool cp, int res) const;
 	~Spline();

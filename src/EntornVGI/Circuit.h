@@ -33,6 +33,8 @@ public:
 	
 	void Load(Circuits c);
 
+	float getDistance();
+
 	void Draw();
 };
 

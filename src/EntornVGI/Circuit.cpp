@@ -115,6 +115,13 @@ void Circuit::Load(Circuits c)
 	m_spline.Load(CircuitsFileNames[(int)m_index]);
 }
 
+float Circuit::getDistance()
+{
+	
+	return m_spline.getdistance();
+
+}
+
 void Circuit::Draw()
 {
 	float inc = 1.0f / CircuitsResolutions[(int)m_index];

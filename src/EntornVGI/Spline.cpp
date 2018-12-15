@@ -99,6 +99,13 @@ Spline::Spline()
 	m_size = 0;
 }
 
+float Spline::getdistance()
+{
+	
+	return m_distance;
+
+}
+
 void Spline::Load(string fileName)
 {
 	if (m_size != 0) delete[] m_spline;
