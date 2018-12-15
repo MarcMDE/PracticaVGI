@@ -48,7 +48,7 @@ PracticaCotxe::PracticaCotxe()
 
 	m_isPaused = false;
 
-	m_currScreen = GAMEPLAY;
+	m_currScreen = INICI;
 }
 
 PracticaCotxe::~PracticaCotxe()
@@ -59,11 +59,15 @@ void PracticaCotxe::Init(int w, int h)
 {
 	m_buttonsInici[START].Set(w / 2, h / 2, 200, 75, TXT_B_START, false);
 	m_buttonsInici[EXIT].Set(w / 2, h / 2 + 180, 200, 75, TXT_B_EXIT, false);
-	m_buttonsSelec[C1].Set(200, 100, 75, 75, TXT_B_SELEC_PC_1, false);
-	m_buttonsSelec[C2].Set(200, 100, 75, 75, TXT_B_SELEC_PC_1, false);
-	m_buttonsSelec[C3].Set(200, 100, 75, 75, TXT_B_SELEC_PC_1, false);
-	m_buttonsSelec[C4].Set(200, 100, 75, 75, TXT_B_SELEC_PC_1, false);
-	m_buttonsSelec[NEXT].Set(200, 100, 75, 75, TXT_B_NEXT, false);
+	m_buttonsSelec[P1].Set(w-400, 100, 75, 75, TXT_B_SELEC_PC_1, true);
+	m_buttonsSelec[P2].Set(w-300, 100, 75, 75, TXT_B_SELEC_PC_2, false);
+	m_buttonsSelec[P3].Set(w-200, 100, 75, 75, TXT_B_SELEC_PC_3, false);
+	m_buttonsSelec[P4].Set(w-100, 100, 75, 75, TXT_B_SELEC_PC_4, false);
+	m_buttonsSelec[C1].Set(200, h-100, 75, 75, TXT_B_SELEC_PC_1, true);
+	m_buttonsSelec[C2].Set(300, h-100, 75, 75, TXT_B_SELEC_PC_2, false);
+	m_buttonsSelec[C3].Set(400, h-100, 75, 75, TXT_B_SELEC_PC_3, false);
+	m_buttonsSelec[C4].Set(500, h-100, 75, 75, TXT_B_SELEC_PC_4, false);
+	m_buttonsSelec[NEXT].Set(w-200, h/2, 200, 75, TXT_B_NEXT, false);
 
 	m_circuit.Init(4);
 	m_circuit.Load(CIRCUIT_2);
@@ -353,7 +357,14 @@ void PracticaCotxe::OnButtonClickSelec(int x, int y)
 	{
 		b = (B_SELEC)i;
 
-		for (int i = 0; i < BUTTONS_SELEC; i++) m_buttonsSelec[i].Unselect();
+		if ((int)b < 4)
+		{
+			for (int j = 0; j < 4; j++) m_buttonsSelec[j].Unselect();
+		}
+		else if ((int)b > 3 && (int)b < BUTTONS_SELEC - 1)
+		{
+			for (int j = 4; j < BUTTONS_SELEC - 1; j++) m_buttonsSelec[j].Unselect();
+		}
 
 		m_buttonsSelec[b].Select();
 
@@ -411,24 +422,27 @@ void PracticaCotxe::OnButtonClickSelec(int x, int y)
 
 void PracticaCotxe::OnButtonClickPause(int x, int y)
 {
-	B_PAUSE b;
-
-	int i = 0;
-	while (i < BUTTONS_PAUSE && !m_buttonsPause[i].IsClicked(x, y))
+	if (m_isPaused)
 	{
-		i++;
-	}
+		B_PAUSE b;
 
-	if (i < BUTTONS_PAUSE)
-	{
-		b = (B_PAUSE)i;
-		switch (b)
+		int i = 0;
+		while (i < BUTTONS_PAUSE && !m_buttonsPause[i].IsClicked(x, y))
 		{
-		case EXITB:
-			m_currScreen = INICI;
-			break;
-		default:
-			break;
+			i++;
+		}
+
+		if (i < BUTTONS_PAUSE)
+		{
+			b = (B_PAUSE)i;
+			switch (b)
+			{
+			case EXITB:
+				m_currScreen = INICI;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 }
@@ -512,8 +526,7 @@ void PracticaCotxe::DrawInterface(int w, int h)
 	{
 	case INICI:
 
-		// TODO: Dibuixar titol
-		DrawUIElement(TXT_TITLE,w/2, h /2 - 200, 400, 200);
+		DrawUIElement(TXT_TITLE, w/2, h /2 - 200, 400, 200);
 		
 		for(int i=0; i<BUTTONS_INICI; i++)
 		{
@@ -533,11 +546,6 @@ void PracticaCotxe::DrawInterface(int w, int h)
 		break;
 	case GAMEPLAY:
 		// TODO: Dibuixar botons per cada jugador (accions restants i voltes que porten (les voltes encara no les feu))
-
-		for (int i = 0; i < BUTTONS_SELEC; i++)
-		{
-			m_buttonsSelec[i].Draw();
-		}
 
 		if (m_isPaused)
 		{
@@ -567,12 +575,12 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 	int ry = 0;
 	int rz = 0;
 
-	switch (nChar) {
-
+	switch (nChar) 
+	{
 	case PAUSE:
 
-		if (m_currScreen == GAMEPLAY) {
-
+		if (m_currScreen == GAMEPLAY) 
+		{
 			// Pause només funciona a gameplay screen
 			m_isPaused = !m_isPaused;
 		}
