@@ -3750,6 +3750,8 @@ void CEntornVGIView::OnPracticaCotxe()
 		ObOBJ->LoadModel("res/models/basic_car_groc.obj", OBJ_CAR+2, true);	// Carregar model obj cotxe amb textura
 		ObOBJ->LoadModel("res/models/basic_car_rosa.obj", OBJ_CAR+3, true);	// Carregar model obj cotxe amb textura
 
+		ObOBJ->LoadModel("res/models/Simple golden ring.obj", OBJ_META, true);
+
 		ObOBJ = new COBJModel;
 		ObOBJ->LoadModel("res/models/basic_wheel.obj", OBJ_WHEEL, true);	// Carregar model obj roda amb textura
 
