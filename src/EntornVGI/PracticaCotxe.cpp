@@ -546,10 +546,15 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	glCallList(EIXOS);
 #endif
 
-	//DrawRec(&m_mainObj);
+	// Dibuixa PoweUP
+	PowerUp pw;
+
+	pw.Init(TXT_BOOST);
+	pw.Draw();
 
 	// Enviar les comandes gràfiques a pantalla
 	glFlush();
+
 }
 
 void PracticaCotxe::DrawInterface(int w, int h)
@@ -573,7 +578,7 @@ void PracticaCotxe::DrawInterface(int w, int h)
 			m_buttonsInici[i].Draw();
 		}
 
-		DrawUIElement({ 0, 0, 1.0f, 1.0f }, w / 2, h / 2, w, h);
+		DrawUIElement({ 1, 0.7f, 0.9f, 1.0f }, w / 2, h / 2, w, h);
 
 		break;
 	case SELECCIO:

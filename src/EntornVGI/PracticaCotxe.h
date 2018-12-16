@@ -6,6 +6,7 @@
 #include "Circuit.h"
 #include "UIButton.h"
 #include "SkyBox.h"
+#include "PowerUp.h"
 
 #include "Sound.h"
 

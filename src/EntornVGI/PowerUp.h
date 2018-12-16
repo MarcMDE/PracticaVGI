@@ -1,7 +1,7 @@
 #pragma once
-#include "OGLObject.h"
+#include "MobileOGLObject.h"
 
-class PowerUp : public OGLObject
+class PowerUp : public MobileOGLObject
 {
 private:
 	int textura;
@@ -9,7 +9,10 @@ private:
 	const int tamanyMax = 10;
 public:
 	PowerUp();
-	void Init(int textura);
 	~PowerUp();
+
+	void Init(int textura);
+	void Draw();
+	bool CheckColision(Vector3 p);
 };
 
