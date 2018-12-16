@@ -190,6 +190,49 @@ Spline::~Spline()
 	delete[] m_pointsDistance;
 }
 
+//Vector3 Spline::CalcPosition(float p) const // (0-1)
+//{
+//	Vector3 cps[4];
+//
+//	float partialDist = m_distance * p; // dist to p
+//
+//	int leftIndex = m_size - 1;
+//	while (m_size > 0 && m_pointsDistance[leftIndex] > partialDist) leftIndex--;
+//
+//	float partialPointDist = partialDist - m_pointsDistance[leftIndex]; // dist left point to p
+//	p = partialPointDist / (m_pointsDistance[leftIndex + 1] - m_pointsDistance[leftIndex]); // controlar cas ultim punt
+//	
+//	int nextIndex;
+//
+//	cps[0] = m_spline[leftIndex];
+//
+//	nextIndex = leftIndex + 1;
+//	if (nextIndex >= m_size)
+//	{
+//		cps[1] = m_spline[nextIndex - m_size + 1];
+//		//else m_cps[1] = &m_spline[leftIndex];
+//	}
+//	else cps[1] = m_spline[nextIndex];
+//
+//	nextIndex = leftIndex + 2;
+//	if (nextIndex >= m_size)
+//	{
+//		cps[2] = m_spline[nextIndex - m_size + 1];
+//		//else m_cps[2] = &m_spline[leftIndex];
+//	}
+//	else cps[2] = m_spline[nextIndex];
+//
+//	nextIndex = leftIndex + 3;
+//	if (nextIndex >= m_size)
+//	{
+//		cps[3] = m_spline[nextIndex - m_size + 1];
+//		//else m_cps[3] = &m_spline[leftIndex];
+//	}
+//	else cps[3] = m_spline[nextIndex];
+//
+//	return m_BSpline(p, cps);
+//	//return m_CubicInterpolate(p, cps);
+//}
 Vector3 Spline::CalcPosition(float p) const // (0-1)
 {
 	Vector3 cps[4];
@@ -201,20 +244,21 @@ Vector3 Spline::CalcPosition(float p) const // (0-1)
 
 	float partialPointDist = partialDist - m_pointsDistance[leftIndex]; // dist left point to p
 	p = partialPointDist / (m_pointsDistance[leftIndex + 1] - m_pointsDistance[leftIndex]); // controlar cas ultim punt
-	
+
 	int nextIndex;
 
-	cps[0] = m_spline[leftIndex];
+	cps[1] = m_spline[leftIndex];
 
-	nextIndex = leftIndex + 1;
-	if (nextIndex >= m_size)
+	nextIndex = leftIndex - 1;
+	if (nextIndex < 0)
 	{
-		cps[1] = m_spline[nextIndex - m_size + 1];
+		cps[0] = m_spline[m_size - 2];
+		//cps[0] = m_spline[nextIndex - m_size + 1];
 		//else m_cps[1] = &m_spline[leftIndex];
 	}
-	else cps[1] = m_spline[nextIndex];
+	else cps[0] = m_spline[nextIndex];
 
-	nextIndex = leftIndex + 2;
+	nextIndex = leftIndex + 1;
 	if (nextIndex >= m_size)
 	{
 		cps[2] = m_spline[nextIndex - m_size + 1];
@@ -222,7 +266,7 @@ Vector3 Spline::CalcPosition(float p) const // (0-1)
 	}
 	else cps[2] = m_spline[nextIndex];
 
-	nextIndex = leftIndex + 3;
+	nextIndex = leftIndex + 2;
 	if (nextIndex >= m_size)
 	{
 		cps[3] = m_spline[nextIndex - m_size + 1];
@@ -232,60 +276,51 @@ Vector3 Spline::CalcPosition(float p) const // (0-1)
 
 	return m_BSpline(p, cps);
 	//return m_CubicInterpolate(p, cps);
-
-	/*
-	switch (s)
-	{
-	case CUBIC:
-		m_cps[1] = &m_spline[leftIndex];
-
-		if (leftIndex - 1 <= m_size) m_cps[0] = &m_spline[leftIndex];
-		else m_cps[0] = &m_spline[leftIndex - 1];
-
-		if (leftIndex + 1 >= m_size) m_cps[2] = &m_spline[leftIndex];
-		else m_cps[2] = &m_spline[leftIndex + 1];
-
-		if (leftIndex + 2 >= m_size) m_cps[3] = &m_spline[leftIndex];
-		else m_cps[3] = &m_spline[leftIndex + 2];
-
-		return m_CubicInterpolate(p);
-		break;
-	case SPLINE:
-		m_cps[0] = &m_spline[leftIndex];
-
-		nextIndex = leftIndex + 1;
-		if (nextIndex >= m_size)
-		{
-			if (m_circular) m_cps[1] = &m_spline[nextIndex-m_size];
-			else m_cps[1] = &m_spline[leftIndex];
-		}
-		else m_cps[1] = &m_spline[nextIndex];
-
-		nextIndex = leftIndex + 2;
-		if (nextIndex >= m_size)
-		{
-			if (m_circular) m_cps[2] = &m_spline[nextIndex - m_size];
-			else m_cps[2] = &m_spline[leftIndex];
-		}
-		else m_cps[2] = &m_spline[nextIndex];
-
-		nextIndex = leftIndex + 3;
-		if (nextIndex >= m_size)
-		{
-			if (m_circular) m_cps[3] = &m_spline[nextIndex - m_size];
-			else m_cps[3] = &m_spline[leftIndex];
-		}
-		else m_cps[3] = &m_spline[nextIndex];
-
-		return m_BSpline(p);
-		break;
-	default:
-		return Vector3().Zero();
-		break;
-	}
-	*/
 }
 
+//Vector3 Spline::CalcDirection(float p) const
+//{
+//	Vector3 cps[4];
+//
+//	float partialDist = m_distance * p; // dist to p
+//
+//	int leftIndex = m_size - 1;
+//	while (m_size > 0 && m_pointsDistance[leftIndex] > partialDist) leftIndex--;
+//
+//	float partialPointDist = partialDist - m_pointsDistance[leftIndex]; // dist left point to p
+//	p = partialPointDist / (m_pointsDistance[leftIndex + 1] - m_pointsDistance[leftIndex]); // controlar cas ultim punt
+//
+//	int nextIndex;
+//
+//	cps[0] = m_spline[leftIndex];
+//
+//	nextIndex = leftIndex + 1;
+//	if (nextIndex >= m_size)
+//	{
+//		cps[1] = m_spline[nextIndex - m_size + 1];
+//		//else m_cps[1] = &m_spline[leftIndex];
+//	}
+//	else cps[1] = m_spline[nextIndex];
+//
+//	nextIndex = leftIndex + 2;
+//	if (nextIndex >= m_size)
+//	{
+//		cps[2] = m_spline[nextIndex - m_size + 1];
+//		//else m_cps[2] = &m_spline[leftIndex];
+//	}
+//	else cps[2] = m_spline[nextIndex];
+//
+//	nextIndex = leftIndex + 3;
+//	if (nextIndex >= m_size)
+//	{
+//		cps[3] = m_spline[nextIndex - m_size + 1];
+//		//else m_cps[3] = &m_spline[leftIndex];
+//	}
+//	else cps[3] = m_spline[nextIndex];
+//
+//	return m_BSplineD(p, cps);
+//	//return m_CubicInterpolateD(p, cps);
+//}
 Vector3 Spline::CalcDirection(float p) const
 {
 	Vector3 cps[4];
@@ -300,17 +335,18 @@ Vector3 Spline::CalcDirection(float p) const
 
 	int nextIndex;
 
-	cps[0] = m_spline[leftIndex];
+	cps[1] = m_spline[leftIndex];
 
-	nextIndex = leftIndex + 1;
-	if (nextIndex >= m_size)
+	nextIndex = leftIndex - 1;
+	if (nextIndex < 0)
 	{
-		cps[1] = m_spline[nextIndex - m_size + 1];
+		cps[0] = m_spline[m_size - 2];
+		//cps[0] = m_spline[nextIndex - m_size + 1];
 		//else m_cps[1] = &m_spline[leftIndex];
 	}
-	else cps[1] = m_spline[nextIndex];
+	else cps[0] = m_spline[nextIndex];
 
-	nextIndex = leftIndex + 2;
+	nextIndex = leftIndex + 1;
 	if (nextIndex >= m_size)
 	{
 		cps[2] = m_spline[nextIndex - m_size + 1];
@@ -318,7 +354,7 @@ Vector3 Spline::CalcDirection(float p) const
 	}
 	else cps[2] = m_spline[nextIndex];
 
-	nextIndex = leftIndex + 3;
+	nextIndex = leftIndex + 2;
 	if (nextIndex >= m_size)
 	{
 		cps[3] = m_spline[nextIndex - m_size + 1];
@@ -330,6 +366,51 @@ Vector3 Spline::CalcDirection(float p) const
 	//return m_CubicInterpolateD(p, cps);
 }
 
+
+//void Spline::CalcDirPos(float p, Vector3 & dir, Vector3 & pos)
+//{
+//	Vector3 cps[4];
+//
+//	float partialDist = m_distance * p; // dist to p
+//
+//	int leftIndex = m_size - 1;
+//	while (m_size > 0 && m_pointsDistance[leftIndex] > partialDist) leftIndex--;
+//
+//	float partialPointDist = partialDist - m_pointsDistance[leftIndex]; // dist left point to p
+//	p = partialPointDist / (m_pointsDistance[leftIndex + 1] - m_pointsDistance[leftIndex]); // controlar cas ultim punt
+//
+//	int nextIndex;
+//
+//	cps[0] = m_spline[leftIndex];
+//
+//	nextIndex = leftIndex + 1;
+//	if (nextIndex >= m_size)
+//	{
+//		cps[1] = m_spline[nextIndex - m_size + 1];
+//		//else m_cps[1] = &m_spline[leftIndex];
+//	}
+//	else cps[1] = m_spline[nextIndex];
+//
+//	nextIndex = leftIndex + 2;
+//	if (nextIndex >= m_size)
+//	{
+//		cps[2] = m_spline[nextIndex - m_size + 1];
+//		//else m_cps[2] = &m_spline[leftIndex];
+//	}
+//	else cps[2] = m_spline[nextIndex];
+//
+//	nextIndex = leftIndex + 3;
+//	if (nextIndex >= m_size)
+//	{
+//		cps[3] = m_spline[nextIndex - m_size + 1];
+//		//else m_cps[3] = &m_spline[leftIndex];
+//	}
+//	else cps[3] = m_spline[nextIndex];
+//
+//	dir = m_BSplineD(p, cps);
+//	pos = m_BSpline(p, cps);
+//	//pos = m_CubicInterpolate(p, cps);
+//}
 void Spline::CalcDirPos(float p, Vector3 & dir, Vector3 & pos)
 {
 	Vector3 cps[4];
@@ -344,17 +425,18 @@ void Spline::CalcDirPos(float p, Vector3 & dir, Vector3 & pos)
 
 	int nextIndex;
 
-	cps[0] = m_spline[leftIndex];
+	cps[1] = m_spline[leftIndex];
 
-	nextIndex = leftIndex + 1;
-	if (nextIndex >= m_size)
+	nextIndex = leftIndex - 1;
+	if (nextIndex < 0)
 	{
-		cps[1] = m_spline[nextIndex - m_size + 1];
+		cps[0] = m_spline[m_size - 2];
+		//cps[0] = m_spline[nextIndex - m_size + 1];
 		//else m_cps[1] = &m_spline[leftIndex];
 	}
-	else cps[1] = m_spline[nextIndex];
+	else cps[0] = m_spline[nextIndex];
 
-	nextIndex = leftIndex + 2;
+	nextIndex = leftIndex + 1;
 	if (nextIndex >= m_size)
 	{
 		cps[2] = m_spline[nextIndex - m_size + 1];
@@ -362,7 +444,7 @@ void Spline::CalcDirPos(float p, Vector3 & dir, Vector3 & pos)
 	}
 	else cps[2] = m_spline[nextIndex];
 
-	nextIndex = leftIndex + 3;
+	nextIndex = leftIndex + 2;
 	if (nextIndex >= m_size)
 	{
 		cps[3] = m_spline[nextIndex - m_size + 1];

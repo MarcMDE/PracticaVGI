@@ -704,24 +704,27 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 
 	default:
 
-		int i = 0;
-		while (i < m_nJugadors && DAV[i] != nChar) i++;
+		if (m_currScreen == GAMEPLAY && !m_isPaused)
+		{
+			int i = 0;
+			while (i < m_nJugadors && DAV[i] != nChar) i++;
 
-		if (i != m_nJugadors) {
+			if (i != m_nJugadors) {
 
-			// El jugador i ha apretat la tecla cap endavant
-			m_cars[i].Boost();
+				// El jugador i ha apretat la tecla cap endavant
+				m_cars[i].Boost();
 
-		}
+			}
 
-		i = 0;
-		while (i < m_nJugadors && DAR[i] != nChar) i++;
+			i = 0;
+			while (i < m_nJugadors && DAR[i] != nChar) i++;
 
-		if (i != m_nJugadors) {
+			if (i != m_nJugadors) {
 
-			// El jugador i ha apretat la tecla cap endarrere
-			m_cars[i].Brake();
+				// El jugador i ha apretat la tecla cap endarrere
+				m_cars[i].Brake();
 
+			}
 		}
 
 		break;

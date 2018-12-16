@@ -132,15 +132,16 @@ void Circuit::Draw()
 	float inc = 1.0f / CircuitsResolutions[(int)m_index];
 	int width = CarrilWidth * m_carrils / 2;
 
-	//m_spline.Debug(true, CircuitsResolutions[(int)m_index]);
+	m_spline.Debug(true, CircuitsResolutions[(int)m_index]);
 
 	glBindTexture(GL_TEXTURE_2D, m_roadTextureId);
 	glBegin(GL_QUAD_STRIP);
 
 	float f = 0;
 
-	Vector3 p = m_spline.CalcPosition(f);
-	Vector3 d = m_spline.CalcDirection(f);
+	Vector3 p; //= m_spline.CalcPosition(f);
+	Vector3 d; // = m_spline.CalcDirection(f);
+	m_spline.CalcDirPos(f, d, p);
 	d.Normalize();
 
 	Vector3 perp = d.DirCrossP(Vector3(0, 1, 0));
@@ -152,8 +153,9 @@ void Circuit::Draw()
 
 	for (f = inc; f < 1; f += inc)
 	{
-		p = m_spline.CalcPosition(f);
-		d = m_spline.CalcDirection(f);
+		//p = m_spline.CalcPosition(f);
+		//d = m_spline.CalcDirection(f);
+		m_spline.CalcDirPos(f, d, p);
 		d.Normalize();
 
 		perp = d.DirCrossP(Vector3(0, 1, 0));
@@ -167,8 +169,9 @@ void Circuit::Draw()
 	}
 
 	// Ultim vertex = posicio inicial
-	p = m_spline.CalcPosition(0);
-	d = m_spline.CalcDirection(0);
+	//p = m_spline.CalcPosition(0);
+	//d = m_spline.CalcDirection(0);
+	m_spline.CalcDirPos(0, d, p);
 	d.Normalize();
 
 	perp = d.DirCrossP(Vector3(0, 1, 0));
