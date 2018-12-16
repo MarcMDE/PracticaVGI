@@ -41,6 +41,7 @@ public:
 	float GetProgress() const;
 	void ResetProgress();
 	void AddBoost();
+	void ResetLaps();
 
 	int getBoosts();
 	int getLaps();

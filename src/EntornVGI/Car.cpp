@@ -22,6 +22,10 @@ void Car::Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 sca
 	}
 }
 
+void Car::ResetLaps() {
+	m_laps = 0;
+}
+
 void Car::SetMoveValues(float dist)
 {
 	m_boosts = m_initialBoosts;

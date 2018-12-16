@@ -95,6 +95,7 @@ void PracticaCotxe::Init(int w, int h)
 
 	m_sun.encesa = true;
 	m_sun.restringida = false;
+	m_isEnd = false;
 
 	m_sun.cutoff = 0.0;
 	m_sun.exponent = 0.0;
@@ -102,7 +103,7 @@ void PracticaCotxe::Init(int w, int h)
 	m_sun.difusa[0] = 1.0f;		m_sun.difusa[1] = 1.0f;		m_sun.difusa[2] = 1.0f;		m_sun.difusa[3] = 1.0f;
 	m_sun.especular[0] = 1.0f;		m_sun.especular[1] = 1.0f;		m_sun.especular[2] = 1.0f;		m_sun.especular[3] = 1.0f;
 
-	m_sun.posicio.R = -1000.0;	m_sun.posicio.alfa = 90.0;		m_sun.posicio.beta = 0.0;
+	//m_sun.posicio.R = -1000.0;	m_sun.posicio.alfa = 90.0;		m_sun.posicio.beta = 0.0;
 	m_sun.atenuacio.a = 0.0;		m_sun.atenuacio.b = 0.0;		m_sun.atenuacio.c = 1.0;		// Llum sense atenuació per distància (a,b,c)=(0,0,1)
 	m_sun.spotdirection[0] = 0.0;		m_sun.spotdirection[1] = 0.0;		m_sun.spotdirection[2] = 0.0;
 	
@@ -658,6 +659,19 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 			DrawRec(&m_mainObj);
 		}
 		break;
+
+	case FI:
+		cameraPosition = Vector3(0, 250, 500);
+		glViewport(0, 0, m_sWidth, m_sHeigth);
+		Fons(col_fons);
+
+		glLoadIdentity();
+		gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), 0, 0, 0, 0, 1, 0);
+
+		Iluminacio(GOURAUD, true, 'a');
+		DrawRec(&m_mainObj);
+		break;
+
 	default:
 		break;
 	}
@@ -757,6 +771,20 @@ void PracticaCotxe::DrawInterface(int w, int h)
 		}
 		glDisable(GL_SCISSOR_TEST);
 		break;
+
+	case FI:
+		glViewport(0, 0, w, h);
+		// TODO: Dibuixar etiquetes Circuit i Jugadors
+		DrawUIElement(TXT_PLAYERS, 150, 100, 200, 75);
+		DrawUIElement(TXT_CIRCUIT, 150, h - 100, 200, 75);
+
+		for (int i = 0; i < BUTTONS_SELEC; i++)
+		{
+			m_buttonsSelec[i].Draw();
+		}
+
+		break;
+
 	default:
 		break;
 	}
@@ -916,12 +944,20 @@ void PracticaCotxe::Update()
 
 				if (m_cars[i].getLaps() >= MAX_LAPS) {
 
-					m_isPaused = true;
+					m_isEnd = true;
 					m_music.stop();
 					m_guanyador = i + 1;
+					m_currScreen = SELECCIO; // Hauria de ser FI, s'ha de crear aquesta Screen
 
 				}
 			}
+
+			if (m_isEnd) {
+				for (int i = 0; i < m_nJugadors; i++) {
+					m_cars[i].ResetLaps();
+				}
+			}
+
 		}
 		else
 		{
@@ -940,7 +976,7 @@ void PracticaCotxe::InitJugadors(int w, int h) {
 
 	if (m_nJugadors == 1) { // For SOLO mode
 
-							// Inici
+		// Inici
 		m_w[0][0] = 0;
 		m_h[0][0] = 0;
 
