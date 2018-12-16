@@ -3,20 +3,20 @@
 
 void Circuit::m_GenRoadTexture()
 {
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 16; i++)
 	{
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < 7; j++)
 		{
-			m_roadImg[i][j][0] = 255;
+			m_roadImg[i][j][0] = 0;
 			m_roadImg[i][j][1] = 0;
-			m_roadImg[i][j][2] = 255;
+			m_roadImg[i][j][2] = 0;
 			m_roadImg[i][j][3] = 255;
 		}
 	}
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 16; i++)
 	{
-		for (int j = 3; j < 5; j++)
+		for (int j = 7; j < 9; j++)
 		{
 			m_roadImg[i][j][0] = 255;
 			m_roadImg[i][j][1] = 255;
@@ -25,13 +25,13 @@ void Circuit::m_GenRoadTexture()
 		}
 	}
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 16; i++)
 	{
-		for (int j = 5; j < 8; j++)
+		for (int j = 9; j < 16; j++)
 		{
-			m_roadImg[i][j][0] = 255;
+			m_roadImg[i][j][0] = 0;
 			m_roadImg[i][j][1] = 0;
-			m_roadImg[i][j][2] = 255;
+			m_roadImg[i][j][2] = 0;
 			m_roadImg[i][j][3] = 255;
 		}
 	}
@@ -127,12 +127,20 @@ float Circuit::getDistance()
 
 }
 
+void Circuit::LoadPowerUps(Circuits c)
+{
+	string nom = CircuitsPwFileNames[c];
+
+
+	m_carrils; //llegir numero arxiu
+}
+
 void Circuit::Draw()
 {
 	float inc = 1.0f / CircuitsResolutions[(int)m_index];
 	int width = CarrilWidth * m_carrils / 2;
 
-	m_spline.Debug(true, CircuitsResolutions[(int)m_index]);
+	//m_spline.Debug(true, CircuitsResolutions[(int)m_index]);
 
 	glBindTexture(GL_TEXTURE_2D, m_roadTextureId);
 	glBegin(GL_QUAD_STRIP);
