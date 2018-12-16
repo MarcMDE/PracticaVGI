@@ -54,6 +54,8 @@ private:
 	//camara m_cam = camara(-100, 0, 0, 0, 25, 0, 0, 5, 0);
 	SCREENS m_currScreen;
 	bool m_isPaused;
+	int m_sWidth;
+	int m_sHeigth;
 
 	Sound m_music;
 
@@ -87,6 +89,7 @@ public:
 	void DrawInterface(int w, int h);
 	void Procesa_Teclat(UINT nChar, UINT nRepCnt);
 	void Update();
+	void InitJugadors(int w, int h);
 	void setNJugadors(int nJugadors, int w, int h, float dist);
 
 	SCREENS GetCurrScreen();

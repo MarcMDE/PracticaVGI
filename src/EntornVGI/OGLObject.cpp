@@ -9,6 +9,7 @@ OGLObject::OGLObject()
 	m_scale = Vector3().One();
 	m_childs = NULL;
 	m_childsLength = 0;
+	m_active = true;
 }
 
 OGLObject::OGLObject(GLuint glIndex, GLuint glTextIndex)
@@ -20,6 +21,7 @@ OGLObject::OGLObject(GLuint glIndex, GLuint glTextIndex)
 	m_scale = Vector3().One();
 	m_childs = NULL;
 	m_childsLength = 0;
+	m_active = true;
 }
 
 OGLObject::OGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position)
@@ -31,6 +33,7 @@ OGLObject::OGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position)
 	m_scale = Vector3().One();
 	m_childs = NULL;
 	m_childsLength = 0;
+	m_active = true;
 }
 
 OGLObject::OGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale)
@@ -42,6 +45,7 @@ OGLObject::OGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vecto
 	m_scale = scale;
 	m_childs = NULL;
 	m_childsLength = 0;
+	m_active = true;
 }
 
 const Vector3& OGLObject::GetPosition() const
@@ -115,6 +119,16 @@ void OGLObject::SetChild(int index, OGLObject * child)
 	m_childs[index] = child;
 }
 
+void OGLObject::SetActive(bool active)
+{
+	m_active = active;
+}
+
+bool OGLObject::IsActive()
+{
+	return m_active;
+}
+
 void OGLObject::Draw()
 {
 	if (m_glIndex != -1)
@@ -125,15 +139,15 @@ void OGLObject::Draw()
 
 OGLObject::~OGLObject()
 {
-	if (m_childs != NULL)
-	{
-		for (int i = 0; i < m_childsLength; i++)
-		{
-			delete m_childs[i];
-		}
+	//if (m_childs != NULL)
+	//{
+	//	for (int i = 0; i < m_childsLength; i++)
+	//	{
+	//		delete m_childs[i];
+	//	}
 
 		delete m_childs;
-	}
+	//}
 
 	m_childs = NULL;
 	m_childsLength = 0;

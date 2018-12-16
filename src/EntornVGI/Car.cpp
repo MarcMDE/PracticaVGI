@@ -1,22 +1,14 @@
 #include "stdafx.h"
 #include "Car.h"
 
-void Car::Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 scale, float dist)
+void Car::Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 scale)
 {
 	m_position = position;
 	m_rotation = rotation;
 	m_scale = scale;
 	m_laps = 0;
 
-	m_friction = 0;//dist / m_frictionC;
-	m_gravity = 0;// dist / m_gravityC;
-	m_boostSpeed = m_boostSpeedC / dist;
-	m_brakeSpeed = m_brakeSpeedC / dist;
-
 	m_direction = Vector3().Zero();
-	m_speed = 0;
-	m_progress = 0;
-
 	if (wheelsLength > 0)
 	{
 		m_wheelsLength = wheelsLength;
@@ -28,6 +20,16 @@ void Car::Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 sca
 		m_wheelsLength = 0;
 		m_wheels = NULL;
 	}
+}
+
+void Car::SetMoveValues(float dist)
+{
+	m_friction = m_frictionC / dist;
+	m_gravity = m_gravityC / dist;
+	m_boostSpeed = m_boostSpeedC / dist;
+	m_brakeSpeed = m_brakeSpeedC / dist;
+	m_speed = 0;
+	m_progress = 0;
 }
 
 void Car::SetWheel(int index, GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale)
@@ -151,5 +153,5 @@ int Car::getLaps()
 
 Car::~Car()
 {
-	delete[] m_wheels;
+	//delete[] m_wheels;
 }

@@ -8,10 +8,10 @@ class Car : public MobileOGLObject
 private:
 	const int m_maxBoosts = 3;
 	const int m_initialBoosts = m_maxBoosts;
-	const int m_frictionC = 20000;
-	const int m_gravityC = 10000;
+	const float m_frictionC = 0.03f;
+	const float m_gravityC = 0.06f;
 	const int m_boostSpeedC = 10;
-	const float m_brakeSpeedC = 2.5;
+	const float m_brakeSpeedC = 2.5f;
 
 	float m_friction;
 	float m_gravity;
@@ -30,7 +30,8 @@ private:
 
 public:
 	Car() : MobileOGLObject() {};
-	void Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 scale, float dist);
+	void Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 scale);
+	void SetMoveValues(float dist);
 	void SetWheel(int index, GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
 	void SetBody(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
 	void Move(Vector3 pos, Vector3 dir);

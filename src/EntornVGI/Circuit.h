@@ -3,7 +3,7 @@
 #include "Spline.h"
 #include "Vector3.h"
 
-enum Circuits {CIRCUIT_1 = 0, CIRCUIT_2 = 1, CERCLE = 2, CIRCUIT_4 = 3, DONUT_PUJADA = 4, CIRCUIT_6 = 5};
+enum Circuits {CIRCUIT_1 = 0, CIRCUIT_2 = 1, CIRCUIT_3 = 2, CIRCUIT_4 = 3, DONUT_PUJADA = 4, CIRCUIT_6 = 5};
 
 class Circuit : public OGLObject
 {

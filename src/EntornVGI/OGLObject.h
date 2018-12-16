@@ -12,6 +12,7 @@ protected:
 	GLuint m_glTextIndex;
 	OGLObject **m_childs;
 	int m_childsLength;
+	bool m_active;
 
 public:
 	// Constructors-------------------------
@@ -22,7 +23,7 @@ public:
 	OGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position);
 	// glIndex i/o glTextIndex han de ser -1 si no model o no textura
 	OGLObject(GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale);
-	~OGLObject();
+	virtual ~OGLObject();
 
 	// Getters------------------------------
 	const Vector3& GetPosition() const;
@@ -36,6 +37,8 @@ public:
 	void SetChilds(OGLObject **childs, int lenght);
 	void SetChildsLength(int lenght);
 	void SetChild(int index, OGLObject *child);
+	void SetActive(bool active);
+	bool IsActive();
 
 	// Draw---------------------------------
 	virtual void Draw();

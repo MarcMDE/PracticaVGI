@@ -21,24 +21,26 @@ void PracticaCotxe::glScaleV(const Vector3 & v)
 
 void PracticaCotxe::DrawRec(OGLObject * obj)
 {
-
-	glPushMatrix();
-
-	glTranslateV(obj->GetPosition());	
-	glScaleV(obj->GetScale());
-	glRotateV(obj->GetRotation());
-
-	obj->Draw();
-
-	int cLength = obj->GetChildsLength();
-
-	// For each child
-	for (int i = 0; i < cLength; i++)
+	if (obj->IsActive())
 	{
-		DrawRec(obj->GetChild(i));
-	}
+		glPushMatrix();
 
-	glPopMatrix();
+		glTranslateV(obj->GetPosition());	
+		glScaleV(obj->GetScale());
+		glRotateV(obj->GetRotation());
+
+		obj->Draw();
+
+		int cLength = obj->GetChildsLength();
+
+		// For each child
+		for (int i = 0; i < cLength; i++)
+		{
+			DrawRec(obj->GetChild(i));
+		}
+
+		glPopMatrix();
+	}
 }
 
 
@@ -47,6 +49,7 @@ PracticaCotxe::PracticaCotxe()
 	m_mainObj = OGLObject(-1, -1);
 
 	m_isPaused = false;
+	m_cars = NULL;
 
 	m_currScreen = INICI;
 }
@@ -57,6 +60,10 @@ PracticaCotxe::~PracticaCotxe()
 
 void PracticaCotxe::Init(int w, int h)
 {
+	m_sWidth = w;
+	m_sHeigth = h;
+	m_nJugadors = 1;
+
 	m_buttonsInici[START].Set(w / 2, h / 2, 200, 75, TXT_B_START, false);
 	m_buttonsInici[EXIT].Set(w / 2, h / 2 + 180, 200, 75, TXT_B_EXIT, false);
 	m_buttonsSelec[P1].Set(400, 100, 75, 75, TXT_B_SELEC_PC_1, true);
@@ -69,8 +76,8 @@ void PracticaCotxe::Init(int w, int h)
 	m_buttonsSelec[C4].Set(700, h-100, 75, 75, TXT_B_SELEC_PC_4, false);
 	m_buttonsSelec[NEXT].Set(w-200, h/2, 200, 75, TXT_B_NEXT, false);
 
-	m_circuit.Init(4);
-	m_circuit.Load(CIRCUIT_2);
+	m_circuit.Init(m_nJugadors);
+	m_circuit.Load(CIRCUIT_1);
 
 	m_mainObj.SetChildsLength(1);
 	m_mainObj.SetChild(0, &m_skyBox);
@@ -82,7 +89,9 @@ void PracticaCotxe::Init(int w, int h)
 
 	m_guanyador = 0;
 
-	setNJugadors(4, w, h, dist);
+	m_circuit.SetChildsLength(MAX_JUGADORS);
+	InitJugadors(w, h);
+	setNJugadors(m_nJugadors, w, h, m_circuit.getDistance());
 	
 	// Musica de fons... es para a 3 segons de reproducció, si prem 2 vegades M es reprodueix be
 	m_music.play();
@@ -371,40 +380,48 @@ void PracticaCotxe::OnButtonClickSelec(int x, int y)
 		switch (b)
 		{
 		case P1:
-			m_nJugadors = 1;
+			setNJugadors(1, m_sWidth, m_sHeigth, m_circuit.getDistance());
+			//m_nJugadors = 1;
 			break;
 		case P2:
-			m_nJugadors = 2;
+			setNJugadors(2, m_sWidth, m_sHeigth, m_circuit.getDistance());
+			//m_nJugadors = 2;
 			break;
 		case P3:
-			m_nJugadors = 3;
+			setNJugadors(3, m_sWidth, m_sHeigth, m_circuit.getDistance());
+			//m_nJugadors = 3;
 			break;
 		case P4:
-			m_nJugadors = 4;
+			setNJugadors(4, m_sWidth, m_sHeigth, m_circuit.getDistance());
+			//m_nJugadors = 4;
 			break;
 		case C1:
 			if (m_circuit.GetCurrCircuit() != CIRCUIT_1)
 			{
 				m_circuit.Load(CIRCUIT_1);
+				setNJugadors(m_nJugadors, m_sWidth, m_sHeigth, m_circuit.getDistance());
 			}
 			break;
 		case C2:
 			if (m_circuit.GetCurrCircuit() != CIRCUIT_2)
 			{
 				m_circuit.Load(CIRCUIT_2);
+				setNJugadors(m_nJugadors, m_sWidth, m_sHeigth, m_circuit.getDistance());
 			}
 			break;
 		case C3:
-			if (m_circuit.GetCurrCircuit() != CIRCUIT_4)
+			if (m_circuit.GetCurrCircuit() != CIRCUIT_3)
 			{
-				m_circuit.Load(CIRCUIT_4);
+				m_circuit.Load(CIRCUIT_3);
+				setNJugadors(m_nJugadors, m_sWidth, m_sHeigth, m_circuit.getDistance());
 			}
 			break;
 		case C4:
 
-			if (m_circuit.GetCurrCircuit() != CIRCUIT_6)
+			if (m_circuit.GetCurrCircuit() != CIRCUIT_4)
 			{
-				m_circuit.Load(CIRCUIT_6);
+				m_circuit.Load(CIRCUIT_4);
+				setNJugadors(m_nJugadors, m_sWidth, m_sHeigth, m_circuit.getDistance());
 			}
 
 			break;
@@ -465,25 +482,50 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	col_fons.a = 1;
 
 	/*Fons(col_fons);*/
+	Vector3 cameraPosition;
 
-	for (int i = 0; i < m_nJugadors; i++) {
-		Vector3 cameraPosition = m_cars[i].GetPosition();
-		cameraPosition -= Vector3(m_cars[i].GetDirection().X() * 60, 0, m_cars[i].GetDirection().Z() * 60);
-		cameraPosition += Vector3(0, 35, 0);
-
-		//Projeccio_Perspectiva(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1], 75);
-		glViewport(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
-		glScissor(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
+	switch (m_currScreen)
+	{
+	case INICI:
+		cameraPosition = Vector3(0, 250, 500);
+		glViewport(0, 0, m_sWidth, m_sHeigth);
+		Fons(col_fons);
+		glLoadIdentity();
+		gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), 0, 0, 0, 0, 1, 0);
+		break;
+	case SELECCIO:
+		cameraPosition = Vector3(0, 250, 500);
+		glViewport(0, 0, m_sWidth, m_sHeigth);
 		Fons(col_fons);
 
 		glLoadIdentity();
-		gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), m_cars[i].GetPosition().X(), m_cars[i].GetPosition().Y() + 20, m_cars[i].GetPosition().Z(), 0, 1, 0);
-		// Iluminacio fixe respecte la camara (després glLookAt)
+		gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), 0, 0, 0, 0, 1, 0);
+
 		Iluminacio(GOURAUD, true, true, m_sun, true, true, 'a', false, 0);
 		DrawRec(&m_mainObj);
+		break;
+	case GAMEPLAY:
+		glEnable(GL_SCISSOR_TEST);
+		for (int i = 0; i < m_nJugadors; i++) {
+			cameraPosition = m_cars[i].GetPosition();
+			cameraPosition -= Vector3(m_cars[i].GetDirection().X() * 60, 0, m_cars[i].GetDirection().Z() * 60);
+			cameraPosition += Vector3(0, 35, 0);
+
+			//Projeccio_Perspectiva(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1], 75);
+			glViewport(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
+			glScissor(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
+			Fons(col_fons);
+
+			glLoadIdentity();
+			gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), m_cars[i].GetPosition().X(), m_cars[i].GetPosition().Y() + 20, m_cars[i].GetPosition().Z(), 0, 1, 0);
+			// Iluminacio fixe respecte la camara (després glLookAt)
+			Iluminacio(GOURAUD, true, true, m_sun, true, true, 'a', false, 0);
+			DrawRec(&m_mainObj);
+		}
+		break;
+	default:
+		break;
 	}
-
-
 
 	// Test de Visibilitat
 	//if (testv) glEnable(GL_CULL_FACE);
@@ -512,7 +554,6 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 void PracticaCotxe::DrawInterface(int w, int h)
 {
-
 	glDisable(GL_SCISSOR_TEST);
 	glViewport(0, 0, w, h);
 
@@ -532,6 +573,8 @@ void PracticaCotxe::DrawInterface(int w, int h)
 		{
 			m_buttonsInici[i].Draw();
 		}
+
+		DrawUIElement({ 0, 0, 1, 1 }, w / 2, h / 2, w, h);
 
 		break;
 	case SELECCIO:
@@ -680,6 +723,27 @@ void PracticaCotxe::Update()
 
 		break;
 	case SELECCIO:
+		if (!m_isPaused)
+		{
+			Vector3 dir, pos;
+			for (int i = 0; i < m_nJugadors; i++)
+			{
+				m_circuit.CalcDirPos(m_cars[i].GetProgress(), i, dir, pos);
+				m_cars[i].Move(pos, dir);
+
+				if (m_cars[i].getLaps() >= MAX_LAPS) {
+
+					m_isPaused = true;
+					m_music.stop();
+					m_guanyador = i + 1;
+
+				}
+			}
+		}
+		else
+		{
+
+		}
 
 		break;
 	case GAMEPLAY:
@@ -712,122 +776,157 @@ void PracticaCotxe::Update()
 	}
 }
 
-void PracticaCotxe::setNJugadors(int nJugadors, int w, int h, float dist) {
+void PracticaCotxe::InitJugadors(int w, int h) {
 
-	if (nJugadors <= MAX_JUGADORS) {
+	m_nJugadors = 1;
 
-		m_nJugadors = nJugadors;
+	if (m_nJugadors == 1) { // For SOLO mode
 
-		if (nJugadors == 1) { // For SOLO mode
+							// Inici
+		m_w[0][0] = 0;
+		m_h[0][0] = 0;
 
-							  // Inici
-			m_w[0][0] = 0;
-			m_h[0][0] = 0;
+		// Fi
+		m_w[0][1] = w;
+		m_h[0][1] = h;
 
-			// Fi
-			m_w[0][1] = w;
-			m_h[0][1] = h;
-
-		}
-		else if (nJugadors == 2) { // For 2 players
-
-								   // Player 1 ==================
-								   // Inici
-			m_w[0][0] = 0;
-			m_h[0][0] = 0;
-
-			// Fi
-			m_w[0][1] = w / 2;
-			m_h[0][1] = h / 2;
-
-			// ===========================
-
-			// Player 2 ==================
-
-			// Inici
-			m_w[1][0] = w / 2;
-			m_h[1][0] = 0;
-
-			// Fi
-			m_w[1][1] = w / 2;
-			m_h[1][1] = h / 2;
-
-			// ===========================
-
-		}
-		else { //For 3 or 4 players
-
-			// Player 1 ==================
-
-			// Inici
-			m_w[2][0] = 0;
-			m_h[2][0] = 0;
-
-			// Fi
-			m_w[2][1] = w / 2;
-			m_h[2][1] = h / 2;
-
-			// ===========================
-
-			// Player 2 ==================
-
-			// Inici
-			m_w[3][0] = w / 2;
-			m_h[3][0] = 0;
-
-			// Fi
-			m_w[3][1] = w / 2;
-			m_h[3][1] = h / 2;
-
-			// ===========================
-
-			// Player 3 ==================
-
-			// Inici
-			m_w[0][0] = 0;
-			m_h[0][0] = h / 2;
-
-			// Fi
-			m_w[0][1] = w / 2;
-			m_h[0][1] = h / 2;
-
-			// ===========================
-
-			// Player 4 ==================
-
-			// Inici
-			m_w[1][0] = w / 2;
-			m_h[1][0] = h / 2;
-
-			// Fi
-			m_w[1][1] = w / 2;
-			m_h[1][1] = h / 2;
-
-			// ===========================
-
-		}
-
-		m_cars = new Car[nJugadors];
-		m_circuit.SetChildsLength(m_nJugadors);
-
-		for (int i = 0; i < m_nJugadors; i++) {
-
-			m_cars[i].Init(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One(), dist);
-
-			m_cars[i].SetBody(OBJ_CAR+i, -1, Vector3().Zero(), Vector3().Zero(), Vector3().One());
-
-			m_cars[i].SetWheel(0, OBJ_WHEEL, -1, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
-			m_cars[i].SetWheel(1, OBJ_WHEEL, -1, Vector3(14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
-			m_cars[i].SetWheel(2, OBJ_WHEEL, -1, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
-			m_cars[i].SetWheel(3, OBJ_WHEEL, -1, Vector3(-14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
-
-			m_circuit.SetChild(i, &m_cars[i]);
-		}
-
-		// Situar cotxes a posicio de sortida
-		Update();
 	}
 
+	// MAX_JUGADORS -> m_nJugadors
+	m_cars = new Car[MAX_JUGADORS];
+
+	for (int i = 0; i < MAX_JUGADORS; i++) {
+
+		m_cars[i].Init(4, Vector3(0, 0, 0), Vector3().Zero(), Vector3().One());
+
+		m_cars[i].SetBody(OBJ_CAR+i, -1, Vector3().Zero(), Vector3().Zero(), Vector3().One());
+
+		m_cars[i].SetWheel(0, OBJ_WHEEL, -1, Vector3(14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
+		m_cars[i].SetWheel(1, OBJ_WHEEL, -1, Vector3(14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+		m_cars[i].SetWheel(2, OBJ_WHEEL, -1, Vector3(-14.0f, 0.0f, 7.0f), Vector3().Zero(), Vector3(1, 1, 1));
+		m_cars[i].SetWheel(3, OBJ_WHEEL, -1, Vector3(-14.0f, 0.0f, -7.0f), Vector3().Zero(), Vector3(1, 1, -1.0f));
+
+		m_circuit.SetChild(i, &m_cars[i]);
+	}
+
+	//// Situar cotxes a posicio de sortida
+	//Update();
+}
+
+void PracticaCotxe::setNJugadors(int nJugadors, int w, int h, float dist)
+{
+	m_nJugadors = nJugadors;
+	m_circuit.SetCarrils(nJugadors);
+
+	if (nJugadors == 1) { // For SOLO mode
+
+							// Inici
+		m_w[0][0] = 0;
+		m_h[0][0] = 0;
+
+		// Fi
+		m_w[0][1] = w;
+		m_h[0][1] = h;
+
+	}
+	else if (nJugadors == 2) { // For 2 players
+
+		// Player 1 ==================
+		// Inici
+		m_w[0][0] = 0;
+		m_h[0][0] = 0;
+
+		// Fi
+		m_w[0][1] = w / 2;
+		m_h[0][1] = h;
+
+		// ===========================
+
+		// Player 2 ==================
+
+		// Inici
+		m_w[1][0] = w / 2;
+		m_h[1][0] = 0;
+
+		// Fi
+		m_w[1][1] = w / 2;
+		m_h[1][1] = h;
+
+		// ===========================
+
+	}
+	else { //For 3 or 4 players
+
+		// Player 1 ==================
+
+		// Inici
+		m_w[2][0] = 0;
+		m_h[2][0] = 0;
+
+		// Fi
+		m_w[2][1] = w / 2;
+		m_h[2][1] = h / 2;
+
+		// ===========================
+
+		// Player 2 ==================
+
+		// Inici
+		m_w[3][0] = w / 2;
+		m_h[3][0] = 0;
+
+		// Fi
+		m_w[3][1] = w / 2;
+		m_h[3][1] = h / 2;
+
+		// ===========================
+
+		// Player 3 ==================
+
+		// Inici
+		m_w[0][0] = 0;
+		m_h[0][0] = h / 2;
+
+		// Fi
+		m_w[0][1] = w / 2;
+		m_h[0][1] = h / 2;
+
+		// ===========================
+
+		// Player 4 ==================
+
+		// Inici
+		m_w[1][0] = w / 2;
+		m_h[1][0] = h / 2;
+
+		// Fi
+		m_w[1][1] = w / 2;
+		m_h[1][1] = h / 2;
+
+		// ===========================
+
+	}
+
+	for (int i = 0; i < MAX_JUGADORS; i++) {
+		m_cars[i].SetMoveValues(dist);
+	}
+
+	// Situar cotxes a posicio de sortida
+	Vector3 dir, pos;
+	for (int i = 0; i < MAX_JUGADORS; i++)
+	{
+		m_cars[i].SetActive(i < m_nJugadors);
+		m_circuit.CalcDirPos(m_cars[i].GetProgress(), i, dir, pos);
+		m_cars[i].Move(pos, dir);
+
+		if (m_cars[i].getLaps() >= MAX_LAPS) {
+
+			m_isPaused = true;
+			m_music.stop();
+			m_guanyador = i + 1;
+
+		}
+	}
 }
 
 SCREENS PracticaCotxe::GetCurrScreen()

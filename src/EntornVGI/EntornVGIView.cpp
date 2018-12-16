@@ -656,7 +656,6 @@ void CEntornVGIView::OnPaint()
 		}
 #else
 	Projeccio_Perspectiva(0, 0, w, h, zoom);
-	glEnable(GL_SCISSOR_TEST);
 #endif
 
 
