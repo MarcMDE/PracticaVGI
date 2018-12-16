@@ -9,7 +9,7 @@
 
 #include "Sound.h"
 
-#define PC_DEVELOP
+//#define PC_DEVELOP
 
 #define MAX_JUGADORS 4
 #define MAX_LAPS 3
@@ -76,7 +76,7 @@ private:
 	void glRotateV(const Vector3& v);
 	void glScaleV(const Vector3& v);
 	void DrawRec(OGLObject* obj);
-	void Iluminacio(char ilumin, bool ifix, bool ll_amb, LLUM lumin, bool textur, bool textur_map, char obj, bool bc_lin, int step);
+	void Iluminacio(char ilumin, /*bool ifix, bool ll_amb, LLUM lumin,*/ bool textur, /*bool textur_map,*/ char obj/*, bool bc_lin, int step*/);
 	void DrawUIElement(int texture, int posX, int posY, int width, int heigth);
 	void DrawUIElement(CColor color, int posX, int posY, int width, int heigth);
 

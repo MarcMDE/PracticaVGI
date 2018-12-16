@@ -9,7 +9,7 @@ class Sound {
 private:
 
 	std::string m_music = "res/audio/music2.wav";
-	bool m_play = true;
+	bool m_play = false;
 
 public:
 

@@ -621,6 +621,10 @@ void CEntornVGIView::OnPaint()
 {
 	if (escena == ESCENA_PRACTICA_COTXE_1)
 	{
+
+		glDisable(GL_LIGHT0);
+		glDisable(GL_LIGHTING);
+
 		CPaintDC dc(this); // device context for painting
 						   // TODO: Agregue aquí su código de controlador de mensajes
 
