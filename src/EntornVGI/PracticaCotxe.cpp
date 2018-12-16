@@ -92,33 +92,32 @@ void PracticaCotxe::Init(int w, int h)
 	m_circuit.SetChildsLength(MAX_JUGADORS);
 	InitJugadors(w, h);
 	setNJugadors(m_nJugadors, w, h, m_circuit.getDistance());
+
+	m_sun.encesa = true;
+	m_sun.restringida = false;
+
+	m_sun.cutoff = 0.0;
+	m_sun.exponent = 0.0;
+
+	m_sun.difusa[0] = 1.0f;		m_sun.difusa[1] = 1.0f;		m_sun.difusa[2] = 1.0f;		m_sun.difusa[3] = 1.0f;
+	m_sun.especular[0] = 1.0f;		m_sun.especular[1] = 1.0f;		m_sun.especular[2] = 1.0f;		m_sun.especular[3] = 1.0f;
+
+	m_sun.posicio.R = -1000.0;	m_sun.posicio.alfa = 90.0;		m_sun.posicio.beta = 0.0;
+	m_sun.atenuacio.a = 0.0;		m_sun.atenuacio.b = 0.0;		m_sun.atenuacio.c = 1.0;		// Llum sense atenuació per distància (a,b,c)=(0,0,1)
+	m_sun.spotdirection[0] = 0.0;		m_sun.spotdirection[1] = 0.0;		m_sun.spotdirection[2] = 0.0;
 	
 }
 
 void PracticaCotxe::Iluminacio(char ilumin, bool textur, char obj) {
 
-	m_sun.encesa = true;
-	m_sun.difusa[0] = 1.0f;		m_sun.difusa[1] = 1.0f;		m_sun.difusa[2] = 1.0f;		m_sun.difusa[3] = 1.0f;
-	m_sun.especular[0] = 1.0f;		m_sun.especular[1] = 1.0f;		m_sun.especular[2] = 1.0f;		m_sun.especular[3] = 1.0f;
-
-	m_sun.posicio.R = -300000.0;		m_sun.posicio.alfa = 90.0;		m_sun.posicio.beta = 0.0;		// Posició llum (x,y,z)=(0,0,75)
-	m_sun.atenuacio.a = 0.0;		m_sun.atenuacio.b = 0.0;		m_sun.atenuacio.c = 1.0;		// Llum sense atenuació per distància (a,b,c)=(0,0,1)
-	m_sun.restringida = false;
-	m_sun.spotdirection[0] = 0.0;	m_sun.spotdirection[1] = 0.0;	m_sun.spotdirection[2] = 0.0;
-	m_sun.cutoff = 0.0;			m_sun.exponent = 0.0;
-
-	// =========================================================================================================
-	// Testing lightness =======================================================================================
-	// =========================================================================================================
-
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
 
-	GLfloat angv, angh;
+	//GLfloat angv, angh;
 
 	// Configuració de la font de llum LIGHT1
-	GLfloat position[]	= { 0.0, 0.0, 1000.0, 1.0 };
-	GLfloat ambientg[]	= { 0.5, 0.5,    0.5, 1.0 };
+	GLfloat position[]	= { 500.0, 500.0, 1000.0, 1.0 };
+	GLfloat ambientg[]	= { 0.6, 0.6, 0.6, 1.0 }; // def {0.5, 0.5, 0.5, 1.0}
 
 	// Definició de llum ambient
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientg);
@@ -126,14 +125,13 @@ void PracticaCotxe::Iluminacio(char ilumin, bool textur, char obj) {
 	if (m_sun.encesa) {
 
 		// Conversió angles graus -> radians
-		angv = m_sun.posicio.alfa * pi / 180;
+		/*angv = m_sun.posicio.alfa * pi / 180;
 		angh = m_sun.posicio.beta * pi / 180;
 
 		// Conversió Coord. esfèriques -> Coord. cartesianes
 		position[0] = m_sun.posicio.R * cos(angh) * cos(angv);
 		position[1] = m_sun.posicio.R * sin(angh) * cos(angv);
-		position[2] = m_sun.posicio.R * sin(angv);
-		position[3] = 1.0;
+		position[2] = m_sun.posicio.R * sin(angv);*/
 
 		glLightfv(GL_LIGHT1, GL_POSITION, position);
 		
@@ -245,10 +243,6 @@ void PracticaCotxe::Iluminacio(char ilumin, bool textur, char obj) {
 	glEndList();
 
 	// =========================================================
-
-	// =========================================================================================================
-	// =========================================================================================================
-	// =========================================================================================================
 
 	////bool ll_amb=true;
 	//GLfloat angv, angh;
