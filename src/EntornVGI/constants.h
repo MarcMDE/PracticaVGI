@@ -56,6 +56,7 @@
 #define OBJECTEOBJT 6   // Objecte OBJ amb textures
 #define OBJ_CAR 4		// Cotxe obj
 #define OBJ_WHEEL 8		// Roda obj
+#define OBJ_META 9   // Meta
 
 // Textures
 #define TXT_TEST 6

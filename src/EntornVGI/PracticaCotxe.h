@@ -41,6 +41,8 @@ private:
 	float vY = 1;
 	float vZ = 0;
 
+	OGLObject m_meta;
+
 	UIButton m_buttonsInici[BUTTONS_INICI];
 	UIButton m_buttonsSelec[BUTTONS_SELEC];
 	UIButton m_buttonsPause[BUTTONS_PAUSE];
