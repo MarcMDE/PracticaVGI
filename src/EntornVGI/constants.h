@@ -16,7 +16,6 @@
 #define IMA_PICK 3
 #define PASSEIG_V 4
 
-
 //--------------- VGI: Tipus de Polars (per la Visualització Interactiva)
 #define POLARZ 'Z'
 #define POLARY 'Y'
@@ -61,17 +60,18 @@
 // Textures
 #define TXT_TEST 6
 #define TXT_TITLE 7
-#define TXT_LAP 8
-#define TXT_BOOST 9
-#define TXT_CIRCUIT 10
-#define TXT_PLAYERS 11
-#define TXT_B_START 12
-#define TXT_B_EXIT 13
-#define TXT_B_NEXT 14
-#define TXT_B_SELEC_PC_1 15
-#define TXT_B_SELEC_PC_2 16
-#define TXT_B_SELEC_PC_3 17
-#define TXT_B_SELEC_PC_4 18
+//#define TXT_LAP 8
+#define TXT_BOOST 8
+#define TXT_CIRCUIT 9
+#define TXT_PLAYERS 10
+#define TXT_B_START 11
+#define TXT_B_EXIT 12
+#define TXT_B_NEXT 13
+#define TXT_B_SELEC_PC_1 14
+#define TXT_B_SELEC_PC_2 15
+#define TXT_B_SELEC_PC_3 16
+#define TXT_B_SELEC_PC_4 17
+#define TXT_LAP 18
 
 // -------------- VGI: Definició dels valors del pla near i far del Volum de Visualització en Perspectiva
 const int p_near=1;

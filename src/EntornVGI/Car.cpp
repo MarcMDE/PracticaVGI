@@ -24,6 +24,7 @@ void Car::Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 sca
 
 void Car::SetMoveValues(float dist)
 {
+	m_boosts = m_initialBoosts;
 	m_friction = m_frictionC / dist;
 	m_gravity = m_gravityC / dist;
 	m_boostSpeed = m_boostSpeedC / dist;
@@ -142,6 +143,11 @@ void Car::ResetProgress()
 void Car::AddBoost()
 {
 	if (m_boosts < m_maxBoosts) m_boosts++;
+}
+
+int Car::getBoosts()
+{
+	return m_boosts;
 }
 
 int Car::getLaps()

@@ -555,7 +555,6 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 void PracticaCotxe::DrawInterface(int w, int h)
 {
 	glDisable(GL_SCISSOR_TEST);
-	glViewport(0, 0, w, h);
 
 	glColor3f(1, 1, 1);
 
@@ -566,7 +565,7 @@ void PracticaCotxe::DrawInterface(int w, int h)
 	switch (m_currScreen)
 	{
 	case INICI:
-
+		glViewport(0, 0, w, h);
 		DrawUIElement(TXT_TITLE, w/2, h /2 - 200, 400, 200);
 		
 		for(int i=0; i<BUTTONS_INICI; i++)
@@ -574,11 +573,11 @@ void PracticaCotxe::DrawInterface(int w, int h)
 			m_buttonsInici[i].Draw();
 		}
 
-		DrawUIElement({ 0, 0, 1, 1 }, w / 2, h / 2, w, h);
+		DrawUIElement({ 0, 0, 1.0f, 1.0f }, w / 2, h / 2, w, h);
 
 		break;
 	case SELECCIO:
-
+		glViewport(0, 0, w, h);
 		// TODO: Dibuixar etiquetes Circuit i Jugadors
 		DrawUIElement(TXT_PLAYERS, 150, 100, 200, 75);
 		DrawUIElement(TXT_CIRCUIT, 150, h - 100, 200, 75);
@@ -590,17 +589,33 @@ void PracticaCotxe::DrawInterface(int w, int h)
 
 		break;
 	case GAMEPLAY:
-		// TODO: Dibuixar botons per cada jugador (accions restants i voltes que porten (les voltes encara no les feu))
-
 		if (m_isPaused)
 		{
-
+			glViewport(0, 0, w, h);
 			DrawUIElement({ 0.2f, 0.2f, 0.2f, 0.6f }, w / 2, h / 2, w, h);
 			// DRAW exit button
 
 			// TODO: Dibuixar text pausa
 		}
 
+		// TODO: Dibuixar botons per cada jugador (accions restants i voltes que porten (les voltes encara no les feu))
+		glEnable(GL_SCISSOR_TEST);
+		for (int i = 0; i < m_nJugadors; i++)
+		{
+			glViewport(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
+			glScissor(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1]);
+
+			for (int j = 0; j < m_cars[i].getBoosts(); j++)
+			{
+				DrawUIElement(TXT_BOOST, 60, 60 + (80+10)*j, 80, 80);
+
+			}
+			int nL = m_cars[i].getLaps();
+			if (nL >= MAX_LAPS) nL = MAX_LAPS - 1;
+
+			DrawUIElement(TXT_LAP + nL, m_w[i][1]/2, 80, 100, 100);
+		}
+		glDisable(GL_SCISSOR_TEST);
 		break;
 	default:
 		break;

@@ -42,6 +42,7 @@ public:
 	void ResetProgress();
 	void AddBoost();
 
+	int getBoosts();
 	int getLaps();
 
 	//Car & Car::operator=(const Car & c);

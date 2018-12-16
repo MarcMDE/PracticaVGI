@@ -3760,7 +3760,6 @@ void CEntornVGIView::OnPracticaCotxe()
 
 		// Carregar textura boto inici
 		loadIMA("textures/ProjecteCotxe/titol.png", TXT_TITLE);
-		loadIMA("textures/ProjecteCotxe/lap.png", TXT_LAP);
 		loadIMA("textures/ProjecteCotxe/boost.png", TXT_BOOST);
 		loadIMA("textures/ProjecteCotxe/circuit.png", TXT_CIRCUIT);
 		loadIMA("textures/ProjecteCotxe/jugadors.png", TXT_PLAYERS);
@@ -3771,6 +3770,9 @@ void CEntornVGIView::OnPracticaCotxe()
 		loadIMA("textures/ProjecteCotxe/b_2.png", TXT_B_SELEC_PC_2);
 		loadIMA("textures/ProjecteCotxe/b_3.png", TXT_B_SELEC_PC_3);
 		loadIMA("textures/ProjecteCotxe/b_4.png", TXT_B_SELEC_PC_4);
+		loadIMA("textures/ProjecteCotxe/lap_1.png", TXT_LAP);
+		loadIMA("textures/ProjecteCotxe/lap_2.png", TXT_LAP+1);
+		loadIMA("textures/ProjecteCotxe/lap_3.png", TXT_LAP+2);
 
 		// Parametres textures ----
 			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	
