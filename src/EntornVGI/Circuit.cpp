@@ -190,4 +190,42 @@ void Circuit::Draw()
 	glTexCoord2f(1.0 * m_carrils, 1.0); glVertex3f(pr.X(), pr.Y(), pr.Z());
 
 	glEnd();
+
+
+	glDisable(GL_TEXTURE_2D);
+	inc = 1.0f / BoletesMax;
+	bool rightBoleta = true;
+	for (f = inc; f < 1; f += inc)
+	{
+		m_spline.CalcDirPos(f, d, p);
+		d.Normalize();
+
+		perp = d.DirCrossP(Vector3(0, 1, 0));
+		pl = p + (perp * (-width-BoletesOffsetX));
+		pr = p + (perp * (width+BoletesOffsetX));
+
+			glColor3f(1, 0.2f, 0.2f);
+
+			if (rightBoleta)
+			{
+				// Dibuixem boleta dreta
+				glPushMatrix();
+				glTranslatef(pr.X(), pr.Y() + BoletesOffsetY, pr.Z());
+				glutSolidSphere(BoletesRad, 10, 10);
+				glPopMatrix();
+			}
+			else
+			{
+				// Dibuixem boleta esquerra
+				glPushMatrix();
+				glTranslatef(pl.X(), pl.Y() + BoletesOffsetY, pl.Z());
+				glutSolidSphere(BoletesRad, 10, 10);
+				glPopMatrix();
+			}
+
+			rightBoleta = !rightBoleta;
+
+			glColor3f(1, 1, 1);
+	}
+	glEnable(GL_TEXTURE_2D);
 }

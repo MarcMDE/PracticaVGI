@@ -21,12 +21,13 @@ private:
 	OGLObject m_body;
 	MobileOGLObject** m_wheels;
 	int m_wheelsLength;
-
+	
 	Vector3 m_direction;
 	float m_speed;
 	float m_progress;
 	int m_boosts;
 	int m_laps;
+
 
 public:
 	Car() : MobileOGLObject() {};
