@@ -9,8 +9,8 @@ private:
 	const int m_maxBoosts = 3;
 	const int m_initialBoosts = m_maxBoosts;
 	const float m_frictionC = 0.03f;
-	const float m_gravityC = 0.06f;
-	const int m_boostSpeedC = 10;
+	const float m_gravityC = 0.4f;
+	const float m_boostSpeedC = 10.0f;
 	const float m_brakeSpeedC = 2.5f;
 
 	float m_friction;
@@ -21,12 +21,13 @@ private:
 	OGLObject m_body;
 	MobileOGLObject** m_wheels;
 	int m_wheelsLength;
-
+	
 	Vector3 m_direction;
 	float m_speed;
 	float m_progress;
 	int m_boosts;
 	int m_laps;
+
 
 public:
 	Car() : MobileOGLObject() {};
