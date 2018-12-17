@@ -696,10 +696,10 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 #endif
 
 	// Dibuixa PoweUP
-	PowerUp pw;
+	//PowerUp pw;
 
-	pw.Init(TXT_BOOST);
-	pw.Draw();
+	//pw.Init(TXT_BOOST);
+	//pw.Draw();
 
 	// Enviar les comandes gràfiques a pantalla
 	glFlush();
