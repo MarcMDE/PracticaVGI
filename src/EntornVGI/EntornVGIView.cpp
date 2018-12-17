@@ -3777,6 +3777,11 @@ void CEntornVGIView::OnPracticaCotxe()
 		loadIMA("textures/ProjecteCotxe/lap_1.png", TXT_LAP);
 		loadIMA("textures/ProjecteCotxe/lap_2.png", TXT_LAP+1);
 		loadIMA("textures/ProjecteCotxe/lap_3.png", TXT_LAP+2);
+		loadIMA("textures/ProjecteCotxe/fi.png", TXT_FI);
+		loadIMA("textures/ProjecteCotxe/n_1.png", TXT_FI + 1);
+		loadIMA("textures/ProjecteCotxe/n_2.png", TXT_FI + 2);
+		loadIMA("textures/ProjecteCotxe/n_3.png", TXT_FI + 3);
+		loadIMA("textures/ProjecteCotxe/n_4.png", TXT_FI + 4);
 
 		// Parametres textures ----
 			glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);	

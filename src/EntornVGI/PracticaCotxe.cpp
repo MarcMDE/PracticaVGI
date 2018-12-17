@@ -733,6 +733,12 @@ void PracticaCotxe::DrawInterface(int w, int h)
 		DrawUIElement({ 1, 0.7f, 0.9f, 1.0f }, w / 2, h / 2, w, h);
 
 		break;
+	case PAUSA:
+		glViewport(0, 0, w, h);
+
+		DrawUIElement(TXT_FI, w / 2, (h / 2) - 75, 675, 75); // TODO: S'ha de crear un missatge de pausa
+
+		break;
 	case SELECCIO:
 		glViewport(0, 0, w, h);
 		// TODO: Dibuixar etiquetes Circuit i Jugadors
@@ -770,7 +776,16 @@ void PracticaCotxe::DrawInterface(int w, int h)
 			int nL = m_cars[i].getLaps();
 			if (nL >= MAX_LAPS) nL = MAX_LAPS - 1;
 
-			DrawUIElement(TXT_LAP + nL, m_w[i][1]/2, 80, 100, 100);
+			if (m_nJugadors == 1) {
+
+				DrawUIElement(TXT_LAP + nL, m_w[i][1] / 2, 80, 100, 100);
+
+			} else {
+
+				DrawUIElement(TXT_LAP + nL, m_w[i][1], 80, 100, 100);
+
+			}
+
 		}
 		glDisable(GL_SCISSOR_TEST);
 		break;
@@ -778,7 +793,10 @@ void PracticaCotxe::DrawInterface(int w, int h)
 	case FI:
 		glViewport(0, 0, w, h);
 		// TODO: Dibuixar etiquetes Circuit i Jugadors
-		DrawUIElement(TXT_NUM, w, h / 3, 200, 75);
+		DrawUIElement(TXT_FI, w / 2, (h / 2) - 75, 675, 75);
+		DrawUIElement(TXT_FI + m_guanyador, w / 2, (h / 2) + 75, 75, 75);
+
+		m_buttonsSelec[8].Draw();
 
 		break;
 
@@ -804,10 +822,21 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 	{
 	case PAUSE:
 
-		if (m_currScreen == GAMEPLAY) 
+		if ((m_currScreen == GAMEPLAY) || (m_currScreen == PAUSA))
 		{
 			// Pause només funciona a gameplay screen
 			m_isPaused = !m_isPaused;
+
+			if (m_isPaused) {
+
+				m_currScreen = PAUSA;
+
+			} else {
+
+				m_currScreen = GAMEPLAY;
+
+			}
+
 		}
 
 		break;

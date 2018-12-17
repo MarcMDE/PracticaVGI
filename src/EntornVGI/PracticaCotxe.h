@@ -27,7 +27,7 @@
 const int DAV[MAX_JUGADORS] = { 50, 53, 56, 219 }; // 2, 5, 8, '
 const int DAR[MAX_JUGADORS] = { 49, 52, 55, 48 }; // 1, 4, 7, 0
 
-enum SCREENS { INICI=0, SELECCIO=1, GAMEPLAY=2, FI=3 };
+enum SCREENS { INICI=0, SELECCIO=1, GAMEPLAY=2, FI=3, PAUSA=4 };
 enum B_INICI { START=0, EXIT=1 };
 enum B_SELEC { P1=0, P2, P3, P4, C1, C2, C3, C4, NEXT };
 enum B_PAUSE { BOOST=0, LAP, EXITB };
