@@ -432,6 +432,8 @@ void PracticaCotxe::Iluminacio(char ilumin, bool textur, char obj) {
 void PracticaCotxe::DrawUIElement(int texture, int posX, int posY, int width, int heigth)
 {
 	glEnable(GL_TEXTURE_2D);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glBegin(GL_QUADS);
 	//glColor3f(1.0f, 0.0f, 0.0f); // Red
@@ -440,6 +442,7 @@ void PracticaCotxe::DrawUIElement(int texture, int posX, int posY, int width, in
 	glTexCoord2f(0.0, 1.0); glVertex2f(posX-width/2, posY-heigth/2);
 	glTexCoord2f(1.0, 1.0); glVertex2f(posX+width/2, posY-heigth/2);
 	glEnd();
+	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 }
 
@@ -775,13 +778,7 @@ void PracticaCotxe::DrawInterface(int w, int h)
 	case FI:
 		glViewport(0, 0, w, h);
 		// TODO: Dibuixar etiquetes Circuit i Jugadors
-		DrawUIElement(TXT_PLAYERS, 150, 100, 200, 75);
-		DrawUIElement(TXT_CIRCUIT, 150, h - 100, 200, 75);
-
-		for (int i = 0; i < BUTTONS_SELEC; i++)
-		{
-			m_buttonsSelec[i].Draw();
-		}
+		DrawUIElement(TXT_NUM, w, h / 3, 200, 75);
 
 		break;
 
@@ -909,27 +906,7 @@ void PracticaCotxe::Update()
 
 		break;
 	case SELECCIO:
-		if (!m_isPaused)
-		{
-			Vector3 dir, pos;
-			for (int i = 0; i < m_nJugadors; i++)
-			{
-				m_circuit.CalcDirPos(m_cars[i].GetProgress(), i, dir, pos);
-				m_cars[i].Move(pos, dir);
-
-				if (m_cars[i].getLaps() >= MAX_LAPS) {
-
-					m_isPaused = true;
-					m_music.stop();
-					m_guanyador = i + 1;
-
-				}
-			}
-		}
-		else
-		{
-
-		}
+		
 
 		break;
 	case GAMEPLAY:
@@ -947,15 +924,19 @@ void PracticaCotxe::Update()
 					m_isEnd = true;
 					m_music.stop();
 					m_guanyador = i + 1;
-					m_currScreen = SELECCIO; // Hauria de ser FI, s'ha de crear aquesta Screen
+					m_currScreen = FI;
 
 				}
 			}
 
 			if (m_isEnd) {
+
 				for (int i = 0; i < m_nJugadors; i++) {
+
 					m_cars[i].ResetLaps();
+				
 				}
+			
 			}
 
 		}
@@ -965,6 +946,12 @@ void PracticaCotxe::Update()
 		}
 
 		break;
+
+	case FI:
+
+
+		break;
+
 	default:
 		break;
 	}

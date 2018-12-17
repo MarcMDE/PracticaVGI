@@ -72,6 +72,7 @@
 #define TXT_B_SELEC_PC_3 16
 #define TXT_B_SELEC_PC_4 17
 #define TXT_LAP 18
+#define TXT_NUM 19
 
 // -------------- VGI: Definició dels valors del pla near i far del Volum de Visualització en Perspectiva
 const int p_near=1;
