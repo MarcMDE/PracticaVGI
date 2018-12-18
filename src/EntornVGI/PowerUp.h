@@ -6,7 +6,7 @@ class PowerUp : public MobileOGLObject
 private:
 	int textura;
 	int tamany;
-	const int tamanyMax = 10;
+	const int tamanyMax = 20;
 public:
 	PowerUp();
 	~PowerUp();

@@ -567,6 +567,7 @@ void PracticaCotxe::OnButtonClickSelec(int x, int y)
 		case NEXT:
 
 			m_buttonsSelec[b].Unselect();
+			m_circuit.LoadPowerUps();
 			m_currScreen = GAMEPLAY;
 
 			break;

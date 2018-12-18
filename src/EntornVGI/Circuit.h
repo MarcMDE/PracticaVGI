@@ -9,10 +9,14 @@ enum Circuits {CIRCUIT_1 = 0, CIRCUIT_2 = 1, CIRCUIT_3 = 2, CIRCUIT_4 = 3, DONUT
 class Circuit : public OGLObject
 {
 private:
+
 	const float BoletesRad = 17;
 	const int BoletesMax = 50;
-	const float BoletesOffsetX = 50;
-	const float BoletesOffsetY = 7;
+	const float BoletesOffsetX = 40;
+	const float BoletesOffsetY = 10;
+	const float PowerUpOffsetY = 25;
+	const float BoletesRad = 17;
+	const int BoletesMax = 50;
 
 	const string CircuitsPwFileNames[6] = { "circuits/c1pw.txt", "circuits/c2pw.txt", "circuits/c3pw.txt", "circuits/c4pw.txt", "circuits/c5pw.txt", "circuits/c6pw.txt" };
 	const string CircuitsFileNames[6] = { "circuits/c1.txt", "circuits/c2.txt", "circuits/c3.txt", "circuits/c4.txt", "circuits/c5.txt", "circuits/c6.txt" };
@@ -24,13 +28,14 @@ private:
 	Spline m_spline;
 
 	PowerUp** m_powerUps;
+	int m_poweUpsLength;
 
 	void m_GenRoadTexture();
 	GLubyte m_roadImg[16][16][4];
 	GLuint m_roadTextureId = -1;
 
 public:
-	Circuit() : m_carrils(3), OGLObject() {};
+	Circuit() : m_carrils(1), m_poweUpsLength(0), OGLObject() {};
 	~Circuit();
 	
 	void Init(int carrils);
@@ -45,7 +50,7 @@ public:
 
 	float getDistance();
 
-	void LoadPowerUps(Circuits c);
+	void LoadPowerUps();
 
 	void Draw();
 };
