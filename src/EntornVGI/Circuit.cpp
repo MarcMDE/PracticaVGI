@@ -226,6 +226,10 @@ void Circuit::Draw()
 
 
 	glDisable(GL_TEXTURE_2D);
+
+	float colorG = 1.0f;
+	glColor3f(1.0f - colorG, colorG, 1.0f - colorG);
+	// Dibuix boletes
 	inc = 1.0f / BoletesMax;
 	bool rightBoleta = true;
 	for (f = inc; f < 1; f += inc)
@@ -237,7 +241,7 @@ void Circuit::Draw()
 		pl = p + (perp * (-width-BoletesOffsetX));
 		pr = p + (perp * (width+BoletesOffsetX));
 
-			glColor3f(1, 0.2f, 0.2f);
+			glColor3f(1.0f - colorG, colorG, 1.0f - colorG);
 
 			if (rightBoleta)
 			{
@@ -258,9 +262,92 @@ void Circuit::Draw()
 
 			rightBoleta = !rightBoleta;
 
-			glColor3f(1, 1, 1);
+			colorG -= inc;
+			//glColor3f(1, 1, 1);
 	}
 
+
+	glBegin(GL_LINES);
+
+	glLineWidth(2.0f);
+
+	// Barrera esqerra
+	colorG = 1.0f;
+	glColor3f(1.0f - colorG, colorG, 1.0f - colorG);
+	f = 0;
+	m_spline.CalcDirPos(f, d, p);
+	d.Normalize();
+
+	perp = d.DirCrossP(Vector3(0, 1, 0));
+	pl = p + (perp * (-width - BoletesOffsetX));
+
+	glVertex3f(pl.X(), pl.Y() + BoletesOffsetY, pl.Z());
+
+	for (f = f+inc; f < 1-inc; f += inc)
+	{
+		glColor3f(1.0f - colorG, colorG, 1.0f - colorG);
+		m_spline.CalcDirPos(f, d, p);
+		d.Normalize();
+
+		perp = d.DirCrossP(Vector3(0, 1, 0));
+		pl = p + (perp * (-width - BoletesOffsetX));
+
+		glVertex3f(pl.X(), pl.Y() + BoletesOffsetY, pl.Z());
+		glVertex3f(pl.X(), pl.Y() + BoletesOffsetY, pl.Z());
+		colorG -= inc;
+	}
+
+	m_spline.CalcDirPos(1, d, p);
+	d.Normalize();
+
+	perp = d.DirCrossP(Vector3(0, 1, 0));
+	pl = p + (perp * (-width - BoletesOffsetX));
+
+	glVertex3f(pl.X(), pl.Y() + BoletesOffsetY, pl.Z());
+
+
+	// Barrera dreta
+	colorG = 1.0f;
+	glColor3f(1.0f - colorG, colorG, 1.0f - colorG);
+	f = 0;
+	m_spline.CalcDirPos(f, d, p);
+	d.Normalize();
+
+	perp = d.DirCrossP(Vector3(0, 1, 0));
+	pr = p + (perp * (width + BoletesOffsetX));
+
+	glVertex3f(pr.X(), pr.Y() + BoletesOffsetY, pr.Z());
+
+	for (f = f + inc; f < 1; f += inc)
+	{
+		glColor3f(1.0f - colorG, colorG, 1.0f - colorG);
+		m_spline.CalcDirPos(f, d, p);
+		d.Normalize();
+
+		perp = d.DirCrossP(Vector3(0, 1, 0));
+		pr = p + (perp * (width + BoletesOffsetX));
+
+		glVertex3f(pr.X(), pr.Y() + BoletesOffsetY, pr.Z());
+		glVertex3f(pr.X(), pr.Y() + BoletesOffsetY, pr.Z());
+		colorG -= inc;
+	}
+
+	m_spline.CalcDirPos(1, d, p);
+	d.Normalize();
+
+	perp = d.DirCrossP(Vector3(0, 1, 0));
+	pr = p + (perp * (width + BoletesOffsetX));
+
+	glVertex3f(pr.X(), pr.Y() + BoletesOffsetY, pr.Z());
+
+
+	glEnd();
+
+
+	glColor3f(1, 1, 1);
+
+   
+   
 	glEnable(GL_TEXTURE_2D);
 
 	if (m_poweUpsLength > 0)

@@ -9,15 +9,18 @@ enum Circuits {CIRCUIT_1 = 0, CIRCUIT_2 = 1, CIRCUIT_3 = 2, CIRCUIT_4 = 3, DONUT
 class Circuit : public OGLObject
 {
 private:
-	const float BoletesRad = 7;
-	const int BoletesMax = 40;
+
+	const float BoletesRad = 17;
+	const int BoletesMax = 50;
 	const float BoletesOffsetX = 40;
 	const float BoletesOffsetY = 10;
 	const float PowerUpOffsetY = 25;
+	const float BoletesRad = 17;
+	const int BoletesMax = 50;
 
 	const string CircuitsPwFileNames[6] = { "circuits/c1pw.txt", "circuits/c2pw.txt", "circuits/c3pw.txt", "circuits/c4pw.txt", "circuits/c5pw.txt", "circuits/c6pw.txt" };
 	const string CircuitsFileNames[6] = { "circuits/c1.txt", "circuits/c2.txt", "circuits/c3.txt", "circuits/c4.txt", "circuits/c5.txt", "circuits/c6.txt" };
-	const int CircuitsResolutions[6] = { 150, 100, 30, 150, 70, 20};
+	const int CircuitsResolutions[6] = { 150, 250, 30, 150, 70, 20};
 	const int CarrilWidth = 50;
 
 	Circuits m_index;
