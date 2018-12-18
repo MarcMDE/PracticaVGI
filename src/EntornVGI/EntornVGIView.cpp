@@ -2054,8 +2054,8 @@ void CEntornVGIView::OnLButtonDown(UINT nFlags, CPoint point)
 		practicaCotxe.OnButtonClickSelec(point.x, point.y);
 		break;
 
-	case GAMEPLAY:
-		practicaCotxe.OnButtonClickPause(point.x, point.y);
+	case FI:
+		practicaCotxe.OnButtonClickFI(point.x, point.y);
 		break;
 
 	default:
@@ -3777,6 +3777,7 @@ void CEntornVGIView::OnPracticaCotxe()
 		loadIMA("textures/ProjecteCotxe/lap_1.png", TXT_LAP);
 		loadIMA("textures/ProjecteCotxe/lap_2.png", TXT_LAP+1);
 		loadIMA("textures/ProjecteCotxe/lap_3.png", TXT_LAP+2);
+		loadIMA("textures/ProjecteCotxe/t_pausa.png", TXT_PAUSA);
 		loadIMA("textures/ProjecteCotxe/fi.png", TXT_FI);
 		loadIMA("textures/ProjecteCotxe/n_1.png", TXT_FI + 1);
 		loadIMA("textures/ProjecteCotxe/n_2.png", TXT_FI + 2);

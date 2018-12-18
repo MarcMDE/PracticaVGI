@@ -75,6 +75,7 @@ void PracticaCotxe::Init(int w, int h)
 	m_buttonsSelec[C3].Set(600, h-100, 75, 75, TXT_B_SELEC_PC_3, false);
 	m_buttonsSelec[C4].Set(700, h-100, 75, 75, TXT_B_SELEC_PC_4, false);
 	m_buttonsSelec[NEXT].Set(w-200, h/2, 200, 75, TXT_B_NEXT, false);
+	m_buttonsFI[EXITF].Set(w - 200, h / 2, 200, 75, TXT_B_NEXT, false);
 
 	m_circuit.Init(m_nJugadors);
 	m_circuit.Load(CIRCUIT_1);
@@ -118,7 +119,7 @@ void PracticaCotxe::Iluminacio(char ilumin, bool textur, char obj) {
 
 	// Configuració de la font de llum LIGHT1
 	GLfloat position[]	= { 500.0, 500.0, 1000.0, 1.0 };
-	GLfloat ambientg[]	= { 0.6, 0.6, 0.6, 1.0 }; // def {0.5, 0.5, 0.5, 1.0}
+	GLfloat ambientg[]	= { 0.5, 0.5, 0.5, 1.0 };
 
 	// Definició de llum ambient
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientg);
@@ -577,30 +578,10 @@ void PracticaCotxe::OnButtonClickSelec(int x, int y)
 	}
 }
 
-void PracticaCotxe::OnButtonClickPause(int x, int y)
+void PracticaCotxe::OnButtonClickFI(int x, int y)
 {
-	if (m_isPaused)
-	{
-		B_PAUSE b;
-
-		int i = 0;
-		while (i < BUTTONS_PAUSE && !m_buttonsPause[i].IsClicked(x, y))
-		{
-			i++;
-		}
-
-		if (i < BUTTONS_PAUSE)
-		{
-			b = (B_PAUSE)i;
-			switch (b)
-			{
-			case EXITB:
-				m_currScreen = INICI;
-				break;
-			default:
-				break;
-			}
-		}
+	if (m_buttonsFI[EXITF].IsClicked(x, y)) {
+		m_currScreen = INICI;
 	}
 }
 
@@ -620,6 +601,8 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	col_fons.g = 0;
 	col_fons.b = 0;
 	col_fons.a = 1;
+	glViewport(0, 0, m_sWidth, m_sHeigth);
+	Fons(col_fons);
 
 	/*Fons(col_fons);*/
 	Vector3 cameraPosition;
@@ -628,15 +611,15 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 	{
 	case INICI:
 		cameraPosition = Vector3(0, 250, 500);
-		glViewport(0, 0, m_sWidth, m_sHeigth);
-		Fons(col_fons);
+		//glViewport(0, 0, m_sWidth, m_sHeigth);
+		//Fons(col_fons);
 		glLoadIdentity();
 		gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), 0, 0, 0, 0, 1, 0);
 		break;
 	case SELECCIO:
 		cameraPosition = Vector3(0, 250, 500);
-		glViewport(0, 0, m_sWidth, m_sHeigth);
-		Fons(col_fons);
+		//glViewport(0, 0, m_sWidth, m_sHeigth);
+		//Fons(col_fons);
 
 		glLoadIdentity();
 		gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), 0, 0, 0, 0, 1, 0);
@@ -734,12 +717,7 @@ void PracticaCotxe::DrawInterface(int w, int h)
 		DrawUIElement({ 1, 0.7f, 0.9f, 1.0f }, w / 2, h / 2, w, h);
 
 		break;
-	case PAUSA:
-		glViewport(0, 0, w, h);
 
-		DrawUIElement(TXT_FI, w / 2, (h / 2) - 75, 675, 75); // TODO: S'ha de crear un missatge de pausa
-
-		break;
 	case SELECCIO:
 		glViewport(0, 0, w, h);
 		// TODO: Dibuixar etiquetes Circuit i Jugadors
@@ -756,6 +734,7 @@ void PracticaCotxe::DrawInterface(int w, int h)
 		if (m_isPaused)
 		{
 			glViewport(0, 0, w, h);
+			DrawUIElement(TXT_PAUSA, w / 2, (h / 2), 250, 75);
 			DrawUIElement({ 0.2f, 0.2f, 0.2f, 0.6f }, w / 2, h / 2, w, h);
 			// DRAW exit button
 
@@ -823,20 +802,10 @@ void PracticaCotxe::Procesa_Teclat(UINT nChar, UINT nRepCnt) {
 	{
 	case PAUSE:
 
-		if ((m_currScreen == GAMEPLAY) || (m_currScreen == PAUSA))
+		if (m_currScreen == GAMEPLAY)
 		{
 			// Pause només funciona a gameplay screen
 			m_isPaused = !m_isPaused;
-
-			if (m_isPaused) {
-
-				m_currScreen = PAUSA;
-
-			} else {
-
-				m_currScreen = GAMEPLAY;
-
-			}
 
 		}
 
@@ -1045,11 +1014,11 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h, float dist)
 		// Player 1 ==================
 		// Inici
 		m_w[0][0] = 0;
-		m_h[0][0] = 0;
+		m_h[0][0] = h / 4;
 
 		// Fi
 		m_w[0][1] = w / 2;
-		m_h[0][1] = h;
+		m_h[0][1] = h / 2;
 
 		// ===========================
 
@@ -1057,11 +1026,11 @@ void PracticaCotxe::setNJugadors(int nJugadors, int w, int h, float dist)
 
 		// Inici
 		m_w[1][0] = w / 2;
-		m_h[1][0] = 0;
+		m_h[1][0] = h / 4;
 
 		// Fi
 		m_w[1][1] = w / 2;
-		m_h[1][1] = h;
+		m_h[1][1] = h / 2;
 
 		// ===========================
 
