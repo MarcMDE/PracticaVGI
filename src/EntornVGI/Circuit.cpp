@@ -269,7 +269,7 @@ void Circuit::Draw()
 
 	glBegin(GL_LINES);
 
-	glLineWidth(2.0f);
+	glLineWidth(4.0f);
 
 	// Barrera esqerra
 	colorG = 1.0f;
@@ -361,9 +361,13 @@ void Circuit::Draw()
 		}
 	}
 
+	glDisable(GL_TEXTURE_2D);
+	glColor3f(0.7f, 0.2f, 1);
 	Vector3 pos = CalcPosition(0);
 	glPushMatrix();
 	glTranslatef(pos.X(), pos.Y(), pos.Z());
-	glutSolidTorus(m_carrils*CarrilWidth + 50, m_carrils*CarrilWidth + 150, 20, 20);
+	glRotatef(90, 0, 1, 0);
+	glutSolidTorus(20, (m_carrils*CarrilWidth) + 30, 20, 20);
 	glPopMatrix();
+	glEnable(GL_TEXTURE_2D);
 }

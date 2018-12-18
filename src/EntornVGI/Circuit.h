@@ -12,7 +12,7 @@ private:
 
 	const float BoletesRad = 17;
 	const int BoletesMax = 50;
-	const float BoletesOffsetX = 40;
+	const float BoletesOffsetX = 55;
 	const float BoletesOffsetY = 10;
 	const float PowerUpOffsetY = 25;
 	const float RotationSpeed = 1.0f;
