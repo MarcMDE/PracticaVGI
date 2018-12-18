@@ -6,7 +6,7 @@
 
 enum Circuits {CIRCUIT_1 = 0, CIRCUIT_2 = 1, CIRCUIT_3 = 2, CIRCUIT_4 = 3, DONUT_PUJADA = 4, CIRCUIT_6 = 5};
 
-class Circuit : public OGLObject
+class Circuit : public MobileOGLObject
 {
 private:
 
@@ -15,8 +15,7 @@ private:
 	const float BoletesOffsetX = 40;
 	const float BoletesOffsetY = 10;
 	const float PowerUpOffsetY = 25;
-	const float BoletesRad = 17;
-	const int BoletesMax = 50;
+	const float RotationSpeed = 1.0f;
 
 	const string CircuitsPwFileNames[6] = { "circuits/c1pw.txt", "circuits/c2pw.txt", "circuits/c3pw.txt", "circuits/c4pw.txt", "circuits/c5pw.txt", "circuits/c6pw.txt" };
 	const string CircuitsFileNames[6] = { "circuits/c1.txt", "circuits/c2.txt", "circuits/c3.txt", "circuits/c4.txt", "circuits/c5.txt", "circuits/c6.txt" };
@@ -27,6 +26,7 @@ private:
 	int m_carrils;
 	Spline m_spline;
 
+
 	PowerUp** m_powerUps;
 	int m_poweUpsLength;
 
@@ -35,7 +35,7 @@ private:
 	GLuint m_roadTextureId = -1;
 
 public:
-	Circuit() : m_carrils(1), m_poweUpsLength(0), OGLObject() {};
+	Circuit() : m_carrils(1), m_poweUpsLength(0), MobileOGLObject() {};
 	~Circuit();
 	
 	void Init(int carrils);
