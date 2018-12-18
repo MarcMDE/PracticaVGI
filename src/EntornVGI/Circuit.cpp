@@ -360,4 +360,10 @@ void Circuit::Draw()
 			}
 		}
 	}
+
+	Vector3 pos = CalcPosition(0);
+	glPushMatrix();
+	glTranslatef(pos.X(), pos.Y(), pos.Z());
+	glutSolidTorus(m_carrils*CarrilWidth + 50, m_carrils*CarrilWidth + 150, 20, 20);
+	glPopMatrix();
 }
