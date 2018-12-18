@@ -127,12 +127,45 @@ float Circuit::getDistance()
 
 }
 
-void Circuit::LoadPowerUps(Circuits c)
+void Circuit::LoadPowerUps()
 {
-	string nom = CircuitsPwFileNames[c];
+	string fileName = CircuitsPwFileNames[m_index];
 
+	m_powerUps = new PowerUp* [m_carrils];
 
-	m_carrils; //llegir numero arxiu
+	ifstream file;
+	file.open(fileName);
+	//m_circular = true;
+
+	if (file.is_open())
+	{
+		file >> m_poweUpsLength;
+
+		for (int i = 0; i < m_carrils; i++)
+		{
+			m_powerUps[i] = new PowerUp[m_poweUpsLength];
+		}
+
+		int i = 0;
+
+		Vector3 pwPos;
+		Vector3 dir;
+		while (!file.eof())
+		{
+			for (int j = 0; j < m_carrils; j++)
+			{
+				float f;
+				file >> f;
+				CalcDirPos(f, j, dir, pwPos);
+				pwPos = pwPos + Vector3(0, PowerUpOffsetY, 0);
+				m_powerUps[j][i].SetPosition(pwPos);
+			}
+
+			i++;
+		}
+
+		file.close();
+	}
 }
 
 void Circuit::Draw()
@@ -227,5 +260,17 @@ void Circuit::Draw()
 
 			glColor3f(1, 1, 1);
 	}
+
 	glEnable(GL_TEXTURE_2D);
+
+	if (m_poweUpsLength > 0)
+	{
+		for (int i = 0; i < m_carrils; i++)
+		{
+			for (int j = 0; j < m_poweUpsLength; j++)
+			{
+				m_powerUps[i][j].Draw();
+			}
+		}
+	}
 }

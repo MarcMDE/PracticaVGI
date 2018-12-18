@@ -35,6 +35,7 @@ void Car::SetMoveValues(float dist)
 	m_brakeSpeed = m_brakeSpeedC / dist;
 	m_speed = 0;
 	m_progress = 0;
+	m_laps = 0;
 }
 
 void Car::SetWheel(int index, GLuint glIndex, GLuint glTextIndex, Vector3 position, Vector3 rotation, Vector3 scale)
