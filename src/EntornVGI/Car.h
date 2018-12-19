@@ -3,6 +3,8 @@
 #include "MobileOGLObject.h"
 #include "OGLObject.h"
 
+#define TIME_PU 3
+
 class Car : public MobileOGLObject
 {
 private:
@@ -27,7 +29,7 @@ private:
 	float m_progress;
 	int m_boosts;
 	int m_laps;
-
+	int m_GetPU;
 
 public:
 	Car() : MobileOGLObject() {};
@@ -43,6 +45,9 @@ public:
 	void ResetProgress();
 	void AddBoost();
 	void ResetLaps();
+
+	void UpdatePU();
+	bool CheckPU();
 
 	int getBoosts();
 	int getLaps();

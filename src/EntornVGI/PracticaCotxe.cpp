@@ -381,7 +381,8 @@ void PracticaCotxe::OnButtonClickSelec(int x, int y)
 void PracticaCotxe::OnButtonClickFI(int x, int y)
 {
 	if (m_buttonsFI[EXITF].IsClicked(x, y)) {
-		m_currScreen = INICI;
+		Init(m_sWidth, m_sHeigth);
+		//m_currScreen = INICI;
 	}
 }
 
@@ -720,7 +721,19 @@ void PracticaCotxe::Update()
 
 				if (PUColission) {
 
-					m_cars[i].AddBoost();
+					if (m_cars[i].CheckPU()) {
+
+						m_cars[i].AddBoost();
+
+					} else {
+
+						m_cars[i].UpdatePU();
+
+					}
+
+				} else {
+
+					m_cars[i].UpdatePU();
 
 				}
 

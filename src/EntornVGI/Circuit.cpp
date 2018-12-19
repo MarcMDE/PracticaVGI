@@ -129,6 +129,8 @@ float Circuit::getDistance()
 
 void Circuit::LoadPowerUps()
 {
+
+	float f;
 	string fileName = CircuitsPwFileNames[m_index];
 
 	m_powerUps = new PowerUp* [m_carrils];
@@ -152,10 +154,9 @@ void Circuit::LoadPowerUps()
 		Vector3 dir;
 		while (!file.eof())
 		{
+			file >> f;
 			for (int j = 0; j < m_carrils; j++)
 			{
-				float f;
-				file >> f;
 				CalcDirPos(f, j, dir, pwPos);
 				pwPos = pwPos + Vector3(0, PowerUpOffsetY, 0);
 				m_powerUps[j][i].SetPosition(pwPos);

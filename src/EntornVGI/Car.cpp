@@ -7,6 +7,7 @@ void Car::Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 sca
 	m_rotation = rotation;
 	m_scale = scale;
 	m_laps = 0;
+	m_GetPU = 0;
 
 	m_direction = Vector3().Zero();
 	if (wheelsLength > 0)
@@ -24,6 +25,28 @@ void Car::Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 sca
 
 void Car::ResetLaps() {
 	m_laps = 0;
+}
+
+void Car::UpdatePU()
+{
+	
+	if (m_GetPU > 0) {
+	
+		m_GetPU--;
+
+	}
+
+}
+
+bool Car::CheckPU()
+{
+	if (m_GetPU <= 0) {
+
+		return true;
+	
+	}
+	
+	return false;
 }
 
 void Car::SetMoveValues(float dist)
@@ -147,7 +170,12 @@ void Car::ResetProgress()
 
 void Car::AddBoost()
 {
-	if (m_boosts < m_maxBoosts) m_boosts++;
+	if (m_boosts < m_maxBoosts) {
+		
+		m_boosts++;
+		m_GetPU = TIME_PU;
+
+	}
 }
 
 int Car::getBoosts()

@@ -139,16 +139,16 @@ void OGLObject::Draw()
 
 OGLObject::~OGLObject()
 {
-	//if (m_childs != NULL)
-	//{
-	//	for (int i = 0; i < m_childsLength; i++)
-	//	{
-	//		delete m_childs[i];
-	//	}
+	/*if (m_childs != NULL)
+	{
+		for (int i = 0; i < m_childsLength; i++)
+		{
+			delete m_childs[i];
+		}
 
 		delete m_childs;
-	//}
+	}
 
 	m_childs = NULL;
-	m_childsLength = 0;
+	m_childsLength = 0;*/
 }
