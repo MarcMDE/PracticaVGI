@@ -11,7 +11,7 @@ void PracticaCotxe::glRotateV(const Vector3 & v)
 {
 	glRotatef(v.X() * RAD_TO_DEG, 0, 1, 0);
 	//glRotatef(v.Y() * RAD_TO_DEG, 0, 0, 1);
-	//glRotatef(v.Z() * RAD_TO_DEG, 0, 0, 1);
+	//glRotatef(v.Z() * RAD_TO_DEG, 0, 0, 0);
 }
 
 void PracticaCotxe::glScaleV(const Vector3 & v)
@@ -115,8 +115,6 @@ void PracticaCotxe::Iluminacio(char ilumin, bool textur, char obj) {
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
 
-	//GLfloat angv, angh;
-
 	// Configuració de la font de llum LIGHT1
 	GLfloat position[]	= { 500.0, 500.0, 1000.0, 1.0 };
 	GLfloat ambientg[]	= { 0.5, 0.5, 0.5, 1.0 };
@@ -125,15 +123,6 @@ void PracticaCotxe::Iluminacio(char ilumin, bool textur, char obj) {
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientg);
 
 	if (m_sun.encesa) {
-
-		// Conversió angles graus -> radians
-		/*angv = m_sun.posicio.alfa * pi / 180;
-		angh = m_sun.posicio.beta * pi / 180;
-
-		// Conversió Coord. esfèriques -> Coord. cartesianes
-		position[0] = m_sun.posicio.R * cos(angh) * cos(angv);
-		position[1] = m_sun.posicio.R * sin(angh) * cos(angv);
-		position[2] = m_sun.posicio.R * sin(angv);*/
 
 		glLightfv(GL_LIGHT1, GL_POSITION, position);
 		
@@ -180,9 +169,6 @@ void PracticaCotxe::Iluminacio(char ilumin, bool textur, char obj) {
 		
 		// Càlcul de les normals als vertexs si l'objecte és un fractal
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		
-		// Dibuix de les cares back com a línies en Il.luminacio PLANA i SUAU
-		//if (bc_lin) glPolygonMode(GL_BACK, GL_LINE);
 
 		glEnable(GL_COLOR_MATERIAL);
 
@@ -246,188 +232,6 @@ void PracticaCotxe::Iluminacio(char ilumin, bool textur, char obj) {
 
 	// =========================================================
 
-	////bool ll_amb=true;
-	//GLfloat angv, angh;
-
-	//// Configuració de la font de llum LIGHT0.
-	//GLfloat position[] = { 0.0,0.0,200.0,1.0 };
-	//GLfloat especular[] = { 0.0,0.0,0.0,1.0 };
-	//GLfloat ambientg[] = { .5,.5,.5,1.0 };
-
-	//// Definició de llum ambient segons booleana ll_amb
-	//if (ll_amb) glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientg);
-	//else glLightModelfv(GL_LIGHT_MODEL_AMBIENT, especular);
-
-	//if (lumin.encesa) {
-	//	if (!ifix) glLightfv(GL_LIGHT0, GL_POSITION, position);
-	//	else {	// Conversió angles graus -> radians
-	//		angv = lumin.posicio.alfa*pi / 180;
-	//		angh = lumin.posicio.beta*pi / 180;
-
-	//		// Conversió Coord. esfèriques -> Coord. cartesianes
-	//		position[0] = lumin.posicio.R*cos(angh)*cos(angv);
-	//		position[1] = lumin.posicio.R*sin(angh)*cos(angv);
-	//		position[2] = lumin.posicio.R*sin(angv);
-	//		position[3] = 1.0;
-	//		glLightfv(GL_LIGHT0, GL_POSITION, position);
-	//	}
-	//	glLightfv(GL_LIGHT0, GL_DIFFUSE, lumin.difusa);
-	//	glLightfv(GL_LIGHT0, GL_SPECULAR, lumin.especular);
-
-	//	// Coeficients factor atenuació f_att=1/(ad2+bd+c)
-	//	glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, lumin.atenuacio.c);
-	//	glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, lumin.atenuacio.b);
-	//	glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, lumin.atenuacio.a);
-	//	if (lumin.restringida) {
-	//		glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, lumin.spotdirection);
-	//		glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, lumin.cutoff);
-	//		glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, lumin.exponent);
-	//	}
-	//	glEnable(GL_LIGHT0);
-	//}
-	//else glDisable(GL_LIGHT0);
-
-	//glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-
-	//// Selecció del model d'iluminació segons variable ilumin
-	//switch (ilumin)
-	//{
-	//case PUNTS:
-	//	glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
-	//	glEnable(GL_COLOR_MATERIAL);
-
-	//	// Desactivació de l'ocultació de cares
-	//	glDisable(GL_DEPTH_TEST);
-
-	//	// Desactivació de la il.luminació
-	//	glDisable(GL_LIGHTING);
-	//	break;
-
-	//case FILFERROS:
-	//	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	//	glDisable(GL_COLOR_MATERIAL);
-
-	//	// Desactivació de l'ocultació de cares
-	//	//		glDisable(GL_DEPTH_TEST);
-
-	//	// Desactivació de la il-luminació
-	//	glDisable(GL_LIGHTING);
-	//	break;
-
-	//case PLANA:
-	//	// Càlcul de les normals a les cares si l'objecte és un fractal
-	//	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//	// Dibuix de les cares back com a línies en Il.luminacio PLANA i SUAU
-	//	if (bc_lin) glPolygonMode(GL_BACK, GL_LINE);
-
-	//	glEnable(GL_COLOR_MATERIAL);
-
-	//	// Ocultació de cares
-	//	//		glEnable(GL_DEPTH_TEST);
-
-	//	glEnable(GL_NORMALIZE);
-	//	// Il.luminació per cares planes
-	//	glShadeModel(GL_FLAT);
-
-	//	// Activació de la llum
-	//	glEnable(GL_LIGHTING);
-	//	break;
-
-	//case GOURAUD:
-	//	// Càlcul de les normals als vertexs si l'objecte és un fractal
-	//	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//	// Dibuix de les cares back com a línies en Il.luminacio PLANA i SUAU
-	//	if (bc_lin) glPolygonMode(GL_BACK, GL_LINE);
-
-	//	glEnable(GL_COLOR_MATERIAL);
-
-	//	// Ocultació de cares
-	//	//    	glEnable(GL_DEPTH_TEST);
-
-	//	glEnable(GL_NORMALIZE);
-
-	//	// Il.luminació suau 
-	//	glShadeModel(GL_SMOOTH);
-
-	//	// Activació de la llum
-	//	glEnable(GL_LIGHTING);
-	//	break;
-	//}
-
-	////// Configuració de les textures.
-	//if (textur)
-	//{
-	//	// Activació de la textura 0.
-	//	glBindTexture(GL_TEXTURE_2D, 0);
-
-	//	if ((obj != OBJ3DS) && (obj != OBJOBJ))
-	//	{
-	//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	//		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	//	}
-
-	//	// Pregunta 9 enunciat
-	//	if (textur_map) glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	//	else glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
-
-	//	// Generació coordenades textura automàtiques per als objectes Fractals.
-	//	/*	  if (obj == O_FRACTAL)
-	//		  {	  glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-	//			  glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-
-	//	// Coeficicients coordenades textura per a fractals
-	//	//			      sfPlane =     p1,p2,p3,p4
-	//			  GLfloat sfPlane[4] = {  ,  ,  ,  }; // s=p1*x0+p2*y0+p3*z0+p4*w0 on p=(x0,y0,z0,w0)
-	//			  //	  tfPlane =     p1,p2,p3,p4
-	//			  GLfloat tfPlane[4] = {  ,  ,  ,  }; // t=p1*x0+p2*y0+p3*z0+p4*w0 on p=(x0,y0,z0,w0)
-
-	//			  glTexGenfv(GL_S, GL_OBJECT_PLANE, sfPlane);
-	//			  glTexGenfv(GL_T, GL_OBJECT_PLANE, tfPlane);
-
-	//			  glEnable(GL_TEXTURE_GEN_S);
-	//			  glEnable(GL_TEXTURE_GEN_T);
-	//		  }
-	//	*/
-	//	// Coeficicients generació coordenades textura automàtiques per a resta d'objectes
-	//	 /*	  else
-	//		  {	glTexGeni(GL_S,GL_TEXTURE_GEN_MODE,GL_OBJECT_LINEAR);
-	//		  glTexGeni(GL_T,GL_TEXTURE_GEN_MODE,GL_OBJECT_LINEAR);
-
-	//	// Generació coordenades textura.
-	//		  GLfloat sPlane[4] = { -1.0f, 1.0f, 0.0f, 1.0f };
-	//		  GLfloat tPlane[4] = { -1.0f, 0.0f, 1.0f, 1.0f };
-
-	//		  glTexGenfv(GL_S, GL_OBJECT_PLANE, sPlane);
-	//		  glTexGenfv(GL_T, GL_OBJECT_PLANE, tPlane);
-
-	//		  glEnable(GL_TEXTURE_GEN_S);
-	//		  glEnable(GL_TEXTURE_GEN_T);
-	//		  }
-	//	*/
-	//	glEnable(GL_TEXTURE_2D);
-	//}
-	//else {
-	//	glDisable(GL_TEXTURE_2D);
-	//	glDisable(GL_TEXTURE_GEN_S);
-	//	glDisable(GL_TEXTURE_GEN_T);
-	//}
-
-	//// Creació de la llista que dibuixarà els eixos
-	////   funció on està codi per dibuixar eixos
-	//glNewList(EIXOS, GL_COMPILE);
-	//// Dibuix dels eixos sense il.luminació
-	////	if (ilumin!=FILFERROS) 
-	//glDisable(GL_LIGHTING);
-	//// Dibuixar eixos sense textures
-	////	if (textura) 
-	//glDisable(GL_TEXTURE_2D);
-	//deixos();
-	//if (ilumin != FILFERROS) glEnable(GL_LIGHTING);
-	//if (textur) glEnable(GL_TEXTURE_2D);
-	//glEndList();
 }
 
 void PracticaCotxe::DrawUIElement(int texture, int posX, int posY, int width, int heigth)
@@ -521,19 +325,15 @@ void PracticaCotxe::OnButtonClickSelec(int x, int y)
 		{
 		case P1:
 			setNJugadors(1, m_sWidth, m_sHeigth, m_circuit.getDistance());
-			//m_nJugadors = 1;
 			break;
 		case P2:
 			setNJugadors(2, m_sWidth, m_sHeigth, m_circuit.getDistance());
-			//m_nJugadors = 2;
 			break;
 		case P3:
 			setNJugadors(3, m_sWidth, m_sHeigth, m_circuit.getDistance());
-			//m_nJugadors = 3;
 			break;
 		case P4:
 			setNJugadors(4, m_sWidth, m_sHeigth, m_circuit.getDistance());
-			//m_nJugadors = 4;
 			break;
 		case C1:
 			if (m_circuit.GetCurrCircuit() != CIRCUIT_1)
@@ -622,7 +422,7 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 		//Fons(col_fons);
 
 		glLoadIdentity();
-		gluLookAt(cameraPosition.X(), cameraPosition.Y(), cameraPosition.Z(), 0, 0, 0, 0, 1, 0);
+		gluLookAt(cameraPosition.X() - 1400, cameraPosition.Y() + 700, cameraPosition.Z(), 0, 0, 0, 0, 1, 0);
 
 		Iluminacio(GOURAUD, true, 'a');
 		DrawRec(&m_mainObj);

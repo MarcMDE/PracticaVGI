@@ -79,7 +79,7 @@ private:
 	void glRotateV(const Vector3& v);
 	void glScaleV(const Vector3& v);
 	void DrawRec(OGLObject* obj);
-	void Iluminacio(char ilumin, /*bool ifix, bool ll_amb, LLUM lumin,*/ bool textur, /*bool textur_map,*/ char obj/*, bool bc_lin, int step*/);
+	void Iluminacio(char ilumin, bool textur, char obj);
 	void DrawUIElement(int texture, int posX, int posY, int width, int heigth);
 	void DrawUIElement(CColor color, int posX, int posY, int width, int heigth);
 
