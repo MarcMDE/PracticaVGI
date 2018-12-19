@@ -11,7 +11,7 @@ public:
 	PowerUp();
 	~PowerUp();
 
-	void Init(int textura);
+	//void Init(int textura);
 	void Draw();
 	bool CheckColision(Vector3 p);
 };

@@ -51,6 +51,7 @@ public:
 	float getDistance();
 
 	void LoadPowerUps();
+	bool GetPUColission(Vector3 pos, int c);
 
 	void Draw();
 };

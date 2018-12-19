@@ -27,7 +27,7 @@ bool PowerUp::CheckColision(Vector3 p)
 {
 	Vector3 d = p - m_position;
 
-	if (d.X() < tamany / 2 || d.Y() < tamany / 2 || d.Z() < tamany / 2)
+	if (fabs(d.X()) < tamany / 2 && fabs(d.Y()) < tamany / 2 && fabs(d.Z()) < tamany / 2)
 	{
 		return true;
 	}

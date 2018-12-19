@@ -112,7 +112,7 @@ Vector3 Car::GetDirection() const
 
 void Car::Boost()
 {
-	//if (m_boosts > 0)
+	if (m_boosts > 0)
 	{
 		m_speed += m_boostSpeed;
 		m_boosts--;

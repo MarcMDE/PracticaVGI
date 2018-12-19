@@ -917,6 +917,13 @@ void PracticaCotxe::Update()
 			{
 				m_circuit.CalcDirPos(m_cars[i].GetProgress(), i, dir, pos);
 				m_cars[i].Move(pos, dir);
+				bool PUColission = m_circuit.GetPUColission(m_cars[i].GetPosition(), i);
+
+				if (PUColission) {
+
+					m_cars[i].AddBoost();
+
+				}
 
 				if (m_cars[i].getLaps() >= MAX_LAPS) {
 

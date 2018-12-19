@@ -168,6 +168,22 @@ void Circuit::LoadPowerUps()
 	}
 }
 
+bool Circuit::GetPUColission(Vector3 pos, int c)
+{
+
+	for (int i = 0; i < m_poweUpsLength; i++) {
+
+		if (m_powerUps[c][i].CheckColision(pos + Vector3(0, PowerUpOffsetY, 0))) {
+
+			return true;
+
+		}
+
+	}
+
+	return false;
+}
+
 void Circuit::Draw()
 {
 	float inc = 1.0f / CircuitsResolutions[(int)m_index];
