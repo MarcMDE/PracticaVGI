@@ -13,7 +13,7 @@ void Car::Init(int wheelsLength, Vector3 position, Vector3 rotation, Vector3 sca
 	if (wheelsLength > 0)
 	{
 		m_wheelsLength = wheelsLength;
-		m_wheels = new MobileOGLObject*[m_wheelsLength + 1];
+		m_wheels = new MobileOGLObject*[m_wheelsLength /*+ 1*/];
 		SetChildsLength(wheelsLength + 1); // X rodes, 1 carroceria, 1 camara
 	}
 	else
@@ -126,6 +126,11 @@ void Car::Move(Vector3 pos, Vector3 dir)
 		if (m_speed + m_friction > 0) m_speed = 0;
 		else m_speed += m_friction;
 	}
+
+	m_wheels[0]->Rotate({ 0, m_speed * -200, 0 });
+	m_wheels[1]->Rotate({ 0, m_speed * -200, 0 });
+	m_wheels[2]->Rotate({ 0, m_speed * -200, 0 });
+	m_wheels[3]->Rotate({ 0, m_speed * -200, 0 });
 }
 
 Vector3 Car::GetDirection() const
