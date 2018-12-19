@@ -445,6 +445,7 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 			Iluminacio(GOURAUD, true, 'a');
 			DrawRec(&m_mainObj);
 		}
+		glDisable(GL_SCISSOR_TEST);
 		break;
 
 	case FI:
@@ -495,8 +496,6 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 
 void PracticaCotxe::DrawInterface(int w, int h)
 {
-	glDisable(GL_SCISSOR_TEST);
-
 	glColor3f(1, 1, 1);
 
 	glDisable(GL_TEXTURE_2D);
