@@ -381,8 +381,9 @@ void PracticaCotxe::OnButtonClickSelec(int x, int y)
 void PracticaCotxe::OnButtonClickFI(int x, int y)
 {
 	if (m_buttonsFI[EXITF].IsClicked(x, y)) {
-		Init(m_sWidth, m_sHeigth);
-		//m_currScreen = INICI;
+		Reset();
+		m_circuit.UnsetPowerUps();
+		m_currScreen = INICI;
 	}
 }
 
@@ -810,6 +811,20 @@ void PracticaCotxe::InitJugadors(int w, int h) {
 
 	//// Situar cotxes a posicio de sortida
 	//Update();
+}
+
+void PracticaCotxe::Reset()
+{
+	m_circuit.Load(CIRCUIT_1);
+	setNJugadors(1, m_sWidth, m_sHeigth, m_circuit.getDistance());
+	for (int i = 0; i < BUTTONS_SELEC; i++) {
+
+		m_buttonsSelec[i].Unselect();
+
+	}
+
+	m_buttonsSelec[C1].Select();
+	m_buttonsSelec[P1].Select();
 }
 
 void PracticaCotxe::setNJugadors(int nJugadors, int w, int h, float dist)

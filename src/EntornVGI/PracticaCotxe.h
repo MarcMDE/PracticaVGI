@@ -95,6 +95,7 @@ public:
 	void Procesa_Teclat(UINT nChar, UINT nRepCnt);
 	void Update();
 	void InitJugadors(int w, int h);
+	void Reset();
 	void setNJugadors(int nJugadors, int w, int h, float dist);
 
 	SCREENS GetCurrScreen();

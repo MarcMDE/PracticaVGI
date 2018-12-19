@@ -56,6 +56,11 @@ Circuit::~Circuit()
 
 }
 
+void Circuit::UnsetPowerUps()
+{
+	m_poweUpsLength = -1;
+}
+
 void Circuit::Init(int carrils)
 {
 	m_carrils = carrils;
@@ -129,6 +134,16 @@ float Circuit::getDistance()
 
 void Circuit::LoadPowerUps()
 {
+
+	if (m_poweUpsLength != 0 && m_powerUps != NULL)
+	{
+		for (int i = 0; i < m_carrils; i++)
+		{
+			delete[] m_powerUps[i];
+		}
+
+		delete[] m_powerUps;
+	}
 
 	float f;
 	string fileName = CircuitsPwFileNames[m_index];

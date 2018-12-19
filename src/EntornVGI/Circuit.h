@@ -37,6 +37,8 @@ private:
 public:
 	Circuit() : m_carrils(1), m_poweUpsLength(0), MobileOGLObject() {};
 	~Circuit();
+
+	void UnsetPowerUps();
 	
 	void Init(int carrils);
 
