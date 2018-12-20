@@ -43,6 +43,8 @@ private:
 	float vY = 1;
 	float vZ = 0;
 
+	const float m_circuitRotation = 0.0035f;
+
 	OGLObject m_meta;
 
 	UIButton m_buttonsInici[BUTTONS_INICI];
@@ -63,9 +65,6 @@ private:
 	int m_sHeigth;
 
 	Sound m_music;
-
-	float m_carProgress;
-	float m_carInc;
 
 	int m_guanyador;
 

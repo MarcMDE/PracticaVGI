@@ -367,6 +367,7 @@ void PracticaCotxe::OnButtonClickSelec(int x, int y)
 			break;
 		case NEXT:
 
+			m_circuit.SetRotation(Vector3(0, 0, 0));
 			m_buttonsSelec[b].Unselect();
 			m_circuit.LoadPowerUps();
 			m_currScreen = GAMEPLAY;
@@ -703,10 +704,10 @@ void PracticaCotxe::Update()
 	switch (m_currScreen)
 	{
 	case INICI:
-
+		m_circuit.SetRotation(Vector3(0, 0, 0));
 		break;
 	case SELECCIO:
-		
+		m_circuit.Rotate(Vector3(m_circuitRotation, 0, 0));
 
 		break;
 	case GAMEPLAY:
@@ -714,6 +715,9 @@ void PracticaCotxe::Update()
 		if (!m_isPaused)
 		{
 			Vector3 dir, pos;
+
+			m_circuit.UpdatePowerUps();
+
 			for (int i = 0; i < m_nJugadors; i++)
 			{
 				m_circuit.CalcDirPos(m_cars[i].GetProgress(), i, dir, pos);

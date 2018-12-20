@@ -119,6 +119,20 @@ void Circuit::SetCarrils(int c)
 	m_carrils = c;
 }
 
+void Circuit::UpdatePowerUps()
+{
+	if (m_poweUpsLength > 0)
+	{
+		for (int i = 0; i < m_carrils; i++)
+		{
+			for (int j = 0; j < m_poweUpsLength; j++)
+			{
+				m_powerUps[i][j].Rotate(Vector3(1.5f, 0, 0));
+			}
+		}
+	}
+}
+
 void Circuit::Load(Circuits c)
 {
 	m_index = c;

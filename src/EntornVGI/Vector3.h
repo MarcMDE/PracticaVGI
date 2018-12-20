@@ -30,7 +30,10 @@ public:
 	Vector3 DirCrossP(Vector3 v);
 	Vector3 CrossP(Vector3 v);
 	float Magnitude() const;
+	float MagnitudeXZ() const;
+	//float Magnitude() const;
 	void Normalize();
+	void NormalizeXZ();
 	Vector3 AnglesBtw(Vector3 v);
 	Vector3 LookAtRotation();
 	float AngleXBtw(Vector3 v);

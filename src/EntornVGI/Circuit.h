@@ -19,7 +19,7 @@ private:
 
 	const string CircuitsPwFileNames[6] = { "circuits/c1pw.txt", "circuits/c2pw.txt", "circuits/c3pw.txt", "circuits/c4pw.txt", "circuits/c5pw.txt", "circuits/c6pw.txt" };
 	const string CircuitsFileNames[6] = { "circuits/c1.txt", "circuits/c2.txt", "circuits/c3.txt", "circuits/c4.txt", "circuits/c5.txt", "circuits/c6.txt" };
-	const int CircuitsResolutions[6] = { 150, 250, 30, 150, 70, 20};
+	const int CircuitsResolutions[6] = { 400, 250, 30, 150, 70, 20};
 	const int CarrilWidth = 50;
 
 	Circuits m_index;
@@ -47,6 +47,8 @@ public:
 	void CalcDirPos(float f, int c, Vector3 & direction, Vector3 & position);
 	Circuits GetCurrCircuit();
 	void SetCarrils(int c);
+
+	void UpdatePowerUps();
 	
 	void Load(Circuits c);
 

@@ -83,9 +83,19 @@ float Vector3::Magnitude() const
 	return sqrtf(m_x*m_x + m_y*m_y + m_z*m_z);
 }
 
+float Vector3::MagnitudeXZ() const
+{
+	return sqrtf(m_x*m_x + m_z * m_z);
+}
+
 void Vector3::Normalize()
 {
 	*this /= Magnitude();
+}
+
+void Vector3::NormalizeXZ()
+{
+	*this /= MagnitudeXZ();
 }
 
 Vector3 Vector3::AnglesBtw(Vector3 v)
@@ -136,13 +146,14 @@ Vector3 Vector3::GetAngles() const
 {
 	float magnitude = Magnitude();
 	//float magnitude = sqrtf(m_x*m_x + m_z * m_z);
+
 	if (magnitude == 0)
 	{
 		return Vector3().Zero();
 	}
 
 	Vector3 ret = Vector3(
-		acos(m_x / magnitude),
+		acos(m_x / MagnitudeXZ()),
 		acos(m_y / magnitude),
 		acos(m_z / magnitude));
 

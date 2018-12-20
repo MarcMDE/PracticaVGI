@@ -10,10 +10,10 @@ class Car : public MobileOGLObject
 private:
 	const int m_maxBoosts = 3;
 	const int m_initialBoosts = m_maxBoosts;
-	const float m_frictionC = 0.03f;
-	const float m_gravityC = 0.4f;
-	const float m_boostSpeedC = 10.0f;
-	const float m_brakeSpeedC = 2.5f;
+	const float m_frictionC = 0.008f;
+	const float m_gravityC = 0.1f;
+	const float m_boostSpeedC = 6.0f;
+	const float m_brakeSpeedC = 1.5f;
 
 	float m_friction;
 	float m_gravity;
