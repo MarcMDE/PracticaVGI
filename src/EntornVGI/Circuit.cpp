@@ -151,13 +151,15 @@ void Circuit::LoadPowerUps()
 
 	if (m_poweUpsLength != 0 && m_powerUps != NULL)
 	{
-		for (int i = 0; i < m_carrils; i++)
+		for (int i = 0; i < m_carrilsPowerUps; i++)
 		{
 			delete[] m_powerUps[i];
 		}
 
 		delete[] m_powerUps;
 	}
+
+	m_carrilsPowerUps = m_carrils;
 
 	float f;
 	string fileName = CircuitsPwFileNames[m_index];

@@ -29,6 +29,7 @@ private:
 
 	PowerUp** m_powerUps;
 	int m_poweUpsLength;
+	int m_carrilsPowerUps;
 
 	void m_GenRoadTexture();
 	GLubyte m_roadImg[16][16][4];

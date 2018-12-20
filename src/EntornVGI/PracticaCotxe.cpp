@@ -385,6 +385,12 @@ void PracticaCotxe::OnButtonClickFI(int x, int y)
 		Reset();
 		m_circuit.UnsetPowerUps();
 		m_currScreen = INICI;
+		for (int i = 0; i < m_nJugadors; i++) {
+
+			m_cars[i].ResetLaps();
+
+		}
+		m_isEnd = false;
 	}
 }
 
@@ -750,16 +756,6 @@ void PracticaCotxe::Update()
 					m_currScreen = FI;
 
 				}
-			}
-
-			if (m_isEnd) {
-
-				for (int i = 0; i < m_nJugadors; i++) {
-
-					m_cars[i].ResetLaps();
-				
-				}
-			
 			}
 
 		}

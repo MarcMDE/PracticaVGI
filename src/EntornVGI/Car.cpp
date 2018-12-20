@@ -127,10 +127,10 @@ void Car::Move(Vector3 pos, Vector3 dir)
 		else m_speed += m_friction;
 	}
 
-	m_wheels[0]->Rotate({ 0, m_speed * -200, 0 });
-	m_wheels[1]->Rotate({ 0, m_speed * -200, 0 });
-	m_wheels[2]->Rotate({ 0, m_speed * -200, 0 });
-	m_wheels[3]->Rotate({ 0, m_speed * -200, 0 });
+	m_wheels[0]->Rotate({ 0, m_speed * -220, 0 });
+	m_wheels[1]->Rotate({ 0, m_speed * -220, 0 });
+	m_wheels[2]->Rotate({ 0, m_speed * -220, 0 });
+	m_wheels[3]->Rotate({ 0, m_speed * -220, 0 });
 }
 
 Vector3 Car::GetDirection() const

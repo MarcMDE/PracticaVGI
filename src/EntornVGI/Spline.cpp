@@ -108,8 +108,10 @@ float Spline::getdistance()
 
 void Spline::Load(string fileName)
 {
-	if (m_size != 0) delete[] m_spline;
-	if (m_size != 0) delete[] m_pointsDistance;
+	if (m_size != 0) { delete[] m_spline; }
+	if (m_size != 0) { delete[] m_pointsDistance; }
+
+	m_size = 0;
 
 	ifstream file;
 	file.open(fileName);
@@ -123,9 +125,9 @@ void Spline::Load(string fileName)
 
 		int i = 0;
 
-		while (!file.eof())
+		float x, y, z;
+		while (/*!file.eof()*/ i<m_size)
 		{
-			float x, y, z;
 			file >> x >> y >> z;
 			m_spline[i] = Vector3(x, y, z);
 			i++;
