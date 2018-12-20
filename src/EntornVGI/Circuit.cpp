@@ -137,6 +137,7 @@ void Circuit::Load(Circuits c)
 {
 	m_index = c;
 	m_spline.Load(CircuitsFileNames[(int)m_index]);
+	m_torusXrotation = CalcDirection(0).GetAngles().X();
 }
 
 float Circuit::getDistance()
@@ -414,7 +415,7 @@ void Circuit::Draw()
 	Vector3 pos = CalcPosition(0);
 	glPushMatrix();
 	glTranslatef(pos.X(), pos.Y(), pos.Z());
-	glRotatef(90, 0, 1, 0);
+	glRotatef(m_torusXrotation * RAD_TO_DEG + 90.0f, 0, 1, 0);
 	glutSolidTorus(20, (m_carrils*CarrilWidth) + 30, 20, 20);
 	glPopMatrix();
 	glEnable(GL_TEXTURE_2D);

@@ -41,6 +41,8 @@ public:
 
 	void UnsetPowerUps();
 	
+	float m_torusXrotation;
+
 	void Init(int carrils);
 
 	Vector3 CalcPosition(float f);
