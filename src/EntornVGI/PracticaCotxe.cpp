@@ -434,7 +434,7 @@ void PracticaCotxe::Draw(/*CColor col_object, bool ref_mat, bool sw_mat[4]*/)
 		glEnable(GL_SCISSOR_TEST);
 		for (int i = 0; i < m_nJugadors; i++) {
 			cameraPosition = m_cars[i].GetPosition();
-			cameraPosition -= Vector3(m_cars[i].GetDirection().X() * 60, 0, m_cars[i].GetDirection().Z() * 60);
+			cameraPosition -= Vector3(m_cars[i].GetDirection().X() * 60, m_cars[i].GetDirection().Y() * 25, m_cars[i].GetDirection().Z() * 60);
 			cameraPosition += Vector3(0, 35, 0);
 
 			//Projeccio_Perspectiva(m_w[i][0], m_h[i][0], m_w[i][1], m_h[i][1], 75);
